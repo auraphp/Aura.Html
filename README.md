@@ -1,4 +1,3 @@
-Aura.Html
-=========
+The helpers escape values internally.
 
-HTML helpers.
+- need "radios" and "checkboxes" helpers
