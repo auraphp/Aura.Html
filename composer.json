@@ -9,7 +9,7 @@
         "form",
         "input",
         "helper",
-        "helpers",
+        "helpers"
     ],
     "homepage": "http://auraphp.com/Aura.Html",
     "license": "BSD-2-Clause",
@@ -17,10 +17,10 @@
         {
             "name": "Aura.Html Contributors",
             "homepage": "https://github.com/auraphp/Aura.Html/contributors"
-        },
+        }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.4.0"
     },
     "autoload": {
         "psr-0": {
