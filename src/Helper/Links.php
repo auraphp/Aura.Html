@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * This file is part of the Aura Project for PHP.
+ * This file is part of Aura for PHP.
  * 
  * @package Aura.Html
  * 
@@ -46,12 +46,13 @@ class Links extends AbstractHelper
      * 
      * @param array $attr Attributes for the <link> tag.
      * 
-     * @return void
+     * @return $this
      * 
      */
     public function add(array $attr = [])
     {
         $this->links[] = $this->void('link', $attr);
+        return $this;
     }
 
     /**
