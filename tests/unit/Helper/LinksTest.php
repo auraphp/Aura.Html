@@ -60,4 +60,28 @@ class LinksTest extends AbstractHelperTest
        
         $this->assertSame($expect, $actual);
     }
+    
+    public function testAddAndGetChaining()
+    {
+        $links = $this->helper;
+        
+        $data = (object) [
+            'prev' => [
+                'rel' => 'prev',
+                'href' => '/path/to/prev',
+            ],
+            'next' => [
+                'rel' => 'next',
+                'href' => '/path/to/next',
+            ]
+        ];
+        
+        $actual = $links->add($data->prev)
+            ->add($data->next)
+            ->get();
+        $expect = '    <link rel="prev" href="/path/to/prev" />' . PHP_EOL
+                . '    <link rel="next" href="/path/to/next" />' . PHP_EOL;
+       
+        $this->assertSame($expect, $actual);
+    }
 }
