@@ -1,0 +1,27 @@
+{
+    "name": "aura/html",
+    "type": "library",
+    "description": "Provides HTML view helpers, including form input helpers, suitable for a view layer.",
+    "keywords": [
+        "html",
+        "view",
+        "form",
+        "input",
+        "helper",
+        "helpers"
+    ],
+    "homepage": "http://auraphp.com/Aura.Html",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Aura.Html Contributors",
+            "homepage": "https://github.com/auraphp/Aura.Html/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "files": ["autoload.php"]
+    }
+}
