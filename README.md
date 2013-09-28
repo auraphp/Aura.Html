@@ -1,57 +1,46 @@
-Aura.Html
-=========
+# Aura.Html
 
-The Aura.Html provides HTML view helpers, including form input helpers, 
-suitable for a view layer.
+Provides HTML view helpers, including form input helpers.
+
+## Foreword
 
 ### Installation and Autoloading
 
-This library is installable via Composer and is registered on Packagist at
-<https://packagist.org/packages/aura/html>. Installing via Composer will set up
-autoloading automatically.
+This library is installable and autoloadable via Composer with the following
+`require` element in your `composer.json` file:
 
+    "require": {
+        "aura/html": "dev-develop-2"
+    }
+    
 Alternatively, download or clone this repository, then require or include its
 _autoload.php_ file.
 
-### Dependencies
+### Dependencies and PHP Version
 
-As with all Aura libraries, this library has no external dependencies.
+As with all Aura libraries, this library has no userland dependencies. It
+requires PHP version 5.4 or later.
 
 ### Tests
 
-This library has 100% code coverage. To run the library tests, first install
-[PHPUnit][], then go to the library _tests_ directory and issue `phpunit` at
-the command line.
+[![Build Status](https://travis-ci.org/auraphp/Aura.{PACKAGE}.png?branch=develop-2)](https://travis-ci.org/auraphp/Aura.{PACKAGE})
 
-[PHPUnit]: http://phpunit.de/manual/
+This library has 100% code coverage with [PHPUnit][]. To run the tests at the
+command line, go to the _tests_ directory and issue `phpunit`.
 
-### API Documentation
-
-This library has embedded DocBlock API documentation. To generate the
-documentation in HTML, first install [PHPDocumentor][] or [ApiGen][], then go
-to the library directory and issue one of the following at the command line:
-
-    # for PHPDocumentor
-    phpdoc -d ./src/ -t /path/to/output/
-    
-    # for ApiGen
-    apigen --source=./src/ --destination=/path/to/output/
-
-You can then browse the HTML-formatted API documentation at _/path/to/output_.
-
-[PHPDocumentor]: http://phpdoc.org/docs/latest/for-users/installation.html
-[ApiGen]: http://apigen.org/#installation
+[phpunit]: http://phpunit.de/manual/
 
 ### PSR Compliance
 
-This library is compliant with [PSR-1][] and [PSR-2][]. If you notice
-compliance oversights, please send a patch via pull request.
+This library attempts to comply with [PSR-1][], [PSR-2][], and [PSR-4][]. If
+you notice compliance oversights, please send a patch via pull request.
 
 [PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+[PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
-Getting Started
-===============
+
+## Getting Started
 
 The easiest way to instantiate with all the available helpers is to 
 include the `instance.php` script:
@@ -59,10 +48,10 @@ include the `instance.php` script:
 ```php
 <?php
 $helper = require "/path/to/Aura.Html/scripts/instance.php";
+?>
 ```
 
-Form Helpers
-------------
+### Form Helpers
 
 Form : `$helper->form(array $attr = []);`
 
@@ -74,6 +63,7 @@ $helper->form();
 // <form method="post" enctype="multipart/form-data">
 $helper->form(['action' => '/hello-action', 'method' => 'GET']);
 // <form method="GET" action="/hello-action" enctype="multipart/form-data">
+?>
 ```
 
 Form Input
@@ -96,6 +86,7 @@ $helper->input([
     'attribs' => [],
     'options' => [],
 ]);
+?>
 ```
 
 checkbox
@@ -136,7 +127,7 @@ $helper->input([
 ]);
 
 // <label><input type="checkbox" value="yes" /> This is yes</label>
-
+?>
 ```
 
 radio : 
@@ -160,6 +151,7 @@ $helper->input([
 // <label><input type="radio" name="field" value="foo" /> bar</label>
 // <label><input type="radio" name="field" value="baz" checked /> dib</label>
 // <label><input type="radio" name="field" value="zim" /> gir</label>
+?>
 ```
 
 select :
@@ -190,6 +182,7 @@ $helper->input([
     <option value="value3">Third Label</option>
 </select>
 */
+?>
 ```
 
 textarea :
@@ -202,6 +195,7 @@ $helper->input([
     'value' => "the quick brown fox",
 ]);
 // <textarea name="field">the quick brown fox</textarea>
+?>
 ```
 
 button
@@ -217,7 +211,7 @@ $helper->input([
 ]);
 
 // <input type="button" name="name" value="value" />
-
+?>
 ```
 
 color
@@ -233,7 +227,7 @@ $helper->input([
 ]);
 
 // <input type="color" name="name" value="value" />
-
+?>
 ```
 
 date
@@ -249,7 +243,7 @@ $helper->input([
 ]);
 
 // <input type="date" name="name" value="value" />
-
+?>
 ```
 
 datetime
@@ -265,7 +259,7 @@ $helper->input([
 ]);
 
 // <input type="datetime" name="name" value="value" />
-
+?>
 ```
 
 datetime-local
@@ -281,7 +275,7 @@ $helper->input([
 ]);
 
 // <input type="datetime-local" name="name" value="value" />
-
+?>
 ```
 
 email
@@ -297,7 +291,7 @@ $helper->input([
 ]);
 
 // <input type="email" name="name" value="value" />
-
+?>
 ```
 
 file
@@ -313,7 +307,7 @@ $helper->input([
 ]);
 
 // <input type="file" name="name" value="value" />
-
+?>
 ```
 
 hidden
@@ -329,7 +323,7 @@ $helper->input([
 ]);
 
 // <input type="hidden" name="name" value="value" />
-
+?>
 ```
 
 image
@@ -345,7 +339,7 @@ $helper->input([
 ]);
 
 // <input type="image" name="name" value="value" />
-
+?>
 ```
 
 month
@@ -361,7 +355,7 @@ $helper->input([
 ]);
 
 // <input type="month" name="name" value="value" />
-
+?>
 ```
 
 number
@@ -377,7 +371,7 @@ $helper->input([
 ]);
 
 // <input type="number" name="name" value="value" />
-
+?>
 ```
 
 password
@@ -393,7 +387,7 @@ $helper->input([
 ]);
 
 // <input type="password" name="name" value="value" />
-
+?>
 ```
 
 range
@@ -409,7 +403,7 @@ $helper->input([
 ]);
 
 // <input type="range" name="name" value="value" />
-
+?>
 ```
 
 reset
@@ -425,7 +419,7 @@ $helper->input([
 ]);
 
 // <input type="reset" name="name" value="value" />
-
+?>
 ```
 
 search
@@ -441,7 +435,7 @@ $helper->input([
 ]);
 
 // <input type="search" name="name" value="value" />
-
+?>
 ```
 
 submit
@@ -457,7 +451,7 @@ $helper->input([
 ]);
 
 // <input type="submit" name="name" value="value" />
-
+?>
 ```
 
 tel
@@ -473,7 +467,7 @@ $helper->irnput([
 ]);
 
 // <input type="tel" name="name" value="value" />
-
+?>
 ```
 
 text
@@ -489,7 +483,7 @@ $helper->input([
 ]);
 
 // <input type="text" name="name" value="value" />
-
+?>
 ```
 
 time
@@ -505,7 +499,7 @@ $helper->input([
 ]);
 
 // <input type="time" name="name" value="value" />
-
+?>
 ```
 
 url
@@ -521,7 +515,7 @@ $helper->input([
 ]);
 
 // <input type="url" name="name" value="value" />
-
+?>
 ```
 
 week
@@ -537,7 +531,7 @@ $helper->input([
 ]);
 
 // <input type="week" name="name" value="value" />
-
+?>
 ```
 
 Anchor : `$helper->anchor($href, $text, array $attr = []);`
@@ -546,6 +540,7 @@ Anchor : `$helper->anchor($href, $text, array $attr = []);`
 <?php
 $helper->anchor('http://auraphp.com', 'Aura Project');
 // <a href="http://auraphp.com">Aura Project</a>
+?>
 ```
 
 Attribs : `$helper->attr();`
@@ -553,6 +548,7 @@ Attribs : `$helper->attr();`
 ```php
 <?php
 // Missing ?
+?>
 ``` 
 
 Base : `$helper->base($href);`
@@ -561,6 +557,7 @@ Base : `$helper->base($href);`
 <?php
 $helper->base('/base')
 // <base href="/base" />
+?>
 ```
 
 Image : `$helper->img($src, array $attr = []);`
@@ -569,6 +566,7 @@ Image : `$helper->img($src, array $attr = []);`
 <?php
 $helper->img('hello.jpg', ['alt' => 'Hello', 'width' => 100, 'height' => 200]);
 // <img src="hello.jpg" alt="Hello" width="100" height="200">
+?>
 ```
 
 Links : 
@@ -587,6 +585,7 @@ $links->add([
 ]);
 
 $links->get();
+?>
 ```
 
 Alternatively you can do by chaining
@@ -603,6 +602,7 @@ $helper->links()
     'href' => '/path/to/next',
 ])
 ->get();
+?>
 ```
 
 Metas : 
@@ -617,6 +617,7 @@ $metas->get();
 
 // <meta http-equiv="Location" content="/redirect/to/here">
 // <meta name="foo" content="bar">
+?>
 ```
 
 Ordered list (ol) :
@@ -635,6 +636,7 @@ $ol->items(['foo', 'bar', 'baz'])
     <li class="callout">dib</li>
 </ol>
 */
+?>
 ```
 
 Un-ordered list (ul) :
@@ -653,7 +655,7 @@ $helper->ul(['id' => 'test'])
     <li class="callout">dib</li>
 </ul>
 */
-```
+?>
 
 scripts :
 
@@ -670,6 +672,7 @@ script src="/js/first.js" type="text/javascript"></script>
 <script src="/js/middle.js" type="text/javascript"></script>
 <script src="/js/last.js" type="text/javascript"></script>
 */
+?>
 ```
 
 You can also set order by which the scripts need to be taken, 
@@ -688,6 +691,7 @@ $scripts->addCond('ie6', '/js/ie6.js');
 <!--[if ie6]><script src="/js/ie6.js" type="text/javascript"></script><![endif]-->
 <script src="/js/last.js" type="text/javascript"></script>
 */
+?>
 ```
 
 scriptsFoot :
@@ -695,6 +699,7 @@ scriptsFoot :
 ```php
 <?php
 // tbd
+?>
 ```
 
 Styles :
@@ -713,11 +718,12 @@ $styles->get();
 <!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="print" /><![endif]-->
 <link rel="stylesheet" href="/css/last.css" type="text/css" media="screen" />
 */
+?>
 ```
 
 Tag: `$helper->tag($tag, array $attr = [])`
 
-```
+```php
 <?php
 $helper->tag('form', [
     'action' => '/action.php',
@@ -727,6 +733,7 @@ $helper->tag('form', [
 
 $helper->tag('div');
 // <div>
+?>
 ```
 
 Title : 
