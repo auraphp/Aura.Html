@@ -36,7 +36,7 @@ class Input extends AbstractHelper
      * 
      * @param HelperLocator $helper_locator
      * 
-     * @return void
+     * @return null
      * 
      */
     public function setHelperLocator(HelperLocator $helper_locator)

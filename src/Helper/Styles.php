@@ -50,7 +50,7 @@ class Styles extends AbstractHelper
      * 
      * @param int $pos The stylesheet position in the stack.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function add($href, array $attr = null, $pos = 100)
@@ -84,7 +84,7 @@ class Styles extends AbstractHelper
      * 
      * @param string $pos The stylesheet position in the stack.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function addCond($cond, $href, array $attr = null, $pos = 100)

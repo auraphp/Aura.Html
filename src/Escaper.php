@@ -45,7 +45,16 @@ class Escaper
      * @var string
      * 
      */
-    protected $encoding = 'utf-8';
+    protected $encoding = 'UTF-8';
+
+    /**
+     * 
+     * Flags for `htmlspecialchars()`.
+     *
+     * @var mixed
+     * 
+     */
+    protected $flags = ENT_QUOTES;
 
     /**
      * 
@@ -69,12 +78,21 @@ class Escaper
      *
      * @param string $encoding The encoding for raw and escaped strings.
      * 
+     * @param mixed $flags Flags for `htmlspecialchars()`.
+     * 
      */
-    public function __construct($encoding = 'UTF-8')
+    public function __construct($encoding = null, $flags = null)
     {
-        $encoding = trim($encoding);
         if ($encoding) {
             $this->setEncoding($encoding);
+        }
+        
+        if ($flags) {
+            // use custom flags only
+            $this->setFlags($flags);
+        } elseif (defined('ENT_SUBSTITUTE')) {
+            // add ENT_SUBSTITUTE if available (PHP 5.4)
+            $this->setFlags(ENT_QUOTES | ENT_SUBSTITUTE);
         }
     }
 
@@ -84,7 +102,7 @@ class Escaper
      * 
      * @param string $encoding The encoding.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function setEncoding($encoding)
@@ -108,6 +126,20 @@ class Escaper
         return $this->encoding;
     }
 
+    /**
+     * 
+     * Sets the flags for `htmlspecialchars()`.
+     * 
+     * @param mixed $flags The flags.
+     * 
+     * @return null
+     * 
+     */
+    public function setFlags($flags)
+    {
+        $this->flags = $flags;
+    }
+    
     /**
      * 
      * Escapes for unquoted HTML attribute context.

@@ -271,7 +271,7 @@ class Select extends AbstractInput
      * 
      * @param array $info The optgroup info.
      * 
-     * @return void
+     * @return null
      * 
      */
     protected function beginOptgroup($info)
@@ -287,7 +287,7 @@ class Select extends AbstractInput
      * 
      * Builds the HTML to end an optgroup.
      * 
-     * @return void
+     * @return null
      * 
      */
     protected function endOptgroup()

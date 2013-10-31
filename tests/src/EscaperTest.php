@@ -24,7 +24,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEncoding()
     {
-        $this->assertEquals('utf-8', $this->escaper->getEncoding());
+        $this->assertEquals('UTF-8', $this->escaper->getEncoding());
     }
 
     public function testAttr()

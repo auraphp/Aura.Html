@@ -54,7 +54,7 @@ abstract class AbstractHelper
      * 
      * @param Escaper $escaper The escaper object.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function setEscaper(Escaper $escaper)
@@ -68,7 +68,7 @@ abstract class AbstractHelper
      * 
      * @param string $indent The indent string.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function setIndent($indent)

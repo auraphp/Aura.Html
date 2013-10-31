@@ -46,7 +46,7 @@ class Title extends AbstractHelper
      * 
      * @param string $title The title string.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function set($title)
@@ -60,7 +60,7 @@ class Title extends AbstractHelper
      * 
      * @param string $text The string to be appended to the title.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function append($text)
@@ -74,7 +74,7 @@ class Title extends AbstractHelper
      * 
      * @param string $text The string to be appended to the title.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function prepend($text)

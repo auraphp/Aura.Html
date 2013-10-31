@@ -50,7 +50,7 @@ class Scripts extends AbstractHelper
      * 
      * @param int $pos The script position in the stack.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function add($src, array $attr = array(), $pos = 100)
@@ -80,7 +80,7 @@ class Scripts extends AbstractHelper
      * 
      * @param string $pos The script position in the stack.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function addCond($cond, $src, array $attr = array(), $pos = 100)

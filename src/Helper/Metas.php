@@ -48,7 +48,7 @@ class Metas extends AbstractHelper
      * 
      * @param int $pos The meta position.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function add(array $attr = array(), $pos = 100)
@@ -66,7 +66,7 @@ class Metas extends AbstractHelper
      * 
      * @param int $pos The meta position.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function addHttp($http_equiv, $content, $pos = 100)
@@ -89,7 +89,7 @@ class Metas extends AbstractHelper
      * 
      * @param int $pos The meta position.
      * 
-     * @return void
+     * @return null
      * 
      */
     public function addName($name, $content, $pos = 100)
