@@ -9,7 +9,7 @@ class HelperFactory
     
     public function __construct(
         Escaper $escaper,
-        array $registry = [])
+        array $registry = array())
     {
         $this->escaper = $escaper;
         $this->registry = $registry;

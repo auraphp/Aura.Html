@@ -26,7 +26,7 @@ abstract class AbstractList extends AbstractHelper
      * @var array
      * 
      */
-    protected $attr = [];
+    protected $attr = array();
     
     /**
      * 
@@ -35,7 +35,7 @@ abstract class AbstractList extends AbstractHelper
      * @var array
      * 
      */
-    protected $stack = [];
+    protected $stack = array();
     
     /**
      * 
@@ -57,10 +57,10 @@ abstract class AbstractList extends AbstractHelper
      * @todo As with select, allow a second param for the items?
      * 
      */
-    public function __invoke(array $attr = [])
+    public function __invoke(array $attr = array())
     {
         $this->attr    = $attr;
-        $this->stack   = [];
+        $this->stack   = array();
         $this->html    = '';
         return $this;
     }
@@ -76,9 +76,9 @@ abstract class AbstractList extends AbstractHelper
      * @return self
      * 
      */
-    public function item($html, array $attr = [])
+    public function item($html, array $attr = array())
     {
-        $this->stack[] = [$html, $attr];
+        $this->stack[] = array($html, $attr);
         return $this;
     }
     
@@ -93,7 +93,7 @@ abstract class AbstractList extends AbstractHelper
      * @return self
      * 
      */
-    public function items(array $items, array $attr = [])
+    public function items(array $items, array $attr = array())
     {
         foreach ($items as $html) {
             $this->item($html, $attr);

@@ -102,7 +102,7 @@ abstract class AbstractHelper
      * @return string
      * 
      */
-    protected function void($tag, array $attr = [])
+    protected function void($tag, array $attr = array())
     {
         $attr = $this->escaper->attr($attr);
         $html = "<{$tag} {$attr} />";

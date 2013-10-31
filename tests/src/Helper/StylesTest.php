@@ -37,10 +37,10 @@ class StylesTest extends AbstractHelperTest
         $styles = $this->helper;
         
         $styles->setIndent('  ');
-        $styles->add('/css/middle.css', ['media' => 'print']);
+        $styles->add('/css/middle.css', array('media' => 'print'));
         $styles->add('/css/last.css', null, 150);
         $styles->add('/css/first.css', null, 50);
-        $styles->addCond('ie6', '/css/ie6.css', ['media' => 'print']);
+        $styles->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
         $actual = $styles->get();
         
         $expect = '  <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />' . PHP_EOL

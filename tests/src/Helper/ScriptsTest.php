@@ -34,8 +34,8 @@ class ScriptsTest extends AbstractHelperTest
     public function testAddAndGet()
     {
         $scripts = $this->helper;
-        $scripts->add('/js/last.js', [], 150);
-        $scripts->add('/js/first.js', [], 50);
+        $scripts->add('/js/last.js', array(), 150);
+        $scripts->add('/js/first.js', array(), 50);
         $scripts->add('/js/middle.js');
         $scripts->addCond('ie6', '/js/ie6.js');
         

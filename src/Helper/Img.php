@@ -35,12 +35,12 @@ class Img extends AbstractHelper
      * @todo Add automated height/width calculation?
      * 
      */
-    public function __invoke($src, array $attr = [])
+    public function __invoke($src, array $attr = array())
     {
-        $base = [
+        $base = array(
             'src' => $src,
             'alt' => basename($src),
-        ];
+        );
         
         unset($attr['src']);
         

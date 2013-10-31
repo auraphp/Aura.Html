@@ -26,7 +26,7 @@ class Select extends AbstractInput
      * @var array
      * 
      */
-    protected $stack = [];
+    protected $stack = array();
     
     /**
      * 
@@ -48,7 +48,7 @@ class Select extends AbstractInput
     
     protected $placeholder;
     
-    public function __invoke(array $spec = [])
+    public function __invoke(array $spec = array())
     {
         // if there's no spec, return $this so we can build manually
         if (! $spec) {
@@ -56,7 +56,7 @@ class Select extends AbstractInput
         }
         
         // reset the tracking properties
-        $this->stack = [];
+        $this->stack = array();
         $this->optgroup = false;
         $this->optlevel = 1;
         
@@ -111,9 +111,9 @@ class Select extends AbstractInput
      * @return self
      * 
      */
-    public function option($value, $label, array $attribs = [])
+    public function option($value, $label, array $attribs = array())
     {
-        $this->stack[] = ['buildOption', $value, $label, $attribs];
+        $this->stack[] = array('buildOption', $value, $label, $attribs);
         return $this;
     }
     
@@ -131,7 +131,7 @@ class Select extends AbstractInput
      * @return self
      * 
      */
-    public function options(array $options, array $attribs = [])
+    public function options(array $options, array $attribs = array())
     {
         // set the options and optgroups
         foreach ($options as $key => $val) {
@@ -160,12 +160,12 @@ class Select extends AbstractInput
      * @return self
      * 
      */
-    public function optgroup($label, array $attribs = [])
+    public function optgroup($label, array $attribs = array())
     {
         if ($this->optgroup) {
-            $this->stack[] = ['endOptgroup'];
+            $this->stack[] = array('endOptgroup');
         }
-        $this->stack[] = ['beginOptgroup', $label, $attribs];
+        $this->stack[] = array('beginOptgroup', $label, $attribs);
         $this->optgroup = true;
         return $this;
     }
@@ -211,11 +211,11 @@ class Select extends AbstractInput
         
         // is there a placeholder option?
         if ($this->placeholder) {
-            $html .= $this->buildOption([
+            $html .= $this->buildOption(array(
                 '',
                 $this->placeholder,
                 ['disabled' => true],
-            ]);
+            ));
         }
         
         // build the options

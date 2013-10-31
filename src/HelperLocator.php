@@ -35,7 +35,7 @@ class HelperLocator
      * @var array
      * 
      */
-    protected $registry = [];
+    protected $registry = array();
     
     /**
      * 

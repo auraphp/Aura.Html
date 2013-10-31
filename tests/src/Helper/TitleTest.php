@@ -19,13 +19,13 @@ class TitleTest extends AbstractHelperTest
         $title = $this->helper;
         $this->assertInstanceOf('Aura\Html\Helper\Title', $title);
         
-        $data = (object) [
+        $data = (object) array(
             'main' => 'This and That',
             'suf1' => ' Suf1',
             'suf2' => ' Suf2',
             'pre1' => 'Pre1 ',
             'pre2' => 'Pre2 ',
-        ];
+        );
         
         $title->set($data->main);
         
@@ -44,9 +44,9 @@ class TitleTest extends AbstractHelperTest
     {
         $title = $this->helper;
         $title->setIndent('  ');
-        $data = (object) [
+        $data = (object) array(
             'main' => 'This and That',
-        ];
+        );
         $title->set($data->main);
         $actual = $title->get();
         $expect = '  <title>This and That</title>' . PHP_EOL;

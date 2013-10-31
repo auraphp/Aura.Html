@@ -31,12 +31,12 @@ class Escaper
      * @var array
      * 
      */
-    protected $entities = [
+    protected $entities = array(
         34 => '&quot;',
         38 => '&amp;',
         60 => '&lt;',
         62 => '&gt;',
-    ];
+    );
 
     /**
      * 
@@ -54,14 +54,14 @@ class Escaper
      * @var array
      * 
      */
-    protected $supported_encodings = [
+    protected $supported_encodings = array(
         '1251', '1252', '866', '932', '936', '950', 'big5', 'big5-hkscs',
         'cp1251', 'cp1252', 'cp866', 'cp932', 'euc-jp', 'eucjp', 'eucjp-win',
         'gb2312', 'ibm866', 'iso-8859-1', 'iso-8859-15', 'iso-8859-5',
         'iso8859-1', 'iso8859-15', 'iso8859-5', 'koi8-r', 'koi8-ru', 'koi8r',
         'macroman', 'shift_jis', 'sjis', 'sjis-win', 'utf-8', 'win-1251',
         'windows-1251', 'windows-1252',
-    ];
+    );
 
     /**
      * 

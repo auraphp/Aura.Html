@@ -5,10 +5,10 @@ class AnchorTest extends AbstractHelperTest
 {
     public function test__invoke()
     {
-        $data = (object) [
+        $data = (object) array(
             'href' => '/path/to/script.php',
             'text' => 'this',
-        ];
+        );
         
         $anchor = $this->helper;
         $actual = $anchor($data->href, $data->text);
@@ -18,11 +18,11 @@ class AnchorTest extends AbstractHelperTest
     
     public function testWithAttribs()
     {
-        $data = (object) [
+        $data = (object) array(
             'href' => '/path/to/script.php',
             'text' => 'foo',
-            'attribs' => ['bar' => 'baz', 'href' => 'skip-me'],
-        ];
+            'attribs' => array('bar' => 'baz', 'href' => 'skip-me'),
+        );
         
         $anchor = $this->helper;
         $actual = $anchor($data->href, $data->text, $data->attribs);

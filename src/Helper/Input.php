@@ -53,7 +53,7 @@ class Input extends AbstractHelper
      * @return object
      * 
      */
-    public function __invoke(array $spec = [])
+    public function __invoke(array $spec = array())
     {
         if (empty($spec['type'])) {
             $spec['type'] = 'text';

@@ -50,10 +50,10 @@ class Checkbox extends AbstractChecked
         $unchecked = $this->attribs['value_unchecked'];
         unset($this->attribs['value_unchecked']);
         
-        $attribs = [
+        $attribs = array(
             'type' => 'hidden',
             'value' => $unchecked,
-        ];
+        );
         
         return $this->void('input', $attribs);
     }

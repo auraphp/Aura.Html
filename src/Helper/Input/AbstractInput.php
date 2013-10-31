@@ -56,7 +56,7 @@ abstract class AbstractInput extends AbstractHelper
      * @var array
      * 
      */
-    protected $attribs = [];
+    protected $attribs = array();
     
     /**
      * 
@@ -65,7 +65,7 @@ abstract class AbstractInput extends AbstractHelper
      * @var array
      * 
      */
-    protected $options = [];
+    protected $options = array();
     
     /**
      * 
@@ -76,7 +76,7 @@ abstract class AbstractInput extends AbstractHelper
      * @return string
      * 
      */
-    public function __invoke(array $spec = [])
+    public function __invoke(array $spec = array())
     {
         $this->prep($spec);
         return $this->html();
@@ -85,13 +85,13 @@ abstract class AbstractInput extends AbstractHelper
     protected function prep($spec)
     {
         // base spec inputs
-        $base = [
+        $base = array(
             'type' => null,
             'name' => null,
             'value' => null,
-            'attribs' => [],
-            'options' => [],
-        ];
+            'attribs' => array(),
+            'options' => array(),
+        );
         
         // make sure we have the base spec inputs
         $spec = array_merge($base, $spec);
@@ -104,11 +104,11 @@ abstract class AbstractInput extends AbstractHelper
         $this->options = $spec['options'];
         
         // set up base attributes
-        $attribs = [
+        $attribs = array(
             'id'   => null,
             'type' => null,
             'name' => $this->name,
-        ];
+        );
         $this->attribs = array_merge($attribs, $this->attribs);
     }
     

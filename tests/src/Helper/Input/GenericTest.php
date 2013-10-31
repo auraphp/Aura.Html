@@ -13,28 +13,28 @@ class GenericTest extends AbstractHelperTest
         $input = $this->helper;
         
         // value should override attribute
-        $actual = $input([
+        $actual = $input(array(
             'type'    => $type,
             'name'    => 'foo',
             'value'   => 'bar',
-            'attribs' => [
+            'attribs' => array(
                 // should get overridden
                 'value' => 'baz',
-            ],
-        ]);
+            ),
+        ));
         
         $expect = "<input type=\"$type\" name=\"foo\" value=\"bar\" />" . PHP_EOL;
         $this->assertSame($expect, $actual);
         
         // no value given so attribute should still be there
-        $actual = $input([
+        $actual = $input(array(
             'type'     => $type,
             'name'     => 'foo',
-            'attribs'  => [
+            'attribs'  => array(
                 // should remain in place
                 'value' => 'baz',
-            ],
-        ]);
+            ),
+        ));
         
         $expect = "<input type=\"$type\" name=\"foo\" value=\"baz\" />" . PHP_EOL;
         $this->assertSame($expect, $actual);
@@ -42,28 +42,28 @@ class GenericTest extends AbstractHelperTest
     
     public function provideTypes()
     {
-        return [
-            ['button'],
-            ['color'],
-            ['date'],
-            ['datetime'],
-            ['datetime-local'],
-            ['email'],
-            ['file'],
-            ['hidden'],
-            ['image'],
-            ['month'],
-            ['number'],
-            ['password'],
-            ['range'],
-            ['reset'],
-            ['search'],
-            ['submit'],
-            ['tel'],
-            ['text'],
-            ['time'],
-            ['url'],
-            ['week'],
-        ];
+        return array(
+            array('button'),
+            array('color'),
+            array('date'),
+            array('datetime'),
+            array('datetime-local'),
+            array('email'),
+            array('file'),
+            array('hidden'),
+            array('image'),
+            array('month'),
+            array('number'),
+            array('password'),
+            array('range'),
+            array('reset'),
+            array('search'),
+            array('submit'),
+            array('tel'),
+            array('text'),
+            array('time'),
+            array('url'),
+            array('week'),
+        );
     }
 }

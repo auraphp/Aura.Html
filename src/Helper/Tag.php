@@ -30,7 +30,7 @@ class Tag extends AbstractHelper
      * @return string
      * 
      */
-    public function __invoke($tag, array $attr = [])
+    public function __invoke($tag, array $attr = array())
     {
         $attr = $this->escaper->attr($attr);
         if ($attr) {

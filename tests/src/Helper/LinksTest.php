@@ -14,16 +14,16 @@ class LinksTest extends AbstractHelperTest
     {
         $links = $this->helper;
         
-        $data = (object) [
-            'prev' => [
+        $data = (object) array(
+            'prev' => array(
                 'rel' => 'prev',
                 'href' => '/path/to/prev',
-            ],
-            'next' => [
+            ),
+            'next' => array(
                 'rel' => 'next',
                 'href' => '/path/to/next',
-            ]
-        ];
+            )
+        );
         
         $links->add($data->prev);
         $links->add($data->next);
@@ -40,16 +40,16 @@ class LinksTest extends AbstractHelperTest
         $links = $this->helper;
         $links->setIndent('  ');
         
-        $data = (object) [
-            'prev' => [
+        $data = (object) array(
+            'prev' => array(
                 'rel' => 'prev',
                 'href' => '/path/to/prev',
-            ],
-            'next' => [
+            ),
+            'next' => array(
                 'rel' => 'next',
                 'href' => '/path/to/next',
-            ]
-        ];
+            )
+        );
         
         $links->add($data->prev);
         $links->add($data->next);
@@ -65,16 +65,16 @@ class LinksTest extends AbstractHelperTest
     {
         $links = $this->helper;
         
-        $data = (object) [
-            'prev' => [
+        $data = (object) array(
+            'prev' => array(
                 'rel' => 'prev',
                 'href' => '/path/to/prev',
-            ],
-            'next' => [
+            ),
+            'next' => array(
                 'rel' => 'next',
                 'href' => '/path/to/next',
-            ]
-        ];
+            )
+        );
         
         $actual = $links->add($data->prev)
             ->add($data->next)

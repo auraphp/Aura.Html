@@ -9,19 +9,19 @@ class SelectTest extends AbstractHelperTest
     {
         $select = $this->helper;
         
-        $actual = $select([
+        $actual = $select(array(
             'name' => 'foo[bar]',
             'value' => 'value5',
-            'attribs' => [
+            'attribs' => array(
                 'placeholder' => 'Please pick one',
-            ],
-            'options' => [
+            ),
+            'options' => array(
                 'value1' => 'First Label',
                 'value2' => 'Second Label',
                 'value5' => 'Fifth Label',
                 'value3' => 'Third Label',
-            ],
-        ]);
+            ),
+        ));
         
         $expect = '<select name="foo[bar]">' . PHP_EOL
                 . '    <option disabled value="">Please pick one</option>' . PHP_EOL
@@ -39,26 +39,26 @@ class SelectTest extends AbstractHelperTest
         $select = $this->helper;
         
         $actual = $select()
-            ->attribs([
+            ->attribs(array(
                 'name' => 'foo[bar]',
                 'multiple' => 'multiple',
-            ])
+            ))
             ->optgroup('Group A')
-            ->options([
+            ->options(array(
                'value1' => 'First Label',
                'value2' => 'Second Label',
-            ])
+            ))
             ->optgroup('Group B')
-            ->options([
+            ->options(array(
                'value5' => 'Fifth Label',
                'value3' => 'Third Label',
-            ])
+            ))
             ->option(
                'counting',
                'Three sir!',
-               ['disabled' => true]
+               array('disabled' => true)
             )
-            ->selected(['value2', 'value3'])
+            ->selected(array('value2', 'value3'))
             ->get();
         
         $expect = '<select name="foo[bar][]" multiple="multiple">' . PHP_EOL

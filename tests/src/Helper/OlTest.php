@@ -7,9 +7,9 @@ class OlTest extends AbstractHelperTest
     {
         $ol = $this->helper;
         
-        $actual = $ol(['id' => 'test'])
-                ->items(['foo', 'bar', 'baz'])
-                ->item('dib', ['class' => 'callout'])
+        $actual = $ol(array('id' => 'test'))
+                ->items(array('foo', 'bar', 'baz'))
+                ->item('dib', array('class' => 'callout'))
                 ->get();
         
         $expect = '<ol id="test">' . PHP_EOL
@@ -21,7 +21,7 @@ class OlTest extends AbstractHelperTest
         
         $this->assertSame($expect, $actual);
         
-        $actual = $ol()->items(['foo', 'bar', 'baz'])->get();
+        $actual = $ol()->items(array('foo', 'bar', 'baz'))->get();
         $expect = '<ol>' . PHP_EOL
                 . '    <li>foo</li>' . PHP_EOL
                 . '    <li>bar</li>' . PHP_EOL

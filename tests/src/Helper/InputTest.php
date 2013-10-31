@@ -13,7 +13,7 @@ class InputTest extends AbstractHelperTest
         
         $helper->setHelperLocator(new HelperLocator(new HelperFactory(
             new Escaper,
-            [
+            array(
                 'button'            => function () { return new Input\Generic; },
                 'checkbox'          => function () { return new Input\Checkbox; },
                 'color'             => function () { return new Input\Generic; },
@@ -39,7 +39,7 @@ class InputTest extends AbstractHelperTest
                 'time'              => function () { return new Input\Generic; },
                 'url'               => function () { return new Input\Generic; },
                 'week'              => function () { return new Input\Generic; },
-            ]
+            )
         )));
         
         return $helper;
@@ -47,18 +47,18 @@ class InputTest extends AbstractHelperTest
     
     public function testCheckbox()
     {
-        $spec = [
+        $spec = array(
             'type' => 'checkbox',
             'name' => 'field_name',
-            'attribs' => [
+            'attribs' => array(
                 'id' => null,
                 'type' => null,
                 'name' => null,
                 'value' => 'foo',
                 'label' => 'DOOM',
-            ],
+            ),
             'value' => 'foo',
-        ];
+        );
         
         $input = $this->helper;
         $actual = $input($spec);
@@ -68,17 +68,17 @@ class InputTest extends AbstractHelperTest
     
     public function testInput()
     {
-        $spec = [
+        $spec = array(
             'type' => 'text',
             'name' => 'field_name',
-            'attribs' => [
+            'attribs' => array(
                 'id' => null,
                 'type' => null,
                 'name' => null,
-            ],
-            'options' => [],
+            ),
+            'options' => array(),
             'value' => 'foo',
-        ];
+        );
         
         $input = $this->helper;
         $actual = $input($spec);
@@ -88,16 +88,16 @@ class InputTest extends AbstractHelperTest
     
     public function testNoType()
     {
-        $spec = [
+        $spec = array(
             'name' => 'field_name',
-            'attribs' => [
+            'attribs' => array(
                 'id' => null,
                 'type' => null,
                 'name' => null,
-            ],
-            'options' => [],
+            ),
+            'options' => array(),
             'value' => 'foo',
-        ];
+        );
         
         $input = $this->helper;
         $actual = $input($spec);
@@ -107,19 +107,19 @@ class InputTest extends AbstractHelperTest
     
     public function testRadio()
     {
-        $spec = [
+        $spec = array(
             'type' => 'radio',
             'name' => 'field_name',
             'label' => null,
-            'attribs' => [
+            'attribs' => array(
                 'id' => null,
                 'type' => null,
                 'name' => null,
                 'foo' => 'bar',
-            ],
-            'options' => ['opt1' => 'Label 1', 'opt2' => 'Label 2', 'opt3' => 'Label 3'],
+            ),
+            'options' => array('opt1' => 'Label 1', 'opt2' => 'Label 2', 'opt3' => 'Label 3'),
             'value' => 'opt2',
-        ];
+        );
         
         $input = $this->helper;
         $actual = $input($spec);
@@ -131,32 +131,32 @@ class InputTest extends AbstractHelperTest
     
     public function testSelect()
     {
-        $spec = [
+        $spec = array(
             'type' => 'select',
             'name' => 'field_name',
-            'attribs' => [
+            'attribs' => array(
                 'id' => null,
                 'type' => null,
                 'name' => null,
                 'foo' => 'bar',
-            ],
-            'options' => [
+            ),
+            'options' => array(
                 'opt1' => 'Label 1',
                 'opt2' => 'Label 2',
                 'opt3' => 'Label 3',
-                'Group A' => [
+                'Group A' => array(
                     'opt4' => 'Label 4',
                     'opt5' => 'Label 5',
                     'opt6' => 'Label 6',
-                ],
-                'Group B' => [
+                ),
+                'Group B' => array(
                     'opt7' => 'Label 7',
                     'opt8' => 'Label 8',
                     'opt9' => 'Label 9',
-                ],
-            ],
+                ),
+            ),
             'value' => 'opt5',
-        ];
+        );
         
         $input = $this->helper;
         $actual = $input($spec);
@@ -182,19 +182,19 @@ class InputTest extends AbstractHelperTest
     
     public function testTextarea()
     {
-        $spec = [
+        $spec = array(
             'type' => 'textarea',
             'name' => 'field_name',
             'label' => null,
-            'attribs' => [
+            'attribs' => array(
                 'id' => null,
                 'type' => null,
                 'name' => null,
                 'foo' => 'bar',
-            ],
-            'options' => ['baz' => 'dib'],
+            ),
+            'options' => array('baz' => 'dib'),
             'value' => 'Text in the textarea.',
-        ];
+        );
         
         $input = $this->helper;
         $actual = $input($spec);

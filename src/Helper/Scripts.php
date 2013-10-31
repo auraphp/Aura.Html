@@ -26,7 +26,7 @@ class Scripts extends AbstractHelper
      * @var array
      * 
      */
-    protected $scripts = [];
+    protected $scripts = array();
 
     /**
      * 
@@ -53,12 +53,12 @@ class Scripts extends AbstractHelper
      * @return void
      * 
      */
-    public function add($src, array $attr = [], $pos = 100)
+    public function add($src, array $attr = array(), $pos = 100)
     {
-        $base = [
+        $base = array(
             'src' => $src,
             'type' => 'text/javascript',
-        ];
+        );
         
         unset($attr['src']);
         
@@ -83,12 +83,12 @@ class Scripts extends AbstractHelper
      * @return void
      * 
      */
-    public function addCond($cond, $src, array $attr = [], $pos = 100)
+    public function addCond($cond, $src, array $attr = array(), $pos = 100)
     {
-        $base = [
+        $base = array(
             'src' => $src,
             'type' => 'text/javascript',
-        ];
+        );
         
         unset($attr['src']);
         

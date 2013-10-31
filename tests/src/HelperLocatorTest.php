@@ -9,11 +9,11 @@ class HelperLocatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper_locator = new HelperLocator(new HelperFactory(
             new Escaper,
-            [
+            array(
                 'mockHelper' => function () {
                     return new Helper\MockHelper;
                 },
-            ]
+            )
         ));
     }
     

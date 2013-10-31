@@ -9,10 +9,10 @@ class TextareaTest extends AbstractHelperTest
     {
         $textarea = $this->helper;
         
-        $actual = $textarea([
+        $actual = $textarea(array(
             'name' => 'field',
             'value' => "the quick brown fox",
-        ]);
+        ));
         
         $expect = '<textarea name="field">the quick brown fox</textarea>';
         

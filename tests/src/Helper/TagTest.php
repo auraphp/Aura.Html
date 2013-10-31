@@ -7,10 +7,10 @@ class TagTest extends AbstractHelperTest
     {
         $tag = $this->helper;
         
-        $actual = $tag('form', [
+        $actual = $tag('form', array(
             'action' => '/action.php',
             'method' => 'post',
-        ]);
+        ));
         
         $expect = '<form action="/action.php" method="post">';
         

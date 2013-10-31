@@ -26,7 +26,7 @@ class Styles extends AbstractHelper
      * @var array
      * 
      */
-    protected $styles = [];
+    protected $styles = array();
 
     /**
      * 
@@ -57,12 +57,12 @@ class Styles extends AbstractHelper
     {
         $attr = (array) $attr;
         
-        $base = [
+        $base = array(
             'rel'   => 'stylesheet',
             'href'  => $href,
             'type'  => 'text/css',
             'media' => 'screen',
-        ];
+        );
 
         unset($attr['href']);
 
@@ -91,12 +91,12 @@ class Styles extends AbstractHelper
     {
         $attr = (array) $attr;
         
-        $base = [
+        $base = array(
             'rel'   => 'stylesheet',
             'href'  => $href,
             'type'  => 'text/css',
             'media' => 'screen',
-        ];
+        );
 
         unset($attr['href']);
 

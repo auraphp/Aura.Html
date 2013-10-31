@@ -7,13 +7,13 @@ class EscapeAttrTest extends AbstractHelperTest
     {
         $attr = $this->helper;
         
-        $values = [
+        $values = array(
             'foo' => 'bar',
             'nim' => null,
-            'baz' => ['dib', 'zim', 'gir'],
+            'baz' => array('dib', 'zim', 'gir'),
             'required' => true,
             'optional' => false,
-        ];
+        );
         
         $expect = 'foo="bar" baz="dib zim gir" required';
         $actual = $attr($values);
@@ -23,7 +23,7 @@ class EscapeAttrTest extends AbstractHelperTest
     public function test__invokeNoAttribs()
     {
         $attr = $this->helper;
-        $values = [];
+        $values = array();
         $expect = '';
         $actual = $attr($values);
         $this->assertSame($expect, $actual);

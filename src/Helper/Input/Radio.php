@@ -46,11 +46,11 @@ class Radio extends AbstractChecked
         foreach ($this->options as $value => $label) {
             $this->attribs['value'] = $value;
             $this->attribs['label'] = $label;
-            $html .= $radio([
+            $html .= $radio(array(
                 'name'    => $this->name,
                 'value'   => $this->value,
                 'attribs' => $this->attribs
-            ]);
+            ));
         }
         return $html;
     }

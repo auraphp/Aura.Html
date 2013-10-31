@@ -52,7 +52,7 @@ $helper = require "/path/to/Aura.Html/scripts/instance.php";
 
 ### Form Helpers
 
-Form : `$helper->form(array $attr = []);`
+Form : `$helper->form(array $attr = array());`
 
 Example
 
@@ -60,7 +60,7 @@ Example
 <?php
 $helper->form();
 // <form method="post" enctype="multipart/form-data">
-$helper->form(['action' => '/hello-action', 'method' => 'GET']);
+$helper->form(array('action' => '/hello-action', 'method' => 'GET']);
 // <form method="GET" action="/hello-action" enctype="multipart/form-data">
 ?>
 ```
@@ -78,12 +78,12 @@ Replace the `$type` with the corresponding type.
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => $type,
     'name' => $name,
     'value' => $value,
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 ?>
 ```
@@ -92,22 +92,22 @@ checkbox
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "checkbox",
     'name' => "name",
     'value' => "value",
-    'attribs' => [
+    'attribs' => array(
         'value' => "value",
         'value_checked' => true,
     ],
-    'options' => [],
+    'options' => array(),
 ]);
 
 // <input type="checkbox" name="foo">
 
-$helper->input([
+$helper->input(array(
     'value' => 'yes',
-    'attribs' => [
+    'attribs' => array(
         'value' => 'yes',
         'value_unchecked' => 'no',
         'label' => 'This is yes',
@@ -116,10 +116,10 @@ $helper->input([
 
 // <label><input type="hidden" value="no" /><input type="checkbox" value="yes" checked /> This is yes</label>;
 
-$helper->input([
+$helper->input(array(
     'type' => "checkbox",
     'value' => 'no',
-    'attribs' => [
+    'attribs' => array(
         'value' => 'yes',
         'label' => 'This is yes',
     ]
@@ -133,17 +133,17 @@ radio :
 
 ```php
 <?php        
-$options = [
+$options = array(
     'foo' => 'bar',
     'baz' => 'dib',
     'zim' => 'gir',
 ];
 
-$helper->input([
+$helper->input(array(
     'type' => 'radio',
     'name' => 'field',
     'value' => 'baz',
-    'attribs' => [],
+    'attribs' => array(),
     'options' => $options,
 ]);
 
@@ -157,14 +157,14 @@ select :
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => 'select',
     'name' => 'foo[bar]',
     'value' => 'value5',
-    'attribs' => [
+    'attribs' => array(
         'placeholder' => 'Please pick one',
     ],
-    'options' => [
+    'options' => array(
         'value1' => 'First Label',
         'value2' => 'Second Label',
         'value5' => 'Fifth Label',
@@ -188,7 +188,7 @@ textarea :
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => 'textarea',
     'name' => 'field',
     'value' => "the quick brown fox",
@@ -201,12 +201,12 @@ button
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "button",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="button" name="name" value="value" />
@@ -217,12 +217,12 @@ color
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "color",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="color" name="name" value="value" />
@@ -233,12 +233,12 @@ date
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "date",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="date" name="name" value="value" />
@@ -249,12 +249,12 @@ datetime
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "datetime",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="datetime" name="name" value="value" />
@@ -265,12 +265,12 @@ datetime-local
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "datetime-local",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="datetime-local" name="name" value="value" />
@@ -281,12 +281,12 @@ email
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "email",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="email" name="name" value="value" />
@@ -297,12 +297,12 @@ file
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "file",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="file" name="name" value="value" />
@@ -313,12 +313,12 @@ hidden
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "hidden",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="hidden" name="name" value="value" />
@@ -329,12 +329,12 @@ image
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "image",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="image" name="name" value="value" />
@@ -345,12 +345,12 @@ month
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "month",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="month" name="name" value="value" />
@@ -361,12 +361,12 @@ number
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "number",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="number" name="name" value="value" />
@@ -377,12 +377,12 @@ password
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "password",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="password" name="name" value="value" />
@@ -393,12 +393,12 @@ range
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "range",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="range" name="name" value="value" />
@@ -409,12 +409,12 @@ reset
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "reset",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="reset" name="name" value="value" />
@@ -425,12 +425,12 @@ search
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "search",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="search" name="name" value="value" />
@@ -441,12 +441,12 @@ submit
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "submit",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="submit" name="name" value="value" />
@@ -457,12 +457,12 @@ tel
 
 ```php
 <?php
-$helper->irnput([
+$helper->irnput(array(
     'type' => "tel",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="tel" name="name" value="value" />
@@ -473,12 +473,12 @@ text
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "text",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="text" name="name" value="value" />
@@ -489,12 +489,12 @@ time
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "time",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="time" name="name" value="value" />
@@ -505,12 +505,12 @@ url
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "url",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="url" name="name" value="value" />
@@ -521,19 +521,19 @@ week
 
 ```php
 <?php
-$helper->input([
+$helper->input(array(
     'type' => "week",
     'name' => "name",
     'value' => "value",
-    'attribs' => [],
-    'options' => [],
+    'attribs' => array(),
+    'options' => array(),
 ]);
 
 // <input type="week" name="name" value="value" />
 ?>
 ```
 
-Anchor : `$helper->anchor($href, $text, array $attr = []);`
+Anchor : `$helper->anchor($href, $text, array $attr = array());`
 
 ```php
 <?php
@@ -559,7 +559,7 @@ $helper->base('/base')
 ?>
 ```
 
-Image : `$helper->img($src, array $attr = []);`
+Image : `$helper->img($src, array $attr = array());`
 
 ```php
 <?php
@@ -573,12 +573,12 @@ Links :
 ```php
 <?php
 $links = $helper->links();
-$links->add([
+$links->add(array(
     'rel' => 'prev',
     'href' => '/path/to/prev',
 ]);
 
-$links->add([
+$links->add(array(
     'rel' => 'next',
     'href' => '/path/to/next',
 ]);
@@ -592,11 +592,11 @@ Alternatively you can do by chaining
 ```php
 <?php
 $helper->links()
-->add([
+->add(array(
     'rel' => 'prev',
     'href' => '/path/to/prev',
 ])
-->add([
+->add(array(
     'rel' => 'next',
     'href' => '/path/to/next',
 ])
@@ -623,8 +623,8 @@ Ordered list (ol) :
 
 ```php
 <?php
-$ol = $helper->ol(['id' => 'test']);
-$ol->items(['foo', 'bar', 'baz'])
+$ol = $helper->ol(array('id' => 'test']);
+$ol->items(array('foo', 'bar', 'baz'])
     ->item('dib', ['class' => 'callout'])
     ->get();
 /*
@@ -642,8 +642,8 @@ Un-ordered list (ul) :
 
 ```php
 <?php
-$helper->ul(['id' => 'test'])
-    ->items(['foo', 'bar', 'baz'])
+$helper->ul(array('id' => 'test'])
+    ->items(array('foo', 'bar', 'baz'])
     ->item('dib', ['class' => 'callout'])
     ->get();
 /*
@@ -720,7 +720,7 @@ $styles->get();
 ?>
 ```
 
-Tag: `$helper->tag($tag, array $attr = [])`
+Tag: `$helper->tag($tag, array $attr = array())`
 
 ```php
 <?php
