@@ -136,7 +136,7 @@ class Escaper
         // escape the string in UTF-8 encoding
         $esc = preg_replace_callback(
             '/[^a-z0-9,\.\-_]/iSu',
-            [$this, 'replaceAttr'],
+            array($this, 'replaceAttr'),
             $this->toUtf8($raw)
         );
         
@@ -241,7 +241,7 @@ class Escaper
         // escape the string in UTF-8 encoding
         $esc = preg_replace_callback(
             '/[^a-z0-9]/iSu',
-            [$this, 'replaceCss'],
+            array($this, 'replaceCss'),
             $this->toUtf8($raw)
         );
         
@@ -268,7 +268,7 @@ class Escaper
         // escape the string in UTF-8 encoding
         $esc = preg_replace_callback(
             '/[^a-z0-9,\._]/iSu',
-            [$this, 'replaceJs'],
+            array($this, 'replaceJs'),
             $this->toUtf8($raw)
         );
         

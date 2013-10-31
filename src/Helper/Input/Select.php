@@ -214,7 +214,7 @@ class Select extends AbstractInput
             $html .= $this->buildOption(array(
                 '',
                 $this->placeholder,
-                ['disabled' => true],
+                array('disabled' => true),
             ));
         }
         

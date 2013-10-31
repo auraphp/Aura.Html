@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Html\Helper\Input;
 
-return [
+return array(
     'button'            => function () { return new Generic; },
     'checkbox'          => function () { return new Checkbox; },
     'color'             => function () { return new Generic; },

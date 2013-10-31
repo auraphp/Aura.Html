@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Html;
 
-return [
+return array(
     'anchor'        => function () { return new Helper\Anchor; },
     'attr'          => function () { return new Helper\Attribs; },
     'base'          => function () { return new Helper\Base; },
