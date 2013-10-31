@@ -249,7 +249,7 @@ class Escaper
         // return the escaped string
         return htmlspecialchars(
             $raw, 
-            ENT_QUOTES | ENT_SUBSTITUTE,
+            $this->flags,
             $this->encoding
         );
     }
