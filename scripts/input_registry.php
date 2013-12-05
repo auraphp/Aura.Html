@@ -27,4 +27,4 @@ return array(
     'time'              => function () { return new Generic; },
     'url'               => function () { return new Generic; },
     'week'              => function () { return new Generic; },
-];
+);
