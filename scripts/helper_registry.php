@@ -26,4 +26,4 @@ return array(
     'tag'           => function () { return new Helper\Tag; },
     'title'         => function () { return new Helper\Title; },
     'ul'            => function () { return new Helper\Ul; },
-];
+);
