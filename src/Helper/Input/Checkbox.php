@@ -53,6 +53,7 @@ class Checkbox extends AbstractChecked
         $attribs = array(
             'type' => 'hidden',
             'value' => $unchecked,
+            'name' => $this->name
         );
         
         return $this->void('input', $attribs);
