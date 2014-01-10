@@ -17,6 +17,7 @@ return array(
         return $input;
     },
     'img'           => function () { return new Helper\Img; },
+    'label'         => function () { return new Helper\Label; },
     'links'         => function () { return new Helper\Links; },
     'metas'         => function () { return new Helper\Metas; },
     'ol'            => function () { return new Helper\Ol; },
