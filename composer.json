@@ -22,7 +22,9 @@
         "php": ">=5.4.0"
     },
     "autoload": {
-        "files": ["autoload.php"]
+        "psr-4": {
+            "Aura\\Html\\": "src/"
+        }
     },
     "extra": {
         "aura": {
