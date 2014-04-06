@@ -29,8 +29,15 @@ class Checkbox extends AbstractChecked
     protected function html()
     {
         $this->attribs['type'] = 'checkbox';
-        $input = $this->htmlUnchecked() . $this->htmlChecked();
-        $html  = $this->htmlLabel($input);
+        // Get unchecked element first. This unsets value_unchecked
+        $unchecked = $this->htmlUnchecked();
+        
+        // Get the input
+        $input = $this->htmlChecked();
+        
+        // Unchecked (hidden) element must reside outside the label
+        $html  = $unchecked . $this->htmlLabel($input);
+        
         return $this->indent(0, $html);
     }
     
@@ -53,6 +60,7 @@ class Checkbox extends AbstractChecked
         $attribs = array(
             'type' => 'hidden',
             'value' => $unchecked,
+            'name' => $this->name
         );
         
         return $this->void('input', $attribs);

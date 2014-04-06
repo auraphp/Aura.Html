@@ -88,7 +88,7 @@ $helper->input(array(
     'value' => $value,
     'attribs' => array(),
     'options' => array(),
-]);
+));
 ?>
 ```
 
@@ -97,51 +97,74 @@ checkbox
 ```php
 <?php
 $helper->input(array(
-    'type' => "checkbox",
-    'name' => "name",
-    'value' => "value",
+    'type' => 'checkbox',
+    'name' => 'foo',
+    'value' => 'bar',
     'attribs' => array(
-        'value' => "value",
-        'value_checked' => true,
-    ],
+        'value' => 'baz',
+    ),
     'options' => array(),
-]);
+));
 
-// <input type="checkbox" name="foo">
+// Note that the element value of 'bar' does not match the attribs value of 'baz',
+// therefore, the element is not checked
+// <input type="checkbox" name="foo" value="baz" />
+
 
 $helper->input(array(
+    'type' => 'checkbox',
+    'name' => 'foo',
+    'value' => 'baz',
+    'attribs' => array(
+        'value' => 'baz',
+    ),
+    'options' => array(),
+));
+
+// Now the element value is 'baz' which matches the attribs value of 'baz',
+// therefore, the element is checked
+// <input type="checkbox" name="foo" value="baz" checked />
+
+
+$helper->input(array(
+    'type' => "checkbox",
+    'value' => 'no',
+    'name' => 'dim',
+    'attribs' => array(
+        'value' => 'yes',
+        'label' => 'This is yes',
+        'id'=>'cbox'
+    )
+));
+
+// <label for="cbox"><input id="cbox" type="checkbox" name="dim" value="yes" /> This is yes</label>
+
+
+$helper->input(array(
+    'type' => 'checkbox',
+    'name' => 'foo',
     'value' => 'yes',
     'attribs' => array(
         'value' => 'yes',
         'value_unchecked' => 'no',
         'label' => 'This is yes',
-    ],
-]);
+    ),
+));
 
-// <label><input type="hidden" value="no" /><input type="checkbox" value="yes" checked /> This is yes</label>;
+// <input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" checked /> This is yes</label>
 
-$helper->input(array(
-    'type' => "checkbox",
-    'value' => 'no',
-    'attribs' => array(
-        'value' => 'yes',
-        'label' => 'This is yes',
-    ]
-]);
-
-// <label><input type="checkbox" value="yes" /> This is yes</label>
 ?>
 ```
 
 radio : 
 
 ```php
-<?php        
+<?php
 $options = array(
     'foo' => 'bar',
     'baz' => 'dib',
     'zim' => 'gir',
-];
+);
 
 $helper->input(array(
     'type' => 'radio',
@@ -149,7 +172,7 @@ $helper->input(array(
     'value' => 'baz',
     'attribs' => array(),
     'options' => $options,
-]);
+));
 
 // <label><input type="radio" name="field" value="foo" /> bar</label>
 // <label><input type="radio" name="field" value="baz" checked /> dib</label>
@@ -174,7 +197,7 @@ $helper->input(array(
         'value5' => 'Fifth Label',
         'value3' => 'Third Label',
     ],
-]);
+));
 
 /*
 <select name="foo[bar]">
@@ -196,7 +219,7 @@ $helper->input(array(
     'type' => 'textarea',
     'name' => 'field',
     'value' => "the quick brown fox",
-]);
+));
 // <textarea name="field">the quick brown fox</textarea>
 ?>
 ```
@@ -211,7 +234,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="button" name="name" value="value" />
 ?>
@@ -227,7 +250,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="color" name="name" value="value" />
 ?>
@@ -243,7 +266,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="date" name="name" value="value" />
 ?>
@@ -259,7 +282,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="datetime" name="name" value="value" />
 ?>
@@ -275,7 +298,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="datetime-local" name="name" value="value" />
 ?>
@@ -291,7 +314,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="email" name="name" value="value" />
 ?>
@@ -307,7 +330,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="file" name="name" value="value" />
 ?>
@@ -323,7 +346,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="hidden" name="name" value="value" />
 ?>
@@ -339,7 +362,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="image" name="name" value="value" />
 ?>
@@ -355,7 +378,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="month" name="name" value="value" />
 ?>
@@ -371,7 +394,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="number" name="name" value="value" />
 ?>
@@ -387,7 +410,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="password" name="name" value="value" />
 ?>
@@ -403,7 +426,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="range" name="name" value="value" />
 ?>
@@ -419,7 +442,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="reset" name="name" value="value" />
 ?>
@@ -435,7 +458,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="search" name="name" value="value" />
 ?>
@@ -451,7 +474,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="submit" name="name" value="value" />
 ?>
@@ -467,7 +490,7 @@ $helper->irnput(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="tel" name="name" value="value" />
 ?>
@@ -483,7 +506,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="text" name="name" value="value" />
 ?>
@@ -499,7 +522,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="time" name="name" value="value" />
 ?>
@@ -515,7 +538,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="url" name="name" value="value" />
 ?>
@@ -531,7 +554,7 @@ $helper->input(array(
     'value' => "value",
     'attribs' => array(),
     'options' => array(),
-]);
+));
 
 // <input type="week" name="name" value="value" />
 ?>
@@ -550,7 +573,14 @@ Attribs : `$helper->attr();`
 
 ```php
 <?php
-// Missing ?
+$helper->attr(array(
+    'class'=>'myclass',
+    'id'=>'myid',
+    'data-orbit'=>true
+));
+
+// class="myclass" id="myid" data-orbit
+
 ?>
 ``` 
 
@@ -567,7 +597,7 @@ Image : `$helper->img($src, array $attr = array());`
 
 ```php
 <?php
-$helper->img('hello.jpg', ['alt' => 'Hello', 'width' => 100, 'height' => 200]);
+$helper->img('hello.jpg', array('alt' => 'Hello', 'width' => 100, 'height' => 200));
 // <img src="hello.jpg" alt="Hello" width="100" height="200">
 ?>
 ```
@@ -585,7 +615,7 @@ $links->add(array(
 $links->add(array(
     'rel' => 'next',
     'href' => '/path/to/next',
-]);
+));
 
 $links->get();
 ?>
@@ -599,11 +629,11 @@ $helper->links()
 ->add(array(
     'rel' => 'prev',
     'href' => '/path/to/prev',
-])
+))
 ->add(array(
     'rel' => 'next',
     'href' => '/path/to/next',
-])
+))
 ->get();
 ?>
 ```
@@ -627,9 +657,9 @@ Ordered list (ol) :
 
 ```php
 <?php
-$ol = $helper->ol(array('id' => 'test']);
-$ol->items(array('foo', 'bar', 'baz'])
-    ->item('dib', ['class' => 'callout'])
+$ol = $helper->ol(array('id' => 'test'));
+$ol->items(array('foo', 'bar', 'baz'))
+    ->item('dib', array('class' => 'callout'))
     ->get();
 /*
 <ol id="test">
@@ -647,8 +677,8 @@ Un-ordered list (ul) :
 ```php
 <?php
 $helper->ul(array('id' => 'test'])
-    ->items(array('foo', 'bar', 'baz'])
-    ->item('dib', ['class' => 'callout'])
+    ->items(array('foo', 'bar', 'baz'))
+    ->item('dib', array('class' => 'callout'))
     ->get();
 /*
 <ul id="test">
@@ -671,7 +701,7 @@ $scripts->add('/js/last.js');
 
 $scripts->get();
 /*
-script src="/js/first.js" type="text/javascript"></script>
+<script src="/js/first.js" type="text/javascript"></script>
 <script src="/js/middle.js" type="text/javascript"></script>
 <script src="/js/last.js" type="text/javascript"></script>
 */
@@ -684,8 +714,8 @@ conditional scripts etc as below.
 ```php
 <?php
 $scripts = $helper->scripts();
-$scripts->add('/js/last.js', [], 150);
-$scripts->add('/js/first.js', [], 50);
+$scripts->add('/js/last.js', array(), 150);
+$scripts->add('/js/first.js', array(), 50);
 $scripts->add('/js/middle.js');
 $scripts->addCond('ie6', '/js/ie6.js');
 /*
@@ -710,10 +740,10 @@ Styles :
 ```php
 <?php
 $styles = $helper->styles();
-$styles->add('/css/middle.css', ['media' => 'print']);
+$styles->add('/css/middle.css', array('media' => 'print'));
 $styles->add('/css/last.css', null, 150);
 $styles->add('/css/first.css', null, 50);
-$styles->addCond('ie6', '/css/ie6.css', ['media' => 'print']);
+$styles->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
 $styles->get();
 /*
 <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />
@@ -728,10 +758,10 @@ Tag: `$helper->tag($tag, array $attr = array())`
 
 ```php
 <?php
-$helper->tag('form', [
+$helper->tag('form', array(
     'action' => '/action.php',
     'method' => 'post',
-]);
+));
 // <form action="/action.php" method="post">
 
 $helper->tag('div');
@@ -757,5 +787,4 @@ $title->get();
 
 The helpers escape values internally.
 
-- need "radios" and "checkboxes" helpers
 
