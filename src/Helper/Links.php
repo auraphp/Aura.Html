@@ -32,12 +32,17 @@ class Links extends AbstractHelper
      * 
      * Returns the helper so you can call methods on it.
      * 
-     * @return $this
+     * @return self
      * 
      */
     public function __invoke()
     {
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->indent(1, implode(PHP_EOL . $this->indent, $this->links));
     }
 
     /**
@@ -46,24 +51,12 @@ class Links extends AbstractHelper
      * 
      * @param array $attr Attributes for the <link> tag.
      * 
-     * @return $this
+     * @return self
      * 
      */
     public function add(array $attr = array())
     {
         $this->links[] = $this->void('link', $attr);
         return $this;
-    }
-
-    /**
-     * 
-     * Returns the stack of <link ... /> tags as a single block.
-     * 
-     * @return string The <link ... /> tags.
-     * 
-     */
-    public function get()
-    {
-        return $this->indent(1, implode(PHP_EOL . $this->indent, $this->links));
     }
 }

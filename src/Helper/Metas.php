@@ -32,12 +32,31 @@ class Metas extends AbstractHelper
      * 
      * Returns the helper so you can call methods on it.
      * 
-     * @return $this
+     * @return self
      * 
      */
     public function __invoke()
     {
         return $this;
+    }
+
+    /**
+     * 
+     * Returns the stack of `<meta ...>` tags as a single block.
+     * 
+     * @return string The `<meta ...>` tags.
+     * 
+     */
+    public function __toString()
+    {
+        $html = '';
+        ksort($this->metas);
+        foreach ($this->metas as $list) {
+            foreach ($list as $meta) {
+                $html .= $this->indent(1, $meta);
+            }
+        }
+        return $html;
     }
 
     /**
@@ -100,24 +119,5 @@ class Metas extends AbstractHelper
         );
 
         $this->add($attr, $pos);
-    }
-
-    /**
-     * 
-     * Returns the stack of `<meta ...>` tags as a single block.
-     * 
-     * @return string The `<meta ...>` tags.
-     * 
-     */
-    public function get()
-    {
-        $html = '';
-        ksort($this->metas);
-        foreach ($this->metas as $list) {
-            foreach ($list as $meta) {
-                $html .= $this->indent(1, $meta);
-            }
-        }
-        return $html;
     }
 }

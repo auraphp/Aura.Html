@@ -23,7 +23,7 @@ class StylesTest extends AbstractHelperTest
         $styles->add('/css/first.css', null, 50);
         $styles->addCond('ie6', '/css/ie6.css');
         
-        $actual = $styles->get();
+        $actual = $styles->__toString();
         $expect = '    <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />' . PHP_EOL
                 . '    <link rel="stylesheet" href="/css/middle.css" type="text/css" media="screen" />' . PHP_EOL
                 . '    <!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="screen" /><![endif]-->' . PHP_EOL
@@ -41,7 +41,7 @@ class StylesTest extends AbstractHelperTest
         $styles->add('/css/last.css', null, 150);
         $styles->add('/css/first.css', null, 50);
         $styles->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
-        $actual = $styles->get();
+        $actual = $styles->__toString();
         
         $expect = '  <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />' . PHP_EOL
                 . '  <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />' . PHP_EOL

@@ -48,7 +48,7 @@ class Input
      * 
      * @param array $spec The element specification.
      * 
-     * @return object
+     * @return string
      * 
      */
     public function __invoke(array $spec = array())

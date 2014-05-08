@@ -21,7 +21,7 @@ class MetasTest extends AbstractHelperTest
         $metas->addHttp('Location', '/redirect/to/here');
         $metas->addName('foo', 'bar');
         
-        $actual = $metas->get();
+        $actual = $metas->__toString();
         $expect = '    <meta http-equiv="Location" content="/redirect/to/here" />' . PHP_EOL
                 . '    <meta name="foo" content="bar" />' . PHP_EOL;
         
@@ -35,7 +35,7 @@ class MetasTest extends AbstractHelperTest
         $metas->addHttp('Location', '/redirect/to/here');
         $metas->addName('foo', 'bar');
         
-        $actual = $metas->get();
+        $actual = $metas->__toString();
         $expect = '  <meta http-equiv="Location" content="/redirect/to/here" />' . PHP_EOL
                 . '  <meta name="foo" content="bar" />' . PHP_EOL;
         

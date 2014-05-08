@@ -604,7 +604,7 @@ $helper->links()->add(array(
     'href' => '/path/to/next',
 ));
 
-echo $helper->links()->get();
+echo $helper->links();
 ?>
 ```
 
@@ -620,8 +620,7 @@ echo $helper->links()
     ->add(array(
         'rel' => 'next',
         'href' => '/path/to/next',
-    ))
-    ->get();
+    ));
 ?>
 ```
 
@@ -631,8 +630,7 @@ Metas :
 <?php
 echo $helper->metas()
     ->addHttp('Location', '/redirect/to/here');
-    ->addName('foo', 'bar')
-    ->get();
+    ->addName('foo', 'bar');
 
 // <meta http-equiv="Location" content="/redirect/to/here">
 // <meta name="foo" content="bar">
@@ -645,8 +643,7 @@ Ordered list (ol) :
 <?php
 $ol = $helper->ol(array('id' => 'test'));
 $ol->items(array('foo', 'bar', 'baz'))
-    ->item('dib', array('class' => 'callout'))
-    ->get();
+   ->item('dib', array('class' => 'callout'));
 /*
 <ol id="test">
     <li>foo</li>
@@ -664,8 +661,7 @@ Un-ordered list (ul) :
 <?php
 echo $helper->ul(array('id' => 'test'])
     ->items(array('foo', 'bar', 'baz'))
-    ->item('dib', array('class' => 'callout'))
-    ->get();
+    ->item('dib', array('class' => 'callout'));
 /*
 <ul id="test">
     <li>foo</li>
@@ -683,8 +679,7 @@ scripts :
 echo $helper->scripts()
     ->add('/js/first.js')
     ->add('/js/middle.js')
-    ->add('/js/last.js')
-    ->get();
+    ->add('/js/last.js');
 
 /*
 <script src="/js/first.js" type="text/javascript"></script>
@@ -703,8 +698,7 @@ echo $helper->scripts()
     ->add('/js/last.js', array(), 150)
     ->add('/js/first.js', array(), 50)
     ->add('/js/middle.js')
-    ->addCond('ie6', '/js/ie6.js')
-    ->get();
+    ->addCond('ie6', '/js/ie6.js');
 /*
 <script src="/js/first.js" type="text/javascript"></script>
 <script src="/js/middle.js" type="text/javascript"></script>
@@ -730,7 +724,7 @@ $helper->styles()->add('/css/middle.css', array('media' => 'print'));
 $helper->styles()->add('/css/last.css', null, 150);
 $helper->styles()->add('/css/first.css', null, 50);
 $helper->styles()->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
-echo $helper->styles()->get();
+echo $helper->styles();
 /*
 <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />
@@ -744,14 +738,10 @@ Tag: `echo $helper->tag($tag, array $attr = array())`
 
 ```php
 <?php
-echo $helper->tag('form', array(
-    'action' => '/action.php',
-    'method' => 'post',
+echo $helper->tag('div', array(
+    'id' => 'foo',
 ));
-// <form action="/action.php" method="post">
-
-echo $helper->tag('div');
-// <div>
+// <div id="foo">
 ?>
 ```
 
@@ -767,7 +757,7 @@ $helper->title()->append(' Suf2');
 $helper->title()->prepend('Pre1');
 $helper->title()->prepend('Pre2');
         
-$helper->title()->get();
+echo $helper->title();
 // <title>Pre2Pre1This and That Suf1 Suf2</title>
 ?>
 ``` 

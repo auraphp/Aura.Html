@@ -79,8 +79,17 @@ abstract class AbstractInput extends AbstractHelper
     public function __invoke(array $spec = array())
     {
         $this->prep($spec);
-        return $this->html();
+        return $this->__toString();
     }
+    
+    /**
+     * 
+     * Returns the HTML for this input.
+     * 
+     * @return string
+     * 
+     */
+    abstract public function __toString();
     
     protected function prep($spec)
     {
@@ -111,13 +120,4 @@ abstract class AbstractInput extends AbstractHelper
         );
         $this->attribs = array_merge($attribs, $this->attribs);
     }
-    
-    /**
-     * 
-     * Returns the HTML for this input.
-     * 
-     * @return string
-     * 
-     */
-    abstract protected function html();
 }

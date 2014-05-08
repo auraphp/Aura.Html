@@ -35,7 +35,7 @@ class TitleTest extends AbstractHelperTest
         $title->prepend($data->pre1);
         $title->prepend($data->pre2);
         
-        $actual = $title->get();
+        $actual = $title->__toString();
         $expect = '    <title>Pre2 Pre1 This and That Suf1 Suf2</title>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -48,7 +48,7 @@ class TitleTest extends AbstractHelperTest
             'main' => 'This and That',
         );
         $title->set($data->main);
-        $actual = $title->get();
+        $actual = $title->__toString();
         $expect = '  <title>This and That</title>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }

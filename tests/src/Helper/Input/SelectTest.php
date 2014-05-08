@@ -59,7 +59,7 @@ class SelectTest extends AbstractHelperTest
                array('disabled' => true)
             )
             ->selected(array('value2', 'value3'))
-            ->get();
+            ->__toString();
         
         $expect = '<select name="foo[bar][]" multiple="multiple">' . PHP_EOL
                 . '    <optgroup label="Group A">' . PHP_EOL

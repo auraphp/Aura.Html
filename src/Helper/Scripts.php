@@ -30,9 +30,28 @@ class Scripts extends AbstractHelper
 
     /**
      * 
+     * Returns the stack of <script> tags as a single block.
+     * 
+     * @return string The <script> tags.
+     * 
+     */
+    public function __toString()
+    {
+        $html = '';
+        ksort($this->scripts);
+        foreach ($this->scripts as $list) {
+            foreach ($list as $script) {
+                $html .= $this->indent . $script . PHP_EOL;
+            }
+        }
+        return $html;
+    }
+
+    /**
+     * 
      * Returns the helper so you can call methods on it.
      * 
-     * @return $this
+     * @return self
      * 
      */
     public function __invoke()
@@ -97,24 +116,5 @@ class Scripts extends AbstractHelper
         
         $tag = "<!--[if $cond]><script $attr></script><![endif]-->";
         $this->scripts[(int) $pos][] = $tag;
-    }
-
-    /**
-     * 
-     * Returns the stack of <script> tags as a single block.
-     * 
-     * @return string The <script> tags.
-     * 
-     */
-    public function get()
-    {
-        $html = '';
-        ksort($this->scripts);
-        foreach ($this->scripts as $list) {
-            foreach ($list as $script) {
-                $html .= $this->indent . $script . PHP_EOL;
-            }
-        }
-        return $html;
     }
 }
