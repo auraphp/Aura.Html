@@ -2,7 +2,6 @@
 namespace Aura\Html\Functions;
 
 use Aura\Html\Escaper;
-use Aura\Html\Exception;
 
 class EscaperFunctions
 {
