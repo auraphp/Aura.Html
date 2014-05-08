@@ -35,58 +35,60 @@ To ask questions, provide feedback, or otherwise communicate with the Aura commu
 
 ## Getting Started
 
-The easiest way to instantiate with all the available helpers is to 
-include the `instance.php` script:
+The easiest way to instantiate an HTML helper locator with all the available helpers is to use the _HelperLocatorFactory_:
 
 ```php
 <?php
-$helper = require "/path/to/Aura.Html/scripts/instance.php";
+$factory = new Aura\Html\HelperLocatorFactory;
+$helper = $factory->newInstance();
 ?>
 ```
 
-### Form Helpers
+### Escaping
 
-Form : `$helper->form(array $attr = array());`
+All helpers escape values internally.
 
-Example
+TBD: Escaping Functions
+
+### Forms
+
+Open and close a form element like so:
 
 ```php
 <?php
-$helper->form();
-// <form method="post" enctype="multipart/form-data">
-$helper->form(array('action' => '/hello-action', 'method' => 'GET']);
-// <form method="GET" action="/hello-action" enctype="multipart/form-data">
+// <form id="my-form" method="put" action="/hello-action" enctype="multipart/form-data">
+echo $helper->form(array(
+    'id' => 'my-form',
+    'method' => 'put',
+    'action' => '/hello-action',
+));
+
+// </form>
+echo $helper->tag('/form');
 ?>
 ```
 
-Form Input
-----------
+?>
+```
 
-Creating `HTML5` input types is easy. Some of the built in form 
-input types are `button`, `checkbox`, `color`, `date`, `datetime`, 
-`datetime-local`, `email`, `file`, `hidden`, `image`, `month`, 
-`number`, `password`, `range`, `reset`, `search`, `submit`, `tel`, 
-`text`, `time`, `url`, `week`.
-
-Replace the `$type` with the corresponding type.
+Emit HTML 5 input elements between the form tags. All of the input helpers use the same method signature: a single descriptor array that formats the input element.
 
 ```php
 <?php
-$helper->input(array(
-    'type' => $type,
-    'name' => $name,
-    'value' => $value,
+echo $helper->input(array(
+    'type'    => $type,
+    'name'    => $name,
+    'value'   => $value,
     'attribs' => array(),
-    'options' => array(),
+    'options' => array(), // for select elements
 ));
 ?>
 ```
-
-checkbox
+#### checkbox
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => 'checkbox',
     'name' => 'foo',
     'value' => 'bar',
@@ -101,7 +103,7 @@ $helper->input(array(
 // <input type="checkbox" name="foo" value="baz" />
 
 
-$helper->input(array(
+echo $helper->input(array(
     'type' => 'checkbox',
     'name' => 'foo',
     'value' => 'baz',
@@ -116,7 +118,7 @@ $helper->input(array(
 // <input type="checkbox" name="foo" value="baz" checked />
 
 
-$helper->input(array(
+echo $helper->input(array(
     'type' => "checkbox",
     'value' => 'no',
     'name' => 'dim',
@@ -130,7 +132,7 @@ $helper->input(array(
 // <label for="cbox"><input id="cbox" type="checkbox" name="dim" value="yes" /> This is yes</label>
 
 
-$helper->input(array(
+echo $helper->input(array(
     'type' => 'checkbox',
     'name' => 'foo',
     'value' => 'yes',
@@ -146,7 +148,7 @@ $helper->input(array(
 ?>
 ```
 
-radio : 
+#### radio
 
 ```php
 <?php
@@ -156,7 +158,7 @@ $options = array(
     'zim' => 'gir',
 );
 
-$helper->input(array(
+echo $helper->input(array(
     'type' => 'radio',
     'name' => 'field',
     'value' => 'baz',
@@ -170,23 +172,23 @@ $helper->input(array(
 ?>
 ```
 
-select :
+#### select
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => 'select',
     'name' => 'foo[bar]',
     'value' => 'value5',
     'attribs' => array(
         'placeholder' => 'Please pick one',
-    ],
+    ),
     'options' => array(
         'value1' => 'First Label',
         'value2' => 'Second Label',
         'value5' => 'Fifth Label',
         'value3' => 'Third Label',
-    ],
+    ),
 ));
 
 /*
@@ -201,11 +203,11 @@ $helper->input(array(
 ?>
 ```
 
-textarea :
+#### textarea
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => 'textarea',
     'name' => 'field',
     'value' => "the quick brown fox",
@@ -218,7 +220,7 @@ button
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "button",
     'name' => "name",
     'value' => "value",
@@ -234,7 +236,7 @@ color
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "color",
     'name' => "name",
     'value' => "value",
@@ -250,7 +252,7 @@ date
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "date",
     'name' => "name",
     'value' => "value",
@@ -266,7 +268,7 @@ datetime
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "datetime",
     'name' => "name",
     'value' => "value",
@@ -282,7 +284,7 @@ datetime-local
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "datetime-local",
     'name' => "name",
     'value' => "value",
@@ -298,7 +300,7 @@ email
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "email",
     'name' => "name",
     'value' => "value",
@@ -314,7 +316,7 @@ file
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "file",
     'name' => "name",
     'value' => "value",
@@ -330,7 +332,7 @@ hidden
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "hidden",
     'name' => "name",
     'value' => "value",
@@ -346,7 +348,7 @@ image
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "image",
     'name' => "name",
     'value' => "value",
@@ -362,7 +364,7 @@ month
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "month",
     'name' => "name",
     'value' => "value",
@@ -378,7 +380,7 @@ number
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "number",
     'name' => "name",
     'value' => "value",
@@ -394,7 +396,7 @@ password
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "password",
     'name' => "name",
     'value' => "value",
@@ -410,7 +412,7 @@ range
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "range",
     'name' => "name",
     'value' => "value",
@@ -426,7 +428,7 @@ reset
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "reset",
     'name' => "name",
     'value' => "value",
@@ -442,7 +444,7 @@ search
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "search",
     'name' => "name",
     'value' => "value",
@@ -458,7 +460,7 @@ submit
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "submit",
     'name' => "name",
     'value' => "value",
@@ -474,7 +476,7 @@ tel
 
 ```php
 <?php
-$helper->irnput(array(
+echo $helper->irnput(array(
     'type' => "tel",
     'name' => "name",
     'value' => "value",
@@ -490,7 +492,7 @@ text
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "text",
     'name' => "name",
     'value' => "value",
@@ -506,7 +508,7 @@ time
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "time",
     'name' => "name",
     'value' => "value",
@@ -522,7 +524,7 @@ url
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "url",
     'name' => "name",
     'value' => "value",
@@ -538,7 +540,7 @@ week
 
 ```php
 <?php
-$helper->input(array(
+echo $helper->input(array(
     'type' => "week",
     'name' => "name",
     'value' => "value",
@@ -550,20 +552,20 @@ $helper->input(array(
 ?>
 ```
 
-Anchor : `$helper->anchor($href, $text, array $attr = array());`
+Anchor : `echo $helper->anchor($href, $text, array $attr = array());`
 
 ```php
 <?php
-$helper->anchor('http://auraphp.com', 'Aura Project');
+echo $helper->anchor('http://auraphp.com', 'Aura Project');
 // <a href="http://auraphp.com">Aura Project</a>
 ?>
 ```
 
-Attribs : `$helper->attr();`
+Attribs : `echo $helper->attr();`
 
 ```php
 <?php
-$helper->attr(array(
+echo $helper->attr(array(
     'class'=>'myclass',
     'id'=>'myid',
     'data-orbit'=>true
@@ -574,20 +576,20 @@ $helper->attr(array(
 ?>
 ``` 
 
-Base : `$helper->base($href);`
+Base : `echo $helper->base($href);`
 
 ```php
 <?php
-$helper->base('/base')
+echo $helper->base('/base')
 // <base href="/base" />
 ?>
 ```
 
-Image : `$helper->img($src, array $attr = array());`
+Image : `echo $helper->img($src, array $attr = array());`
 
 ```php
 <?php
-$helper->img('hello.jpg', array('alt' => 'Hello', 'width' => 100, 'height' => 200));
+echo $helper->img('hello.jpg', array('alt' => 'Hello', 'width' => 100, 'height' => 200));
 // <img src="hello.jpg" alt="Hello" width="100" height="200">
 ?>
 ```
@@ -596,18 +598,17 @@ Links :
 
 ```php
 <?php
-$links = $helper->links();
-$links->add(array(
+$helper->links()->add(array(
     'rel' => 'prev',
     'href' => '/path/to/prev',
-]);
+));
 
-$links->add(array(
+$helper->links()->add(array(
     'rel' => 'next',
     'href' => '/path/to/next',
 ));
 
-$links->get();
+echo $helper->links()->get();
 ?>
 ```
 
@@ -615,16 +616,16 @@ Alternatively you can do by chaining
 
 ```php
 <?php
-$helper->links()
-->add(array(
-    'rel' => 'prev',
-    'href' => '/path/to/prev',
-))
-->add(array(
-    'rel' => 'next',
-    'href' => '/path/to/next',
-))
-->get();
+echo $helper->links()
+    ->add(array(
+        'rel' => 'prev',
+        'href' => '/path/to/prev',
+    ))
+    ->add(array(
+        'rel' => 'next',
+        'href' => '/path/to/next',
+    ))
+    ->get();
 ?>
 ```
 
@@ -632,11 +633,10 @@ Metas :
 
 ```php
 <?php
-$metas = $helper->metas();
-$metas->addHttp('Location', '/redirect/to/here');
-$metas->addName('foo', 'bar');
-
-$metas->get();
+echo $helper->metas()
+    ->addHttp('Location', '/redirect/to/here');
+    ->addName('foo', 'bar')
+    ->get();
 
 // <meta http-equiv="Location" content="/redirect/to/here">
 // <meta name="foo" content="bar">
@@ -666,7 +666,7 @@ Un-ordered list (ul) :
 
 ```php
 <?php
-$helper->ul(array('id' => 'test'])
+echo $helper->ul(array('id' => 'test'])
     ->items(array('foo', 'bar', 'baz'))
     ->item('dib', array('class' => 'callout'))
     ->get();
@@ -684,12 +684,12 @@ scripts :
 
 ```php
 <?php
-$scripts = $helper->scripts();
-$scripts->add('/js/first.js');
-$scripts->add('/js/middle.js');
-$scripts->add('/js/last.js');
+echo $helper->scripts()
+    ->add('/js/first.js')
+    ->add('/js/middle.js')
+    ->add('/js/last.js')
+    ->get();
 
-$scripts->get();
 /*
 <script src="/js/first.js" type="text/javascript"></script>
 <script src="/js/middle.js" type="text/javascript"></script>
@@ -703,11 +703,12 @@ conditional scripts etc as below.
 
 ```php
 <?php
-$scripts = $helper->scripts();
-$scripts->add('/js/last.js', array(), 150);
-$scripts->add('/js/first.js', array(), 50);
-$scripts->add('/js/middle.js');
-$scripts->addCond('ie6', '/js/ie6.js');
+echo $helper->scripts()
+    ->add('/js/last.js', array(), 150)
+    ->add('/js/first.js', array(), 50)
+    ->add('/js/middle.js')
+    ->addCond('ie6', '/js/ie6.js')
+    ->get();
 /*
 <script src="/js/first.js" type="text/javascript"></script>
 <script src="/js/middle.js" type="text/javascript"></script>
@@ -729,12 +730,11 @@ Styles :
 
 ```php
 <?php
-$styles = $helper->styles();
-$styles->add('/css/middle.css', array('media' => 'print'));
-$styles->add('/css/last.css', null, 150);
-$styles->add('/css/first.css', null, 50);
-$styles->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
-$styles->get();
+$helper->styles()->add('/css/middle.css', array('media' => 'print'));
+$helper->styles()->add('/css/last.css', null, 150);
+$helper->styles()->add('/css/first.css', null, 50);
+$helper->styles()->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
+echo $helper->styles()->get();
 /*
 <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />
@@ -744,17 +744,17 @@ $styles->get();
 ?>
 ```
 
-Tag: `$helper->tag($tag, array $attr = array())`
+Tag: `echo $helper->tag($tag, array $attr = array())`
 
 ```php
 <?php
-$helper->tag('form', array(
+echo $helper->tag('form', array(
     'action' => '/action.php',
     'method' => 'post',
 ));
 // <form action="/action.php" method="post">
 
-$helper->tag('div');
+echo $helper->tag('div');
 // <div>
 ?>
 ```
@@ -762,19 +762,18 @@ $helper->tag('div');
 Title : 
 
 ```php
-$title  = $helper->title();
-$title->set('This and That');
+<?php
+$helper->title()->set('This and That');
 
-$title->append(' Suf1');
-$title->append(' Suf2');
+$helper->title()->append(' Suf1');
+$helper->title()->append(' Suf2');
 
-$title->prepend('Pre1');
-$title->prepend('Pre2');
+$helper->title()->prepend('Pre1');
+$helper->title()->prepend('Pre2');
         
-$title->get();
+$helper->title()->get();
 // <title>Pre2Pre1This and That Suf1 Suf2</title>
+?>
 ``` 
-
-The helpers escape values internally.
 
 
