@@ -50,14 +50,14 @@ abstract class AbstractHelper
     
     /**
      * 
-     * Sets the escaper object.
+     * Constructor.
      * 
      * @param Escaper $escaper The escaper object.
      * 
      * @return null
      * 
      */
-    public function setEscaper(Escaper $escaper)
+    public function __construct(Escaper $escaper)
     {
         $this->escaper = $escaper;
     }
