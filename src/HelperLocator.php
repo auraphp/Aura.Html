@@ -21,68 +21,107 @@ class HelperLocator
 {
     /**
      * 
-     * A factory to create helper objects.
+     * A map of helper factories.
      * 
      * @var array
      * 
      */
-    protected $helper_factory;
-
+    protected $map = array();
+    
     /**
      * 
-     * A registry of created helper objects.
+     * The helper object instances.
      * 
      * @var array
      * 
      */
-    protected $registry = array();
-    
+    protected $helpers = array();
+
     /**
      * 
      * Constructor.
      * 
-     * @param array $registry An array of key-value pairs where the key is the
+     * @param array $map An array of key-value pairs where the key is the
      * helper name and the value is a callable that returns a helper object.
      * 
      */
-    public function __construct(HelperFactory $helper_factory)
+    public function __construct(array $map = array())
     {
-        $this->helper_factory = $helper_factory;
+        $this->map = $map;
     }
 
     /**
      * 
-     * Magic call to make the registry objects available as methods.
+     * Magic call to make the helper objects available as methods.
      * 
-     * @param string $name A registered helper name.
+     * @param string $name A helper name.
      * 
-     * @param array $params Params to pass to the helper.
+     * @param array $args Arguments to pass to the helper.
      * 
      * @return mixed
      * 
      */
-    public function __call($name, $params)
+    public function __call($name, $args)
     {
-        $helper = $this->get($name);
-        return call_user_func_array($helper, $params);
+        return call_user_func_array(
+            $this->get($name),
+            $args
+        );
+    }
+
+    /**
+     * 
+     * Sets a helper object factory into the map.
+     * 
+     * @param string $name The helper name.
+     * 
+     * @param callable $callable A callable to create the helper object.
+     * 
+     * @return null
+     * 
+     */
+    public function set($name, $callable)
+    {
+        $this->map[$name] = $callable;
+        unset($this->helpers[$name]);
+    }
+
+    /**
+     * 
+     * Does a named helper exist in the locator?
+     * 
+     * @param string $name The helper name.
+     * 
+     * @param callable $callable A callable to create the helper object.
+     * 
+     * @return bool
+     * 
+     */
+    public function has($name)
+    {
+        return isset($this->map[$name]);
     }
     
     /**
      * 
-     * Gets a helper object from the registry by name; creates it with the
-     * helper factory if needed.
+     * Returns a helper object instance, using the map to factory it if needed.
      * 
      * @param string $name The helper to retrieve.
      * 
-     * @return AbstractHelper
+     * @return object
      * 
      */
     public function get($name)
     {
-        if (! isset($this->registry[$name])) {
-            $this->registry[$name] = $this->helper_factory->newInstance($name);
+        if (! $this->has($name)) {
+            throw new Exception\HelperNotFound($name);
         }
 
-        return $this->registry[$name];
+        if (! isset($this->helpers[$name])) {
+            $factory = $this->map[$name];
+            $this->helpers[$name] = $factory();
+        }
+
+        return $this->helpers[$name];
     }
 }
