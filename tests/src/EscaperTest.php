@@ -16,15 +16,26 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         $this->escaper = new Escaper;
     }
 
-    public function testSetEncoding_invalid()
+    public function test__construct()
     {
+        $escaper = new Escaper('iso8859-1', ENT_NOQUOTES);
+        $this->assertSame('iso8859-1', $escaper->getEncoding());
+        $this->assertSame(ENT_NOQUOTES, $escaper->getFlags());
+    }
+
+    public function testSetAndGetEncoding()
+    {
+        $this->escaper->setEncoding('macroman');
+        $this->assertEquals('macroman', $this->escaper->getEncoding());
+
         $this->setExpectedException('Aura\Html\Exception\EncodingNotSupported');
         $this->escaper->setEncoding('invalid-encoding');
     }
 
-    public function testGetEncoding()
+    public function testSetAndGetFlags()
     {
-        $this->assertEquals('UTF-8', $this->escaper->getEncoding());
+        $this->escaper->setFlags(ENT_NOQUOTES);
+        $this->assertSame(ENT_NOQUOTES, $this->escaper->getFlags());
     }
 
     public function testAttr()
@@ -95,6 +106,19 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
+    }
+
+    public function testAttr_array()
+    {
+        $expect = 'foo="bar baz dib"';
+        $actual = $this->escaper->attr(array(
+            'foo' => array(
+                'bar',
+                'baz',
+                'dib',
+            )
+        ));
+        $this->assertSame($expect, $actual);
     }
 
     public function testCss()
@@ -246,6 +270,27 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
+    }
+
+    public function testToUtf8()
+    {
+        $this->escaper->setEncoding('iso8859-1');
+        $this->assertSame('', $this->escaper->toUtf8(''));
+        $this->assertSame('foo', $this->escaper->toUtf8('foo'));
+    }
+
+    public function testToUtf8_invalid()
+    {
+        // http://stackoverflow.com/questions/11709410/regex-to-detect-invalid-utf-8-string
+        $this->setExpectedException('Aura\Html\Exception\InvalidUtf8');
+        $this->escaper->toUtf8(chr(0xC0) . chr(0x80));
+    }
+
+    public function testFromUtf8()
+    {
+        $this->escaper->setEncoding('iso8859-1');
+        $this->assertSame('', $this->escaper->fromUtf8(''));
+        $this->assertSame('foo', $this->escaper->fromUtf8('foo'));
     }
 
     /**

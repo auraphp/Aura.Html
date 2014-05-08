@@ -45,7 +45,7 @@ class Escaper
      * @var string
      * 
      */
-    protected $encoding = 'UTF-8';
+    protected $encoding = 'utf-8';
 
     /**
      * 
@@ -83,11 +83,11 @@ class Escaper
      */
     public function __construct($encoding = null, $flags = null)
     {
-        if ($encoding) {
+        if ($encoding !== null) {
             $this->setEncoding($encoding);
         }
         
-        if ($flags) {
+        if ($flags !== null) {
             // use custom flags only
             $this->setFlags($flags);
         } elseif (defined('ENT_SUBSTITUTE')) {
@@ -138,6 +138,18 @@ class Escaper
     public function setFlags($flags)
     {
         $this->flags = $flags;
+    }
+    
+    /**
+     * 
+     * Gets the flags for `htmlspecialchars()`.
+     * 
+     * @return mixed
+     * 
+     */
+    public function getFlags()
+    {
+        return $this->flags;
     }
     
     /**
@@ -415,7 +427,7 @@ class Escaper
      * @return string The UTF-8 string.
      * 
      */
-    protected function toUtf8($str)
+    public function toUtf8($str)
     {
         // pre-empt converting
         if ($str === '') {
@@ -446,7 +458,7 @@ class Escaper
      * @return string The string in its original encoding.
      * 
      */
-    protected function fromUtf8($str)
+    public function fromUtf8($str)
     {
         if ($this->encoding == 'utf-8') {
             return $str;
