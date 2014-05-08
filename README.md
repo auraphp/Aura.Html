@@ -35,11 +35,11 @@ To ask questions, provide feedback, or otherwise communicate with the Aura commu
 
 ## Getting Started
 
-The easiest way to instantiate an HTML helper locator with all the available helpers is to use the _HelperLocatorFactory_:
+The easiest way to instantiate a _HelperLocator_ with all the available helpers is to use the _HelperLocatorFactory_:
 
 ```php
 <?php
-$factory = new Aura\Html\HelperLocatorFactory;
+$factory = new \Aura\Html\HelperLocatorFactory;
 $helper = $factory->newInstance();
 ?>
 ```
@@ -68,9 +68,6 @@ echo $helper->tag('/form');
 ?>
 ```
 
-?>
-```
-
 Emit HTML 5 input elements between the form tags. All of the input helpers use the same method signature: a single descriptor array that formats the input element.
 
 ```php
@@ -89,9 +86,9 @@ echo $helper->input(array(
 ```php
 <?php
 echo $helper->input(array(
-    'type' => 'checkbox',
-    'name' => 'foo',
-    'value' => 'bar',
+    'type'    => 'checkbox',
+    'name'    => 'foo',
+    'value'   => 'bar',
     'attribs' => array(
         'value' => 'baz',
     ),
@@ -104,9 +101,9 @@ echo $helper->input(array(
 
 
 echo $helper->input(array(
-    'type' => 'checkbox',
-    'name' => 'foo',
-    'value' => 'baz',
+    'type'    => 'checkbox',
+    'name'    => 'foo',
+    'value'   => 'baz',
     'attribs' => array(
         'value' => 'baz',
     ),
@@ -119,9 +116,9 @@ echo $helper->input(array(
 
 
 echo $helper->input(array(
-    'type' => "checkbox",
-    'value' => 'no',
-    'name' => 'dim',
+    'type'    => 'checkbox',
+    'value'   => 'no',
+    'name'    => 'dim',
     'attribs' => array(
         'value' => 'yes',
         'label' => 'This is yes',
@@ -133,9 +130,9 @@ echo $helper->input(array(
 
 
 echo $helper->input(array(
-    'type' => 'checkbox',
-    'name' => 'foo',
-    'value' => 'yes',
+    'type'    => 'checkbox',
+    'name'    => 'foo',
+    'value'   => 'yes',
     'attribs' => array(
         'value' => 'yes',
         'value_unchecked' => 'no',
@@ -159,9 +156,9 @@ $options = array(
 );
 
 echo $helper->input(array(
-    'type' => 'radio',
-    'name' => 'field',
-    'value' => 'baz',
+    'type'    => 'radio',
+    'name'    => 'field',
+    'value'   => 'baz',
     'attribs' => array(),
     'options' => $options,
 ));
@@ -177,9 +174,9 @@ echo $helper->input(array(
 ```php
 <?php
 echo $helper->input(array(
-    'type' => 'select',
-    'name' => 'foo[bar]',
-    'value' => 'value5',
+    'type'    => 'select',
+    'name'    => 'foo[bar]',
+    'value'   => 'value5',
     'attribs' => array(
         'placeholder' => 'Please pick one',
     ),
@@ -208,9 +205,9 @@ echo $helper->input(array(
 ```php
 <?php
 echo $helper->input(array(
-    'type' => 'textarea',
-    'name' => 'field',
-    'value' => "the quick brown fox",
+    'type'    => 'textarea',
+    'name'    => 'field',
+    'value'   => 'the quick brown fox',
 ));
 // <textarea name="field">the quick brown fox</textarea>
 ?>
@@ -221,9 +218,9 @@ button
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "button",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'button',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -237,9 +234,9 @@ color
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "color",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'color',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -253,9 +250,9 @@ date
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "date",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'date',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -269,9 +266,9 @@ datetime
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "datetime",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'datetime',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -285,9 +282,9 @@ datetime-local
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "datetime-local",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'datetime-local',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -301,9 +298,9 @@ email
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "email",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'email',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -317,9 +314,9 @@ file
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "file",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'file',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -333,9 +330,9 @@ hidden
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "hidden",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'hidden',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -349,9 +346,9 @@ image
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "image",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'image',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -365,9 +362,9 @@ month
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "month",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'month',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -381,9 +378,9 @@ number
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "number",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'number',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -397,9 +394,9 @@ password
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "password",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'password',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -413,9 +410,9 @@ range
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "range",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'range',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -429,9 +426,9 @@ reset
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "reset",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'reset',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -445,9 +442,9 @@ search
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "search",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'search',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -461,9 +458,9 @@ submit
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "submit",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'submit',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -477,9 +474,9 @@ tel
 ```php
 <?php
 echo $helper->irnput(array(
-    'type' => "tel",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'tel',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -493,9 +490,9 @@ text
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "text",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'text',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -509,9 +506,9 @@ time
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "time",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'time',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -525,9 +522,9 @@ url
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "url",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'url',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
@@ -541,9 +538,9 @@ week
 ```php
 <?php
 echo $helper->input(array(
-    'type' => "week",
-    'name' => "name",
-    'value' => "value",
+    'type'    => 'week',
+    'name'    => 'name',
+    'value'   => 'value',
     'attribs' => array(),
     'options' => array(),
 ));
