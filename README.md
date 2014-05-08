@@ -53,7 +53,8 @@ TBD: Escaping Functions
 
 ### Helpers
 
-Use a helper by calling it as a method on the _HelperLocator_.
+Use a helper by calling it as a method on the _HelperLocator_. In addition to
+the below helpers, there is a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/functions/README-FORMS.md).
 
 #### anchor
 
@@ -63,7 +64,6 @@ echo $helper->anchor('http://auraphp.com', 'Aura Project');
 // <a href="http://auraphp.com">Aura Project</a>
 ?>
 ```
-
 
 #### base
 
@@ -182,8 +182,7 @@ echo $helper->scripts()
 ?>
 ```
 
-You can also set order by which the scripts need to be taken, 
-conditional scripts etc as below.
+You can also set order by which the scripts need to be taken, conditional scripts etc as below.
 
 ```php
 <?php
