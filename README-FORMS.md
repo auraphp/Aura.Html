@@ -1,6 +1,6 @@
 # Aura.Html Forms
 
-## The <form> Tag
+## The `<form>` Tag
 
 Open and close a form element like so:
 
