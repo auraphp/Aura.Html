@@ -81,10 +81,14 @@ echo $helper->input(array(
 ));
 ?>
 ```
+
+(The array is used so that other libraries can generate form element descriptions without needing to depend on Aura.Html for a particular object.)
+
 #### checkbox
 
 ```php
 <?php
+// the element value of 'bar' does not match the attribs value of 'baz'; therefore, the element is not checked
 echo $helper->input(array(
     'type'    => 'checkbox',
     'name'    => 'foo',
@@ -94,12 +98,11 @@ echo $helper->input(array(
     ),
     'options' => array(),
 ));
-
-// Note that the element value of 'bar' does not match the attribs value of 'baz',
-// therefore, the element is not checked
 // <input type="checkbox" name="foo" value="baz" />
 
 
+// the element value is 'baz' matches the attribs value of 'baz';
+// therefore, the element is checked
 echo $helper->input(array(
     'type'    => 'checkbox',
     'name'    => 'foo',
@@ -109,9 +112,6 @@ echo $helper->input(array(
     ),
     'options' => array(),
 ));
-
-// Now the element value is 'baz' which matches the attribs value of 'baz',
-// therefore, the element is checked
 // <input type="checkbox" name="foo" value="baz" checked />
 
 
@@ -122,10 +122,9 @@ echo $helper->input(array(
     'attribs' => array(
         'value' => 'yes',
         'label' => 'This is yes',
-        'id'=>'cbox'
+        'id'    =>'cbox',
     )
 ));
-
 // <label for="cbox"><input id="cbox" type="checkbox" name="dim" value="yes" /> This is yes</label>
 
 
