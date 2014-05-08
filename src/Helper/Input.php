@@ -19,7 +19,7 @@ use Aura\Html\HelperLocator;
  * @package Aura.Html
  * 
  */
-class Input extends AbstractHelper
+class Input
 {
     /**
      * 
@@ -32,14 +32,12 @@ class Input extends AbstractHelper
     
     /**
      * 
-     * Sets the locator object.
+     * Constructor.
      * 
-     * @param HelperLocator $helper_locator
-     * 
-     * @return null
+     * @param HelperLocator $helper_locator A locator for input helpers.
      * 
      */
-    public function setHelperLocator(HelperLocator $helper_locator)
+    public function __construct(HelperLocator $helper_locator)
     {
         $this->helper_locator = $helper_locator;
     }
