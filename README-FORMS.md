@@ -1,6 +1,6 @@
 # Aura.Html Form Helpers
 
-## The `<form>` Tag
+## The Form Element
 
 Open and close a form element like so:
 
@@ -18,9 +18,9 @@ echo $helper->tag('/form');
 ?>
 ```
 
-## Input Elements
+## HTML 5 Input Elements
 
-Emit HTML 5 input elements between the form tags. All of the input helpers use the same method signature: a single descriptor array that formats the input element.
+All of the HTML 5 input helpers use the same method signature: a single descriptor array that formats the input element.
 
 ```php
 <?php
@@ -36,6 +36,49 @@ echo $helper->input(array(
 
 (The array is used so that other libraries can generate form element descriptions without needing to depend on Aura.Html for a particular object.)
 
+The available input element `type` values are:
+
+- [button](#button)
+- [checkbok](#checkbok)
+- [color](#color)
+- [date](#date)
+- [datetime](#datetime)
+- [datetime-local](#datetime-local)
+- [email](#email)
+- [file](#file)
+- [hidden](#hidden)
+- [image](#image)
+- [month](#month)
+- [number](#number)
+- [password](#password)
+- [radio](#radio)
+- [range](#range)
+- [reset](#reset)
+- [search](#search)
+- [select](#select) (including options)
+- [submit](#submit)
+- [tel](#tel)
+- [text](#text)
+- [textarea](#textarea)
+- [time](#time)
+- [url](#url)
+- [week](#week)
+
+### button
+
+```php
+<?php
+echo $helper->input(array(
+    'type'    => 'button',
+    'name'    => 'name',
+    'value'   => 'value',
+    'attribs' => array(),
+    'options' => array(),
+));
+
+// <input type="button" name="name" value="value" />
+?>
+```
 
 ### checkbox
 
@@ -94,22 +137,6 @@ echo $helper->input(array(
 
 // <input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" checked /> This is yes</label>
 
-?>
-```
-
-### button
-
-```php
-<?php
-echo $helper->input(array(
-    'type'    => 'button',
-    'name'    => 'name',
-    'value'   => 'value',
-    'attribs' => array(),
-    'options' => array(),
-));
-
-// <input type="button" name="name" value="value" />
 ?>
 ```
 

@@ -1,9 +1,22 @@
-### Aura.Html Tag Helpers
+# Aura.Html Tag Helpers
 
-Use a helper by calling it as a method on the _HelperLocator_. In addition to
-the below helpers, there is a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/functions/README-FORMS.md).
+Use a helper by calling it as a method on the _HelperLocator_. The available helpers are:
 
-#### a / anchor
+- [anchor](#anchor) / a
+- [base](#base)
+- [image](#image) / img
+- [links](#links)
+- [metas](#metas)
+- [ol](#ol)
+- [scripts](#scripts) / scriptsFoot
+- [ul](#ul)
+- [styles](#styles)
+- [tag](#tag)
+- [title](#title)
+
+There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/functions/README-FORMS.md).
+
+## anchor
 
 ```php
 <?php
@@ -12,7 +25,7 @@ echo $helper->anchor('http://auraphp.com', 'Aura Project');
 ?>
 ```
 
-#### base
+## base
 
 ```php
 <?php
@@ -21,7 +34,7 @@ echo $helper->base('/base')
 ?>
 ```
 
-#### img / image
+## image
 
 ```php
 <?php
@@ -30,7 +43,7 @@ echo $helper->img('hello.jpg', array('alt' => 'Hello', 'width' => 100, 'height' 
 ?>
 ```
 
-#### links 
+## links 
 
 ```php
 <?php
@@ -64,7 +77,7 @@ echo $helper->links()
 ?>
 ```
 
-#### metas 
+## metas 
 
 ```php
 <?php
@@ -77,7 +90,7 @@ echo $helper->metas()
 ?>
 ```
 
-#### ol
+## ol
 
 ```php
 <?php
@@ -95,24 +108,7 @@ $ol->items(array('foo', 'bar', 'baz'))
 ?>
 ```
 
-#### ul
-
-```php
-<?php
-echo $helper->ul(array('id' => 'test'])
-    ->items(array('foo', 'bar', 'baz'))
-    ->item('dib', array('class' => 'callout'));
-/*
-<ul id="test">
-    <li>foo</li>
-    <li>bar</li>
-    <li>baz</li>
-    <li class="callout">dib</li>
-</ul>
-*/
-?>
-
-#### scripts / scriptsFoot
+## scripts
 
 ```php
 <?php
@@ -149,8 +145,25 @@ echo $helper->scripts()
 
 There is also `scriptsFoot()`, which works the same, but is intended for placing scripts at the end of the HTML body.
 
+## ul
 
-#### styles
+```php
+<?php
+echo $helper->ul(array('id' => 'test'])
+    ->items(array('foo', 'bar', 'baz'))
+    ->item('dib', array('class' => 'callout'));
+/*
+<ul id="test">
+    <li>foo</li>
+    <li>bar</li>
+    <li>baz</li>
+    <li class="callout">dib</li>
+</ul>
+*/
+?>
+
+
+## styles
 
 ```php
 <?php
@@ -168,7 +181,7 @@ echo $helper->styles();
 ?>
 ```
 
-#### tag
+## tag
 
 A generic tag helper.
 
@@ -181,7 +194,7 @@ echo $helper->tag('div', array(
 ?>
 ```
 
-#### title
+## title
 
 ```php
 <?php
