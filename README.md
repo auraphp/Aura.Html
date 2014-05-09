@@ -1,6 +1,6 @@
 # Aura.Html
 
-Provides independent HTML view helpers, including form input helpers, that can be used in any template, view, or presentation system.
+Provides HTML escapers and helpers, including form input helpers, that can be used in any template, view, or presentation system.
 
 ## Foreword
 

@@ -1,14 +1,17 @@
 {
     "name": "aura/html",
     "type": "library",
-    "description": "Provides HTML view helpers, including form input helpers, suitable for a view layer.",
+    "description": "Provides HTML escapers and helpers, including form input helpers.",
     "keywords": [
         "html",
-        "view",
         "form",
         "input",
         "helper",
-        "helpers"
+        "helpers",
+        "escape",
+        "escaper",
+        "escapers",
+        "escaping"
     ],
     "homepage": "http://auraphp.com/Aura.Html",
     "license": "BSD-2-Clause",
