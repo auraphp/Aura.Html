@@ -30,7 +30,9 @@ you notice compliance oversights, please send a patch via pull request.
 
 ### Community
 
-To ask questions, provide feedback, or otherwise communicate with the Aura community, please join our [Google Group](http://groups.google.com/group/auraphp), follow [@auraphp on Twitter](http://twitter.com/auraphp), or chat with us on #auraphp on Freenode.
+To ask questions, provide feedback, or otherwise communicate with the Aura community, 
+please join our [Google Group](http://groups.google.com/group/auraphp), follow 
+[@auraphp on Twitter](http://twitter.com/auraphp), or chat with us on #auraphp on Freenode.
 
 
 ## Getting Started
@@ -44,15 +46,22 @@ $helper = $factory->newInstance();
 ?>
 ```
 
-You can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERS.md) and [form helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERs.md) pages for more information.
+You can then use the helpers by calling them as methods on the _HelperLocator_ instance.  
+See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERS.md) 
+and [form helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-FORMS.md) pages for more information.
 
 ### Escaping
 
 (N.b.: All helpers escape values appropriately; see the _Escaper_ class internals for more information.)
 
-One of the tasks with PHP-based template systems is to escape output properly. Invoking escaper functionality is often verbose makes the template code look cluttered.  This package comes with four namespaced escaper functions to reduce the verbosity and clutter:  `a()`, `c()`, `j()`, and `h(). These escape values for HTML attributes, CSS, JavaScript, and HTML values, respectively.
+One of the tasks with PHP-based template systems is to escape output properly. Invoking 
+escaper functionality is often verbose makes the template code look cluttered.  
+This package comes with four namespaced escaper functions to reduce the verbosity and 
+clutter:  `a()`, `c()`, `j()`, and `h(). These escape values for HTML attributes, 
+CSS, JavaScript, and HTML values, respectively.
 
-To call the namespaced escaper functions in a PHP-based template, `use` the EscaperFunctions_ namespace, then call the functions as you would any other function.
+To call the namespaced escaper functions in a PHP-based template, `use` the _EscaperFunctions_ 
+namespace, then call the functions as you would any other function.
 
 Here are contrived examples of `h()` and `a()` in use:
 
