@@ -28,7 +28,7 @@ class LinksTest extends AbstractHelperTest
         $links->add($data->prev);
         $links->add($data->next);
         
-        $actual = $links->get();
+        $actual = $links->__toString();
         $expect = '    <link rel="prev" href="/path/to/prev" />' . PHP_EOL
                 . '    <link rel="next" href="/path/to/next" />' . PHP_EOL;
        
@@ -54,7 +54,7 @@ class LinksTest extends AbstractHelperTest
         $links->add($data->prev);
         $links->add($data->next);
         
-        $actual = $links->get();
+        $actual = $links->__toString();
         $expect = '  <link rel="prev" href="/path/to/prev" />' . PHP_EOL
                 . '  <link rel="next" href="/path/to/next" />' . PHP_EOL;
        
@@ -78,7 +78,7 @@ class LinksTest extends AbstractHelperTest
         
         $actual = $links->add($data->prev)
             ->add($data->next)
-            ->get();
+            ->__toString();
         $expect = '    <link rel="prev" href="/path/to/prev" />' . PHP_EOL
                 . '    <link rel="next" href="/path/to/next" />' . PHP_EOL;
        

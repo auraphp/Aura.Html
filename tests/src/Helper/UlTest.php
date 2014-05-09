@@ -10,7 +10,7 @@ class UlTest extends AbstractHelperTest
         $actual = $ul(array('id' => 'test'))
                 ->items(array('foo', 'bar', 'baz'))
                 ->item('dib', array('class' => 'callout'))
-                ->get();
+                ->__toString();
         
         $expect = '<ul id="test">' . PHP_EOL
                 . '    <li>foo</li>' . PHP_EOL
@@ -21,7 +21,7 @@ class UlTest extends AbstractHelperTest
         
         $this->assertSame($expect, $actual);
         
-        $actual = $ul()->items(array('foo', 'bar', 'baz'))->get();
+        $actual = $ul()->items(array('foo', 'bar', 'baz'))->__toString();
         $expect = '<ul>' . PHP_EOL
                 . '    <li>foo</li>' . PHP_EOL
                 . '    <li>bar</li>' . PHP_EOL
@@ -29,7 +29,7 @@ class UlTest extends AbstractHelperTest
                 . '</ul>' . PHP_EOL;
         $this->assertSame($expect, $actual);
         
-        $actual = $ul()->get();
+        $actual = $ul()->__toString();
         $expect = null;
         $this->assertSame($expect, $actual);
     }

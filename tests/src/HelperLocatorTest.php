@@ -7,18 +7,16 @@ class HelperLocatorTest extends \PHPUnit_Framework_TestCase
     
     protected function setUp()
     {
-        $this->helper_locator = new HelperLocator(new HelperFactory(
-            new Escaper,
-            array(
-                'mockHelper' => function () {
-                    return new Helper\MockHelper;
-                },
-            )
-        ));
+        $factory = new HelperLocatorFactory;
+        $this->helper_locator = $factory->newInstance();
     }
     
     public function test()
     {
+        $this->helper_locator->set('mockHelper', function () {
+            return new Helper\MockHelper;
+        });
+        
         $expect = 'Aura\Html\Helper\MockHelper';
         $actual = $this->helper_locator->get('mockHelper');
         $this->assertInstanceOf($expect, $actual);

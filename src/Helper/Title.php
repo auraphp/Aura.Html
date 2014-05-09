@@ -32,7 +32,7 @@ class Title extends AbstractHelper
      * 
      * Returns the helper so you can call methods on it.
      * 
-     * @return $this
+     * @return self
      * 
      */
     public function __invoke()
@@ -42,56 +42,87 @@ class Title extends AbstractHelper
 
     /**
      * 
-     * Sets the <title> string.
-     * 
-     * @param string $title The title string.
-     * 
-     * @return null
-     * 
-     */
-    public function set($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * 
-     * Appends to the end of the current <title> string.
-     * 
-     * @param string $text The string to be appended to the title.
-     * 
-     * @return null
-     * 
-     */
-    public function append($text)
-    {
-        $this->title .= $text;
-    }
-
-    /**
-     * 
-     * Prepends to the beginning of the current <title> string.
-     * 
-     * @param string $text The string to be appended to the title.
-     * 
-     * @return null
-     * 
-     */
-    public function prepend($text)
-    {
-        $this->title = $text . $this->title;
-    }
-
-    /**
-     * 
      * Returns the current title string.
      * 
      * @return string The current title string.
      * 
      */
-    public function get()
+    public function __toString()
     {
-        $html = "<title>" . $this->escaper->html($this->title) . "</title>";
-        return $this->indent(1, $html);
+        $title = $this->indent(1, "<title>{$this->title}</title>");
+        $this->title = null;
+        return $title;
+    }
+
+    /**
+     * 
+     * Escapes and sets text as the <title> string
+     * 
+     * @param string $text The title string.
+     * 
+     * @return self
+     * 
+     */
+    public function set($text)
+    {
+        $this->title = $this->escaper->html($text);
+        return $this;
+    }
+
+    /**
+     * 
+     * Escapes and sets text as the <title> string
+     * 
+     * @param string $title The title string.
+     * 
+     * @return self
+     * 
+     */
+    public function setRaw($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * 
+     * Escapes and appends text to the end of the current <title> string.
+     * 
+     * @param string $text The string to be appended to the title.
+     * 
+     * @return self
+     * 
+     */
+    public function append($text)
+    {
+        $this->title .= $this->escaper->html($text);
+        return $this;
+    }
+
+    public function appendRaw($text)
+    {
+        $this->title .= $text;
+        return $this;
+    }
+
+    /**
+     * 
+     * Escapes and prepends text to the beginning of the current <title> string.
+     * 
+     * @param string $text The string to be appended to the title.
+     * 
+     * @return self
+     * 
+     */
+    public function prepend($text)
+    {
+        $this->title = $this->escaper->html($text) . $this->title;
+        return $this;
+    }
+
+    public function prependRaw($text)
+    {
+        $this->title = $text . $this->title;
+        return $this;
     }
 }

@@ -9,40 +9,34 @@ class InputTest extends AbstractHelperTest
 {
     protected function newHelper()
     {
-        $helper = parent::newHelper();
-        
-        $helper->setHelperLocator(new HelperLocator(new HelperFactory(
-            new Escaper,
-            array(
-                'button'            => function () { return new Input\Generic; },
-                'checkbox'          => function () { return new Input\Checkbox; },
-                'color'             => function () { return new Input\Generic; },
-                'date'              => function () { return new Input\Generic; },
-                'datetime'          => function () { return new Input\Generic; },
-                'datetime-local'    => function () { return new Input\Generic; },
-                'email'             => function () { return new Input\Generic; },
-                'file'              => function () { return new Input\Generic; },
-                'hidden'            => function () { return new Input\Generic; },
-                'image'             => function () { return new Input\Generic; },
-                'month'             => function () { return new Input\Generic; },
-                'number'            => function () { return new Input\Generic; },
-                'password'          => function () { return new Input\Generic; },
-                'radio'             => function () { return new Input\Radio; },
-                'range'             => function () { return new Input\Generic; },
-                'reset'             => function () { return new Input\Generic; },
-                'search'            => function () { return new Input\Generic; },
-                'select'            => function () { return new Input\Select; },
-                'submit'            => function () { return new Input\Generic; },
-                'tel'               => function () { return new Input\Generic; },
-                'text'              => function () { return new Input\Generic; },
-                'textarea'          => function () { return new Input\Textarea; },
-                'time'              => function () { return new Input\Generic; },
-                'url'               => function () { return new Input\Generic; },
-                'week'              => function () { return new Input\Generic; },
-            )
+        $escaper = new Escaper;
+        return new Input(new HelperLocator(array(
+            'button'            => function () use ($escaper) { return new Input\Generic($escaper); },
+            'checkbox'          => function () use ($escaper) { return new Input\Checkbox($escaper); },
+            'color'             => function () use ($escaper) { return new Input\Generic($escaper); },
+            'date'              => function () use ($escaper) { return new Input\Generic($escaper); },
+            'datetime'          => function () use ($escaper) { return new Input\Generic($escaper); },
+            'datetime-local'    => function () use ($escaper) { return new Input\Generic($escaper); },
+            'email'             => function () use ($escaper) { return new Input\Generic($escaper); },
+            'file'              => function () use ($escaper) { return new Input\Generic($escaper); },
+            'hidden'            => function () use ($escaper) { return new Input\Generic($escaper); },
+            'image'             => function () use ($escaper) { return new Input\Generic($escaper); },
+            'month'             => function () use ($escaper) { return new Input\Generic($escaper); },
+            'number'            => function () use ($escaper) { return new Input\Generic($escaper); },
+            'password'          => function () use ($escaper) { return new Input\Generic($escaper); },
+            'radio'             => function () use ($escaper) { return new Input\Radio($escaper); },
+            'range'             => function () use ($escaper) { return new Input\Generic($escaper); },
+            'reset'             => function () use ($escaper) { return new Input\Generic($escaper); },
+            'search'            => function () use ($escaper) { return new Input\Generic($escaper); },
+            'select'            => function () use ($escaper) { return new Input\Select($escaper); },
+            'submit'            => function () use ($escaper) { return new Input\Generic($escaper); },
+            'tel'               => function () use ($escaper) { return new Input\Generic($escaper); },
+            'text'              => function () use ($escaper) { return new Input\Generic($escaper); },
+            'textarea'          => function () use ($escaper) { return new Input\Textarea($escaper); },
+            'time'              => function () use ($escaper) { return new Input\Generic($escaper); },
+            'url'               => function () use ($escaper) { return new Input\Generic($escaper); },
+            'week'              => function () use ($escaper) { return new Input\Generic($escaper); },
         )));
-        
-        return $helper;
     }
     
     public function testCheckbox()

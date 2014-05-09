@@ -32,12 +32,29 @@ class Styles extends AbstractHelper
      * 
      * Returns the helper so you can call methods on it.
      * 
-     * @return $this
+     * @return self
      * 
      */
     public function __invoke()
     {
         return $this;
+    }
+
+    /**
+     * 
+     * Returns the stack of <link rel="stylesheet" ... /> tags as a single 
+     * block.
+     * 
+     * @return string The <link rel="stylesheet" ... /> tags.
+     * 
+     */
+    public function __toString()
+    {
+        asort($this->styles);
+        $styles = array_keys($this->styles);
+        return $this->indent
+             . implode(PHP_EOL . $this->indent, $styles)
+             . PHP_EOL;
     }
 
     /**
@@ -50,7 +67,7 @@ class Styles extends AbstractHelper
      * 
      * @param int $pos The stylesheet position in the stack.
      * 
-     * @return null
+     * @return self
      * 
      */
     public function add($href, array $attr = null, $pos = 100)
@@ -69,6 +86,8 @@ class Styles extends AbstractHelper
         $attr = array_merge($base, (array) $attr);
         $tag = $this->void('link', $attr);
         $this->styles[$tag] = $pos;
+
+        return $this;
     }
 
     /**
@@ -84,7 +103,7 @@ class Styles extends AbstractHelper
      * 
      * @param string $pos The stylesheet position in the stack.
      * 
-     * @return null
+     * @return self
      * 
      */
     public function addCond($cond, $href, array $attr = null, $pos = 100)
@@ -105,22 +124,7 @@ class Styles extends AbstractHelper
         $cond  = $this->escaper->html($cond);
         $tag  = "<!--[if $cond]>$link<![endif]-->";
         $this->styles[$tag] = $pos;
-    }
 
-    /**
-     * 
-     * Returns the stack of <link rel="stylesheet" ... /> tags as a single 
-     * block.
-     * 
-     * @return string The <link rel="stylesheet" ... /> tags.
-     * 
-     */
-    public function get()
-    {
-        asort($this->styles);
-        $styles = array_keys($this->styles);
-        return $this->indent
-             . implode(PHP_EOL . $this->indent, $styles)
-             . PHP_EOL;
+        return $this;
     }
 }

@@ -16,8 +16,6 @@ abstract class AbstractHelperTest extends \PHPUnit_Framework_TestCase
     protected function newHelper()
     {
         $class = substr(get_class($this), 0, -4);
-        $helper = new $class;
-        $helper->setEscaper(new Escaper);
-        return $helper;
+        return new $class(new Escaper);
     }
 }

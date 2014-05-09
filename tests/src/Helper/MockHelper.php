@@ -1,6 +1,6 @@
 <?php
 namespace Aura\Html\Helper;
-class MockHelper extends AbstractHelper
+class MockHelper
 {
     public function __invoke($noun)
     {

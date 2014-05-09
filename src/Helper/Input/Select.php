@@ -48,37 +48,76 @@ class Select extends AbstractInput
     
     protected $placeholder;
     
-    public function __invoke(array $spec = array())
+    public function __invoke(array $spec = null)
     {
         // if there's no spec, return $this so we can build manually
-        if (! $spec) {
+        if ($spec === null) {
             return $this;
         }
-        
-        // reset the tracking properties
-        $this->stack = array();
-        $this->optgroup = false;
-        $this->optlevel = 1;
         
         // prep the spec, set up the stack, and deliver the html
         $this->prep($spec);
         $this->attribs($this->attribs);
         $this->options($this->options);
         $this->selected($this->value);
-        return $this->html();
+        return $this->__toString();
     }
     
     /**
      * 
-     * Returns the HTML for the input.
+     * Returns a select tag with options.
      * 
      * @return string
      * 
      */
-    protected function html()
+    public function __toString()
     {
-        return $this->get();
+        $append_brackets = isset($this->attribs['multiple'])
+                        && $this->attribs['multiple']
+                        && isset($this->attribs['name'])
+                        && substr($this->attribs['name'], -2) != '[]';
+        
+        // if this is a multiple select, the name needs to end in "[]"
+        if ($append_brackets) {
+            $this->attribs['name'] .= '[]';
+        }
+        
+        // open the select
+        $attribs = $this->escaper->attr($this->attribs);
+        $html = $this->indent(0, "<select {$attribs}>");
+        
+        // is there a placeholder option?
+        if ($this->placeholder) {
+            $html .= $this->buildOption(array(
+                '',
+                $this->placeholder,
+                array('disabled' => true),
+            ));
+        }
+        
+        // build the options
+        foreach ($this->stack as $info) {
+            $method = array_shift($info);
+            $html .= $this->$method($info);
+        }
+        
+        // close any optgroup tags
+        if ($this->optgroup) {
+            $html .= $this->endOptgroup();
+        }
+        
+        // close the select
+        $html .= $this->indent(0, '</select>');
+        
+        // reset for next time
+        $this->stack = array();
+        $this->optgroup = false;
+        $this->optlevel = 1;
+
+        // done!
+        return $html;
     }
+    
     
     /**
      * 
@@ -183,57 +222,6 @@ class Select extends AbstractInput
     {
         $this->value = (array) $selected;
         return $this;
-    }
-    
-    /**
-     * 
-     * Returns a select tag with options.
-     * 
-     * @return mixed The generated HTML if $options were passed, or this
-     * select object if not.
-     * 
-     */
-    public function get()
-    {
-        $append_brackets = isset($this->attribs['multiple'])
-                        && $this->attribs['multiple']
-                        && isset($this->attribs['name'])
-                        && substr($this->attribs['name'], -2) != '[]';
-        
-        // if this is a multiple select, the name needs to end in "[]"
-        if ($append_brackets) {
-            $this->attribs['name'] .= '[]';
-        }
-        
-        // open the select
-        $attribs = $this->escaper->attr($this->attribs);
-        $html = $this->indent(0, "<select {$attribs}>");
-        
-        // is there a placeholder option?
-        if ($this->placeholder) {
-            $html .= $this->buildOption(array(
-                '',
-                $this->placeholder,
-                array('disabled' => true),
-            ));
-        }
-        
-        // build the options
-        foreach ($this->stack as $info) {
-            $method = array_shift($info);
-            $html .= $this->$method($info);
-        }
-        
-        // close any optgroup tags
-        if ($this->optgroup) {
-            $html .= $this->endOptgroup();
-        }
-        
-        // close the select
-        $html .= $this->indent(0, '</select>');
-        
-        // done!
-        return $html;
     }
     
     /**

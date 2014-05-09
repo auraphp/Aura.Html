@@ -26,7 +26,7 @@ class Radio extends AbstractChecked
      * @return string
      * 
      */
-    protected function html()
+    public function __toString()
     {
         $this->attribs['type'] = 'radio';
         

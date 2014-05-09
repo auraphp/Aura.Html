@@ -54,15 +54,49 @@ abstract class AbstractList extends AbstractHelper
      * 
      * @return self
      * 
-     * @todo As with select, allow a second param for the items?
+     */
+    public function __invoke(array $attr = null)
+    {
+        if ($attr !== null) {
+            $this->attr = $attr;
+        }
+        return $this;
+    }
+    
+    /**
+     * 
+     * Generates and returns the HTML for the list.
+     * 
+     * @return string
      * 
      */
-    public function __invoke(array $attr = array())
+    public function __toString()
     {
-        $this->attr    = $attr;
-        $this->stack   = array();
-        $this->html    = '';
-        return $this;
+        // if there is no stack of items, **do not** return an empty
+        // <ul></ul> tag set.
+        if (! $this->stack) {
+            return;
+        }
+        
+        $tag = $this->getTag();
+        $attr = $this->escaper->attr($this->attr);
+        if ($attr) {
+            $this->html = $this->indent(0, "<{$tag} {$attr}>");
+        } else {
+            $this->html = $this->indent(0, "<{$tag}>");
+        }
+        
+        foreach ($this->stack as $item) {
+            $this->buildItem($item);
+        }
+        
+        $html = $this->html . $this->indent(0, "</{$tag}>");
+
+        $this->attr  = array();
+        $this->stack = array();
+        $this->html  = '';
+
+        return $html;
     }
     
     /**
@@ -99,37 +133,6 @@ abstract class AbstractList extends AbstractHelper
             $this->item($html, $attr);
         }
         return $this;
-    }
-    
-    /**
-     * 
-     * Generates and returns the HTML for the list.
-     * 
-     * @return string
-     * 
-     */
-    public function get()
-    {
-        // if there is no stack of items, **do not** return an empty
-        // <ul></ul> tag set.
-        if (! $this->stack) {
-            return;
-        }
-        
-        $tag = $this->getTag();
-        $attr = $this->escaper->attr($this->attr);
-        if ($attr) {
-            $this->html = $this->indent(0, "<{$tag} {$attr}>");
-        } else {
-            $this->html = $this->indent(0, "<{$tag}>");
-        }
-        
-        foreach ($this->stack as $item) {
-            $this->buildItem($item);
-        }
-        
-        $this->html .= $this->indent(0, "</{$tag}>");
-        return $this->html;
     }
     
     /**

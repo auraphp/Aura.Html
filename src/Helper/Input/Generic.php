@@ -26,7 +26,7 @@ class Generic extends AbstractInput
      * @return string
      * 
      */
-    protected function html()
+    public function __toString()
     {
         // set type attribute to type property, default 'text'
         $this->attribs['type'] = ($this->type) ? $this->type : 'text';

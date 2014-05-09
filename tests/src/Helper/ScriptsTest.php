@@ -22,7 +22,7 @@ class ScriptsTest extends AbstractHelperTest
         $scripts->add('/js/middle.js');
         $scripts->add('/js/last.js');
         
-        $actual = $scripts->get();
+        $actual = $scripts->__toString();
         
         $expect = '  <script src="/js/first.js" type="text/javascript"></script>' . PHP_EOL
                 . '  <script src="/js/middle.js" type="text/javascript"></script>' . PHP_EOL
@@ -39,7 +39,7 @@ class ScriptsTest extends AbstractHelperTest
         $scripts->add('/js/middle.js');
         $scripts->addCond('ie6', '/js/ie6.js');
         
-        $actual = $scripts->get();
+        $actual = $scripts->__toString();
         
         $expect = '    <script src="/js/first.js" type="text/javascript"></script>' . PHP_EOL
                 . '    <script src="/js/middle.js" type="text/javascript"></script>' . PHP_EOL
