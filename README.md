@@ -52,7 +52,51 @@ Once you have a _HelperLocator_, you can then use the helpers by calling them as
 
 ### Custom Helpers
 
-TBD.
+There are two steps to adding your own custom helpers:
+
+1. Write a helper class
+
+2. Set a factory for that class into the _HelperLocator_ under a service name
+
+A helper class needs only to implement the `__invoke()` method.  We suggest extending from _AbstractHelper_ to get access to indenting, escaping, etc., but it's not required.
+
+The following example helper class applies ROT-13 to a string.
+
+```php
+<?php
+namespace Vendor\Package;
+
+class Obfuscate
+{
+    public function __invoke($string)
+    {
+        return str_rot13($input);
+    }
+}
+?>
+```
+
+Now that we have a helper class, we set a factory for it into the _HelperLocator_ under a service name. Therein, we create **and return** the helper class.
+
+```php
+<?php
+$helper->set('obfuscate', function () {
+    return new \Vendor\Package\Obfuscate;
+});
+?>
+```
+    
+The service name in the _HelperLocator_ doubles as a method name. This means we can call the helper via `$this->obfuscate()`:
+
+```php
+<?= $helper->obfuscate('plain text') ?>
+```
+
+Note that we can use any service name for the helper, although it is generally
+useful to name the service for the helper class, and for a word that can be called as a method.
+
+Please examine the classes in `Aura\Html\Helper` for more complex and powerful
+examples.
 
 ### Escaping
 
