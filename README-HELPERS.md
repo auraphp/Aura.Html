@@ -5,6 +5,7 @@ Use a helper by calling it as a method on the _HelperLocator_. The available hel
 - [anchor](#anchor) / a
 - [base](#base)
 - [image](#image) / img
+- [label](#label)
 - [links](#links)
 - [metas](#metas)
 - [ol](#ol)
@@ -42,6 +43,27 @@ echo $helper->img('hello.jpg', array('alt' => 'Hello', 'width' => 100, 'height' 
 // <img src="hello.jpg" alt="Hello" width="100" height="200">
 ?>
 ```
+
+## label
+
+```php
+<?php
+echo $helper->label('Label For Field', array('for' => 'field'));
+// <label for="field">Label For Field</label>
+
+echo $helper->label(
+    'Foo: ',
+    array('for' => 'foo'),
+    $helper->input(array(
+        'type' => 'text',
+        'name' => 'foo',
+        'value' => '',
+        'attribs' => array(
+            'id' => 'foo'
+        ),
+    )
+));
+// <label for="foo">Foo: <input type="text" id="foo" name="foo" value="" /></label>
 
 ## links 
 

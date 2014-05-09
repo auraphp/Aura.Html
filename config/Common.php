@@ -26,6 +26,7 @@ class Common extends Config
             'img'               => $di->lazyNew('Aura\Html\Helper\Img'),
             'image'             => $di->lazyNew('Aura\Html\Helper\Img'),
             'input'             => $di->lazyNew('Aura\Html\Helper\Input'),
+            'label'             => $di->lazyNew('Aura\HtmlHelper\Label'),
             'links'             => $di->lazyNew('Aura\Html\Helper\Links'),
             'metas'             => $di->lazyNew('Aura\Html\Helper\Metas'),
             'ol'                => $di->lazyNew('Aura\Html\Helper\Ol'),

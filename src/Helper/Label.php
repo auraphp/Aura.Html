@@ -20,46 +20,87 @@ namespace Aura\Html\Helper;
  */
 class Label extends AbstractHelper
 {
+    protected $attr;
+
+    protected $before;
+
+    protected $after;
+
+    protected $label;
+
     /**
      * 
      * Returns a <label ... ></label> tag optionally enclosing an input.
      *
-     * Typically, enclosing inputs would be used for radios and checkboxes.
-     * 
-     * 
      * @param string $label The text for the label.
      * 
      * @param array $attr Additional attributes for the tag.
      *
      * @param string $input An optional input to be wrapped by the label.
      * 
-     * @return string A <label ... ></label> tag.
-     * 
+     * @return self
      * 
      */
-    public function __invoke($label, $attr = array(), $input = null)
+    public function __invoke($label, $attr = array())
     {
-        $attr = $this->escaper->attr((array) $attr);
-        $html = array();
-        
-        if ($attr) {
-            $label_start = "<label $attr>";
-        } else {
-            $label_start = "<label>";
-        }
-        
-        $label_end = "</label>";
-        
-        if ($input) {
-            $html[] = $this->indent(0, $label_start);
-            $html[] = $this->indent(1, $input . $label);
-            $html[] = $this->indent(0, $label_end);
-        } else {
-            $html[] = $label_start;
-            $html[] = $label;
-            $html[] = $label_end;
-        }
+        $this->label = $label;
+        $this->attr = (array) $attr;
+        return $this;
+    }
 
-        return implode('', $html);
+    /**
+     * 
+     * Place the label text before raw HTML.
+     * 
+     * @param string $before Place the label text before this raw HTML.
+     * 
+     * @return self
+     * 
+     */
+    public function before($before)
+    {
+        $this->before = $before;
+        $this->after = null;
+        return $this;
+    }
+
+    /**
+     * 
+     * Place the label text after raw HTML.
+     * 
+     * @param string $after Place the label text after this raw HTML.
+     * 
+     * @return self
+     * 
+     */
+    public function after($after)
+    {
+        $this->before = null;
+        $this->after = $after;
+        return $this;
+    }
+
+    /**
+     * 
+     * Returns the label string with the before/after HTML.
+     * 
+     * @return string
+     * 
+     */
+    public function __toString()
+    {
+        $attr = $this->escaper->attr($this->attr);
+        $html = trim("<label $attr") . ">"
+              . $this->after
+              . $this->label
+              . $this->before
+              . "</label>";
+
+        $this->attr = null;
+        $this->label = null;
+        $this->html_before = null;
+        $this->html_after = null;
+
+        return $html;
     }
 }

@@ -25,6 +25,7 @@ class HelperLocatorFactory
             'img'               => function () use ($escaper) { return new Helper\Img($escaper); },
             'image'             => function () use ($escaper) { return new Helper\Img($escaper); },
             'input'             => function () use ($input)   { return $input; },
+            'label'             => function () use ($escaper) { return new Helper\Label($escaper); },
             'links'             => function () use ($escaper) { return new Helper\Links($escaper); },
             'metas'             => function () use ($escaper) { return new Helper\Metas($escaper); },
             'ol'                => function () use ($escaper) { return new Helper\Ol($escaper); },
