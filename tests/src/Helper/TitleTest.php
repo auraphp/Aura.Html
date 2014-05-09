@@ -14,17 +14,17 @@ class TitleTest extends AbstractHelperTest
         $this->assertInstanceOf('Aura\Html\Helper\Title', $actual);
     }
     
-    public function testEverything()
+    public function testEscaped()
     {
         $title = $this->helper;
         $this->assertInstanceOf('Aura\Html\Helper\Title', $title);
         
         $data = (object) array(
-            'main' => 'This and That',
-            'suf1' => ' Suf1',
-            'suf2' => ' Suf2',
-            'pre1' => 'Pre1 ',
-            'pre2' => 'Pre2 ',
+            'main' => 'This & That',
+            'suf1' => ' > Suf1',
+            'suf2' => ' > Suf2',
+            'pre1' => 'Pre1 > ',
+            'pre2' => 'Pre2 > ',
         );
         
         $title->set($data->main);
@@ -36,10 +36,35 @@ class TitleTest extends AbstractHelperTest
         $title->prepend($data->pre2);
         
         $actual = $title->__toString();
-        $expect = '    <title>Pre2 Pre1 This and That Suf1 Suf2</title>' . PHP_EOL;
+        $expect = '    <title>Pre2 &gt; Pre1 &gt; This &amp; That &gt; Suf1 &gt; Suf2</title>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
+    public function testRaw()
+    {
+        $title = $this->helper;
+        $this->assertInstanceOf('Aura\Html\Helper\Title', $title);
+        
+        $data = (object) array(
+            'main' => 'This & That',
+            'suf1' => ' > Suf1',
+            'suf2' => ' > Suf2',
+            'pre1' => 'Pre1 > ',
+            'pre2' => 'Pre2 > ',
+        );
+        
+        $title->setRaw($data->main);
+        
+        $title->appendRaw($data->suf1);
+        $title->appendRaw($data->suf2);
+        
+        $title->prependRaw($data->pre1);
+        $title->prependRaw($data->pre2);
+        
+        $actual = $title->__toString();
+        $expect = '    <title>Pre2 > Pre1 > This & That > Suf1 > Suf2</title>' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+    }
     public function testSetIndent()
     {
         $title = $this->helper;
