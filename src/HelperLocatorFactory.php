@@ -19,10 +19,12 @@ class HelperLocatorFactory
         $escaper = $this->escaper;
         $input = $this->newInputHelper();
         return new HelperLocator(array(
+            'a'             => function () use ($escaper) { return new Helper\Anchor($escaper); },
             'anchor'        => function () use ($escaper) { return new Helper\Anchor($escaper); },
             'base'          => function () use ($escaper) { return new Helper\Base($escaper); },
             'form'          => function () use ($escaper) { return new Helper\Form($escaper); },
             'img'           => function () use ($escaper) { return new Helper\Img($escaper); },
+            'image'         => function () use ($escaper) { return new Helper\Img($escaper); },
             'input'         => function () use ($input)   { return $input; },
             'links'         => function () use ($escaper) { return new Helper\Links($escaper); },
             'metas'         => function () use ($escaper) { return new Helper\Metas($escaper); },

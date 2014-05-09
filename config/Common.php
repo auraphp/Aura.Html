@@ -3,6 +3,7 @@ namespace Aura\Html\_Config;
 
 use Aura\Di\Config;
 use Aura\Di\Container;
+use Aura\Html\Functions\EscaperFunctions;
 
 class Common extends Config
 {
@@ -18,10 +19,12 @@ class Common extends Config
          * Aura\Html\HelperLocator
          */
         $di->params['Aura\Html\HelperLocator']['map'] = array(
+            'a'                 => $di->lazyNew('Aura\Html\Helper\Anchor'),
             'anchor'            => $di->lazyNew('Aura\Html\Helper\Anchor'),
             'base'              => $di->lazyNew('Aura\Html\Helper\Base'),
             'form'              => $di->lazyNew('Aura\Html\Helper\Form'),
             'img'               => $di->lazyNew('Aura\Html\Helper\Img'),
+            'image'             => $di->lazyNew('Aura\Html\Helper\Img'),
             'input'             => $di->lazyNew('Aura\Html\Helper\Input'),
             'links'             => $di->lazyNew('Aura\Html\Helper\Links'),
             'metas'             => $di->lazyNew('Aura\Html\Helper\Metas'),
@@ -69,5 +72,10 @@ class Common extends Config
             'url'               => $di->lazyNew('Aura\Html\Helper\Input\Generic'),
             'week'              => $di->lazyNew('Aura\Html\Helper\Input\Generic'),
         );
+    }
+
+    public function modify(Container $di)
+    {
+        EscaperFunctions::setEscaper($di->get('html_escaper'));
     }
 }
