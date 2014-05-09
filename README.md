@@ -44,42 +44,51 @@ $helper = $factory->newInstance();
 ?>
 ```
 
-You can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERS.md) and [form helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERs.md) pages for more information.
+### Built-In Helpers
+
+Once you have a _HelperLocator_, you can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERS.md) and [form helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERs.md) pages for more information.
+
+> N.b.: All helpers escape values appropriately; see the various helper class internals for more information.
+
+### Custom Helpers
+
+TBD.
 
 ### Escaping
 
-(N.b.: All helpers escape values appropriately; see the _Escaper_ class internals for more information.)
+One of the tasks with PHP-based template systems is to escape output properly. Invoking escaper functionality is often verbose makes the template code look cluttered.  The _Escaper_ comes with four static methods to reduce the verbosity and clutter:  `a()`, `c()`, `j()`, and `h(). These escape values for HTML attributes, CSS, JavaScript, and HTML values, respectively.
 
-One of the tasks with PHP-based template systems is to escape output properly. Invoking escaper functionality is often verbose makes the template code look cluttered.  This package comes with four namespaced escaper functions to reduce the verbosity and clutter:  `a()`, `c()`, `j()`, and `h(). These escape values for HTML attributes, CSS, JavaScript, and HTML values, respectively.
+> N.b.: In Aura, we generally avoid static methods. However, the tradeoff of less-cluttered templates is worth it in this one case.
 
-To call the namespaced escaper functions in a PHP-based template, `use` the EscaperFunctions_ namespace, then call the functions as you would any other function.
+To call the static _Escaper_ methods in a PHP-based template, `use` the _Escaper_ as a short alias name, then call the static methods on the alias.  (If you did not instantiate a _HelperLocatorFactory_, you will need to prepare the static escaper methods by calling `Escaper::setStatic(new Escaper)`.)
 
-Here are contrived examples of `h()` and `a()` in use:
+Here is a contrived example of the various static methods:
 
-```php
-<?php use Aura\Html\EscaperFunctions; ?>
+```html+php
+<?php use Aura\Html\Escaper as e; ?>
 
-<h1><?= h($blog->title) ?></h1>
+<head>
+    <style>
+        body: {
+            color: <?= e::c($theme->color) ?>;
+            font-size: <?= e::c($theme->font_size) ?>;
+        }
+    </style>
+    <script language="javascript">
+        var foo = "<?= e::j($js->foo); ?>";
+    </script>
+</head>
 
-<p class="byline">by <?= h($blog->author) ?> on <?= h($blog->date) ?></p>
+<body>
+    <h1><?= e::h($blog->title) ?></h1>
 
-<div id="<?php a($blog->div_id) ?>">
-    <?= $blog->raw_html ?>
-</div>
+    <p class="byline">
+        by <?= e::h($blog->author) ?>
+        on <?= e::h($blog->date) ?>
+    </p>
+
+    <div id="<?php e::a($blog->div_id) ?>">
+        <?= $blog->raw_html ?>
+    </div>
+</body>
 ```
-
-Here are contrived examples of `c()` and `j()` in use:
-
-```php
-<?php use Aura\Html\EscaperFunctions; ?>
-<style>
-body: {
-    color: <?= c($theme->color) ?>;
-    font-size: <?= c($theme->font_size) ?>;
-}
-</style>
-
-<script language="javascript">
-    var foo = "<?= j($js->foo); ?>";
-</script>
-

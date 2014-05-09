@@ -1,7 +1,6 @@
 <?php
 namespace Aura\Html;
 
-use Aura\Html\Functions\EscaperFunctions;
 use Aura\Html\Helper;
 
 class HelperLocatorFactory
@@ -11,34 +10,34 @@ class HelperLocatorFactory
     public function __construct($encoding = null, $flags = null)
     {
         $this->escaper = new Escaper($encoding, $flags);
-        EscaperFunctions::setEscaper($this->escaper);
+        Escaper::setStatic($this->escaper);
     }
 
     public function newInstance()
     {
         $escaper = $this->escaper;
-        $input = $this->newInputHelper();
+        $input = $this->newInputInstance();
         return new HelperLocator(array(
-            'a'             => function () use ($escaper) { return new Helper\Anchor($escaper); },
-            'anchor'        => function () use ($escaper) { return new Helper\Anchor($escaper); },
-            'base'          => function () use ($escaper) { return new Helper\Base($escaper); },
-            'form'          => function () use ($escaper) { return new Helper\Form($escaper); },
-            'img'           => function () use ($escaper) { return new Helper\Img($escaper); },
-            'image'         => function () use ($escaper) { return new Helper\Img($escaper); },
-            'input'         => function () use ($input)   { return $input; },
-            'links'         => function () use ($escaper) { return new Helper\Links($escaper); },
-            'metas'         => function () use ($escaper) { return new Helper\Metas($escaper); },
-            'ol'            => function () use ($escaper) { return new Helper\Ol($escaper); },
-            'scripts'       => function () use ($escaper) { return new Helper\Scripts($escaper); },
-            'scriptsFoot'   => function () use ($escaper) { return new Helper\Scripts($escaper); },
-            'styles'        => function () use ($escaper) { return new Helper\Styles($escaper); },
-            'tag'           => function () use ($escaper) { return new Helper\Tag($escaper); },
-            'title'         => function () use ($escaper) { return new Helper\Title($escaper); },
-            'ul'            => function () use ($escaper) { return new Helper\Ul($escaper); },
+            'a'                 => function () use ($escaper) { return new Helper\Anchor($escaper); },
+            'anchor'            => function () use ($escaper) { return new Helper\Anchor($escaper); },
+            'base'              => function () use ($escaper) { return new Helper\Base($escaper); },
+            'form'              => function () use ($escaper) { return new Helper\Form($escaper); },
+            'img'               => function () use ($escaper) { return new Helper\Img($escaper); },
+            'image'             => function () use ($escaper) { return new Helper\Img($escaper); },
+            'input'             => function () use ($input)   { return $input; },
+            'links'             => function () use ($escaper) { return new Helper\Links($escaper); },
+            'metas'             => function () use ($escaper) { return new Helper\Metas($escaper); },
+            'ol'                => function () use ($escaper) { return new Helper\Ol($escaper); },
+            'scripts'           => function () use ($escaper) { return new Helper\Scripts($escaper); },
+            'scriptsFoot'       => function () use ($escaper) { return new Helper\Scripts($escaper); },
+            'styles'            => function () use ($escaper) { return new Helper\Styles($escaper); },
+            'tag'               => function () use ($escaper) { return new Helper\Tag($escaper); },
+            'title'             => function () use ($escaper) { return new Helper\Title($escaper); },
+            'ul'                => function () use ($escaper) { return new Helper\Ul($escaper); },
         ));
     }
 
-    protected function newInputHelper()
+    public function newInputInstance()
     {
         $escaper = $this->escaper;
         return new Helper\Input(new HelperLocator(array(

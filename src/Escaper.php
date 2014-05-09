@@ -72,6 +72,8 @@ class Escaper
         'windows-1251', 'windows-1252',
     );
 
+    static protected $escaper;
+
     /**
      * 
      * Constructor.
@@ -492,5 +494,35 @@ class Escaper
         
         $message = "Extension 'iconv' or 'mbstring' is required.";
         throw new Exception\ExtensionNotInstalled($message);
+    }
+
+    public static function setStatic(Escaper $escaper)
+    {
+        static::$escaper = $escaper;
+    }
+
+    public static function getStatic()
+    {
+        return static::$escaper;
+    }
+    
+    public static function a($raw)
+    {
+        return static::$escaper->attr($raw);
+    }
+
+    public static function h($raw)
+    {
+        return static::$escaper->html($raw);
+    }
+    
+    public static function c($raw)
+    {
+        return static::$escaper->css($raw);
+    }
+    
+    public static function j($raw)
+    {
+        return static::$escaper->js($raw);
     }
 }

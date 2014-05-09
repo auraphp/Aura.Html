@@ -76,6 +76,6 @@ class Common extends Config
 
     public function modify(Container $di)
     {
-        EscaperFunctions::setEscaper($di->get('html_escaper'));
+        \Aura\Html\Escaper::setStatic($di->get('html_escaper'));
     }
 }
