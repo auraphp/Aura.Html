@@ -7,35 +7,13 @@ namespace Aura\Html\Helper;
  */
 class ScriptsTest extends AbstractHelperTest
 {
-    public function test__invoke()
+    public function test()
     {
         $scripts = $this->helper;
-        $actual = $scripts();
-        $this->assertInstanceOf('Aura\Html\Helper\Scripts', $actual);
-    }
-    
-    public function testSetIndent()
-    {
-        $scripts = $this->helper;
-        $scripts->setIndent('  ');
-        $scripts->add('/js/first.js');
-        $scripts->add('/js/middle.js');
-        $scripts->add('/js/last.js');
-        
-        $actual = $scripts->__toString();
-        
-        $expect = '  <script src="/js/first.js" type="text/javascript"></script>' . PHP_EOL
-                . '  <script src="/js/middle.js" type="text/javascript"></script>' . PHP_EOL
-                . '  <script src="/js/last.js" type="text/javascript"></script>' . PHP_EOL;
-        
-        $this->assertSame($expect, $actual);
-    }
+        $scripts->setIndent('    ');
 
-    public function testAddAndGet()
-    {
-        $scripts = $this->helper;
-        $scripts->add('/js/last.js', array(), 150);
-        $scripts->add('/js/first.js', array(), 50);
+        $scripts->add('/js/last.js', 150);
+        $scripts->add('/js/first.js', 50);
         $scripts->add('/js/middle.js');
         $scripts->addCond('ie6', '/js/ie6.js');
         
