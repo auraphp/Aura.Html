@@ -48,7 +48,7 @@ $helper = $factory->newInstance();
 
 Once you have a _HelperLocator_, you can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERS.md) and [form helpers](https://github.com/auraphp/Aura.Html/blob/functions/README-HELPERs.md) pages for more information.
 
-> N.b.: All helpers escape values appropriately; see the various helper class internals for more information.
+> N.b.: All built-in helpers escape values appropriately; see the various helper class internals for more information.
 
 ### Custom Helpers
 
@@ -66,11 +66,13 @@ The following example helper class applies ROT-13 to a string.
 <?php
 namespace Vendor\Package;
 
-class Obfuscate
+use Aura\Html\Helper\AbstractHelper;
+
+class Obfuscate extends AbstractHelper
 {
     public function __invoke($string)
     {
-        return str_rot13($input);
+        return $this->escaper->html(str_rot13($input));
     }
 }
 ?>
@@ -102,7 +104,7 @@ examples.
 
 One of the tasks with PHP-based template systems is to escape output properly. Invoking escaper functionality is often verbose makes the template code look cluttered.  The _Escaper_ comes with four static methods to reduce the verbosity and clutter:  `a()`, `c()`, `j()`, and `h(). These escape values for HTML attributes, CSS, JavaScript, and HTML values, respectively.
 
-> N.b.: In Aura, we generally avoid static methods. However, the tradeoff of less-cluttered templates is worth it in this one case.
+> N.b.: In Aura, we generally avoid static methods. However, we feel the tradeoff of less-cluttered templates is worth using static methods in this one case.
 
 To call the static _Escaper_ methods in a PHP-based template, `use` the _Escaper_ as a short alias name, then call the static methods on the alias.  (If you did not instantiate a _HelperLocatorFactory_, you will need to prepare the static escaper methods by calling `Escaper::setStatic(new Escaper)`.)
 

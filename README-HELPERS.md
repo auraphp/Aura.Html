@@ -2,9 +2,9 @@
 
 Use a helper by calling it as a method on the _HelperLocator_. The available helpers are:
 
-- [anchor](#anchor) / a
+- [a](#a) / anchor
 - [base](#base)
-- [image](#image) / img
+- [img](#img) / image
 - [label](#label)
 - [links](#links)
 - [metas](#metas)
@@ -17,177 +17,299 @@ Use a helper by calling it as a method on the _HelperLocator_. The available hel
 
 There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/functions/README-FORMS.md).
 
-## anchor
+## a
 
-```php
+Helper for `<a>` tags.
+
+```html+php
 <?php
-echo $helper->anchor('http://auraphp.com', 'Aura Project');
-// <a href="http://auraphp.com">Aura Project</a>
+echo $helper->a(
+    'http://auraphp.com',       // (string) href
+    'Aura Project',             // (string) text
+    array('id' => 'aura-link')  // (array) optional attributes
+);
 ?>
+<a href="http://auraphp.com" id="aura-link">Aura Project</a>
 ```
 
 ## base
 
-```php
+Helper for `<base>` tags.
+
+```html+php
 <?php
-echo $helper->base('/base')
-// <base href="/base" />
+echo $helper->base(
+    '/base' // (string) href
+);
 ?>
+<base href="/base" />
 ```
 
-## image
+## img
 
-```php
+Helper for `<img>` tags.
+
+```html+php
 <?php
-echo $helper->img('hello.jpg', array('alt' => 'Hello', 'width' => 100, 'height' => 200));
-// <img src="hello.jpg" alt="Hello" width="100" height="200">
+echo $helper->img(
+    '/images/hello.jpg',            // (string) image href src
+    array('id' => 'image-id');      // (array) optional attributes
 ?>
+<!-- if alt is not specified, uses the basename of the image href -->
+<img src="/images/hello.jpg" alt="hello" id="image-id">
+
 ```
 
 ## label
 
-```php
-<?php
-echo $helper->label('Label For Field', array('for' => 'field'));
-// <label for="field">Label For Field</label>
+Helper for `<label>` tags.
 
+```html+php
+<?php
 echo $helper->label(
-    'Foo: ',
-    array('for' => 'foo'),
-    $helper->input(array(
-        'type' => 'text',
-        'name' => 'foo',
-        'value' => '',
-        'attribs' => array(
-            'id' => 'foo'
-        ),
-    )
-));
-// <label for="foo">Foo: <input type="text" id="foo" name="foo" value="" /></label>
+    'Label For Field',          // (string) label text
+    array('for' => 'field'));   // (array) optional attributes
+?>
+<label for="field">Label For Field</label>
+
+<?php
+// wrap html with the label before the html
+echo $helper->label('Foo: ')
+            ->before($helper->input(array(
+                'type' => 'text',
+                'name' => 'foo',
+            )));
+?>
+<label>Foo: <input type="text" name="foo" value="" /></label>
+
+<?php
+// wrap html with the label after the html
+echo $helper->label(' (Foo)')
+            ->after($helper->input(array(
+                'type' => 'text',
+                'name' => 'foo',
+            )));
+?>
+<label><input type="text" name="foo" value="" /> (Foo)</label>
+```
+
 
 ## links 
 
-```php
+Helper for a set of generic `<link>` tags. Build a set of links with `add()` then output them all at once.
+
+```html+php
 <?php
+// build the array of links with add()
 $helper->links()->add(array(
-    'rel' => 'prev',
+    'rel' => 'prev',                // (array) link attributes
     'href' => '/path/to/prev',
 ));
 
-$helper->links()->add(array(
+$helper->links()->add(array(        // (array) link attributes
     'rel' => 'next',
     'href' => '/path/to/next',
 ));
 
+// output the links
 echo $helper->links();
 ?>
-```
+<link rel="prev" href="/path/to/prev" />
+<link ref="next" href="/path/to/next" />
 
-Alternatively you can do by chaining
-
-```php
 <?php
+// alternatively, echo a chain of add() calls
 echo $helper->links()
-    ->add(array(
+    ->add(array(                    // (array) link attributes
         'rel' => 'prev',
         'href' => '/path/to/prev',
     ))
-    ->add(array(
+    ->add(array(                    // (array) link attributes
         'rel' => 'next',
         'href' => '/path/to/next',
     ));
 ?>
 ```
+<link rel="prev" href="/path/to/prev" />
+<link ref="next" href="/path/to/next" />
 
 ## metas 
 
-```php
-<?php
-echo $helper->metas()
-    ->addHttp('Location', '/redirect/to/here');
-    ->addName('foo', 'bar');
+Helper for a set of `<meta>` tags. Build a set of metas with `add*()` then output them all at once.
 
-// <meta http-equiv="Location" content="/redirect/to/here">
-// <meta name="foo" content="bar">
+```html+php
+<?php
+// add an http-equivalent meta
+$helper->metas()->addHttp(
+    'Location',         // (string) header label
+    '/redirect/to/here' // (string) header value
+);
+
+// add a name meta
+$helper->metas()->addName(
+    'foo',              // the meta name
+    'bar'               // the meta content
+);
+
+// output the metas
+echo $helper->meta();
 ?>
+<meta http-equiv="Location" content="/redirect/to/here">
+<meta name="foo" content="bar">
+
+<?php
+// alternatively, echo a chain of add calls
+echo $helper->metas()
+    ->addHttp(
+        'Location',         // (string) header label
+        '/redirect/to/here' // (string) header value
+    )
+    ->addName(
+        'foo',              // the meta name
+        'bar'               // the meta content
+    );
+?>
+<meta http-equiv="Location" content="/redirect/to/here">
+<meta name="foo" content="bar">
 ```
 
 ## ol
 
-```php
+Helper for `<ol>` tags with `<li>` items.  Build the set of items (both raw and escaped) then output them all at once.
+
+```html+php
 <?php
-$ol = $helper->ol(array('id' => 'test'));
-$ol->items(array('foo', 'bar', 'baz'))
-   ->item('dib', array('class' => 'callout'));
-/*
-<ol id="test">
-    <li>foo</li>
-    <li>bar</li>
-    <li>baz</li>
-    <li class="callout">dib</li>
-</ol>
-*/
+// start the list of items
+$helper->ol(array(                  // (array) optional attributes
+    'id' => 'test',
+));
+
+// add a single item to be escaped
+$helper->ol()->item(
+    'foo',                          // (string) the item text
+    array('id' => 'foo')            // (array) optional attributes
+);
+
+// add several items to be escaped
+$helper->ol()->items(array(         // (array) the items to add
+    'bar',                          // the item text, no item attributes
+    'baz' => array('id' => 'baz'),  // item text with item attributes
+));
+
+// add a single raw item not to be escaped
+$helper->ol()->rawItem(
+    '<a href="/first">First</a>',   // (string) the raw item html
+    array('id' => 'first')          // (array) optional attributes
+);
+
+// add several raw items not to be escaped
+$helper->ol()->rawItems(array(         // (array) the raw items to add
+    '<a href="/prev">Prev</a>',     // the item text, no item attributes
+    '<a href="/next">Next</a>',     
+    '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
+));
+
+// output the list
+echo $helper->ol();
 ?>
+<ol id="test">
+    <li id="foo">foo</li>
+    <li>bar</li>
+    <li id="baz">baz</li>
+    <li><a href="/first">First</a></li>
+    <li><a href="/pref">First</a></li>
+    <li><a href="/next">First</a></li>
+    <li><a href="/last">First</a></li>
+</ol>
 ```
 
 ## scripts
 
-```php
+Helper for a set of `<script>` tags. Build a set of script links, then output them all at once.
+```html+php
 <?php
-echo $helper->scripts()
-    ->add('/js/first.js')
-    ->add('/js/middle.js')
-    ->add('/js/last.js');
+// add a single script
+$helper->scripts()->add('/js/middle.js');
 
-/*
-<script src="/js/first.js" type="text/javascript"></script>
-<script src="/js/middle.js" type="text/javascript"></script>
-<script src="/js/last.js" type="text/javascript"></script>
-*/
+// add another script after that one
+$helper->add('/js/last.js');
+
+// add another at a specific priority order
+echo $helper->scripts(
+    '/js/first.js',     // (string) the script src
+    50                  // (int) optional priority order (default 100)
+);
+
+// add a conditional script
+$helper->scripts->addCond(
+    'ie6',              // (string) the condition
+    '/js/ie6.js',       // (string) the script src
+    25                  // (int) optional priority order (default 100)
+));
+
 ?>
-```
-
-You can also set the order priority, and conditional scripts, as shown here:
-
-```php
-<?php
-echo $helper->scripts()
-    ->add('/js/last.js', array(), 150)
-    ->add('/js/first.js', array(), 50)
-    ->add('/js/middle.js')
-    ->addCond('ie6', '/js/ie6.js');
-/*
-<script src="/js/first.js" type="text/javascript"></script>
-<script src="/js/middle.js" type="text/javascript"></script>
 <!--[if ie6]><script src="/js/ie6.js" type="text/javascript"></script><![endif]-->
+<script src="/js/first.js" type="text/javascript"></script>
+<script src="/js/middle.js" type="text/javascript"></script>
 <script src="/js/last.js" type="text/javascript"></script>
-*/
-?>
 ```
 
-There is also `scriptsFoot()`, which works the same, but is intended for placing scripts at the end of the HTML body.
+The `scriptsFoot()` helper works the same way, but is intended for placing a separate set of scripts at the end of the HTML body.
 
 ## ul
 
-```php
+Helper for `<ul>` tags with `<li>` items.  Build the set of items (both raw and escaped) then output them all at once.
+
+```html+php
 <?php
-echo $helper->ul(array('id' => 'test'])
-    ->items(array('foo', 'bar', 'baz'))
-    ->item('dib', array('class' => 'callout'));
-/*
-<ul id="test">
-    <li>foo</li>
-    <li>bar</li>
-    <li>baz</li>
-    <li class="callout">dib</li>
-</ul>
-*/
+// start the list of items
+$helper->ul(array(                  // (array) optional attributes
+    'id' => 'test',
+));
+
+// add a single item to be escaped
+$helper->ul()->item(
+    'foo',                          // (string) the item text
+    array('id' => 'foo')            // (array) optional attributes
+);
+
+// add several items to be escaped
+$helper->ul()->items(array(         // (array) the items to add
+    'bar',                          // the item text, no item attributes
+    'baz' => array('id' => 'baz'),  // item text with item attributes
+));
+
+// add a single raw item not to be escaped
+$helper->ul()->rawItem(
+    '<a href="/first">First</a>',   // (string) the raw item html
+    array('id' => 'first')          // (array) optional attributes
+);
+
+// add several raw items not to be escaped
+$helper->ul()->rawItems(array(         // (array) the raw items to add
+    '<a href="/prev">Prev</a>',     // the item text, no item attributes
+    '<a href="/next">Next</a>',     
+    '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
+));
+
+// output the list
+echo $helper->ul();
 ?>
+<ul id="test">
+    <li id="foo">foo</li>
+    <li>bar</li>
+    <li id="baz">baz</li>
+    <li><a href="/first">First</a></li>
+    <li><a href="/prev">Prev</a></li>
+    <li><a href="/next">Next</a></li>
+    <li><a href="/last">Last</a></li>
+</ul>
+```
 
 
 ## styles
 
-```php
+```html+php
 <?php
 $helper->styles()->add('/css/middle.css', array('media' => 'print'));
 $helper->styles()->add('/css/last.css', null, 150);
@@ -207,7 +329,7 @@ echo $helper->styles();
 
 A generic tag helper.
 
-```php
+```html+php
 <?php
 echo $helper->tag('div', array(
     'id' => 'foo',
@@ -218,7 +340,7 @@ echo $helper->tag('div', array(
 
 ## title
 
-```php
+```html+php
 <?php
 $helper->title()->set('This and That');
 
