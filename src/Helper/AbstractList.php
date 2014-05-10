@@ -101,36 +101,84 @@ abstract class AbstractList extends AbstractHelper
     
     /**
      * 
-     * Adds a single item to the stack.
+     * Adds a single item to the stack; the text will be escaped.
      * 
-     * @param string $html The HTML for the list item text.
+     * @param string $text The list item text.
      * 
      * @param array $attr Attributes for the list item tag.
      * 
      * @return self
      * 
      */
-    public function item($html, array $attr = array())
+    public function item($text, array $attr = array())
     {
-        $this->stack[] = array($html, $attr);
+        $this->stack[] = array(
+            $this->escaper->html($text),
+            $this->escaper->attr($attr),
+        );
         return $this;
     }
     
     /**
      * 
-     * Adds multiple items to the stack.
+     * Adds multiple items to the stack; the text will be escaped.
      * 
-     * @param array $items An array of HTML for the list items.
-     * 
-     * @param array $attr Attributes for each list item tag.
+     * @param array $items An array of text, or text => attribs, for the list
+     * items.
      * 
      * @return self
      * 
      */
-    public function items(array $items, array $attr = array())
+    public function items(array $items)
     {
-        foreach ($items as $html) {
-            $this->item($html, $attr);
+        foreach ($items as $key => $val) {
+            if (is_int($key)) {
+                $this->item($val);
+            } else {
+                $this->item($key, $val);
+            }
+        }
+        return $this;
+    }
+    
+    /**
+     * 
+     * Adds a single raw item to the stack; the text will **not** be escaped.
+     * 
+     * @param string $text The list item text.
+     * 
+     * @param array $attr Attributes for the list item tag.
+     * 
+     * @return self
+     * 
+     */
+    public function rawItem($text, array $attr = array())
+    {
+        $this->stack[] = array(
+            $text,
+            $this->escaper->attr($attr),
+        );
+        return $this;
+    }
+
+    /**
+     * 
+     * Adds multiple raw items to the stack; the text will **not** be escaped.
+     * 
+     * @param array $items An array of text, or text => attribs, for the list
+     * items.
+     * 
+     * @return self
+     * 
+     */
+    public function rawItems(array $items)
+    {
+        foreach ($items as $key => $val) {
+            if (is_int($key)) {
+                $this->rawItem($val);
+            } else {
+                $this->rawItem($key, $val);
+            }
         }
         return $this;
     }
@@ -147,7 +195,6 @@ abstract class AbstractList extends AbstractHelper
     protected function buildItem($item)
     {
         list($html, $attr) = $item;
-        $attr = $this->escaper->attr($attr);
         if ($attr) {
             $this->html .= $this->indent(1, "<li {$attr}>$html</li>");
         } else {
