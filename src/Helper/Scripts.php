@@ -65,23 +65,18 @@ class Scripts extends AbstractHelper
      * 
      * @param string $src The source href for the script.
      * 
-     * @param array $attr Additional attributes for the <script> tag.
-     * 
      * @param int $pos The script position in the stack.
      * 
      * @return null
      * 
      */
-    public function add($src, array $attr = array(), $pos = 100)
+    public function add($src, $pos = 100)
     {
-        $base = array(
+        $attr = $this->escaper->attr(array(
             'src' => $src,
             'type' => 'text/javascript',
-        );
+        ));
         
-        unset($attr['src']);
-        
-        $attr = $this->escaper->attr(array_merge($base, $attr));
         $tag = "<script $attr></script>";
         $this->scripts[(int) $pos][] = $tag;
     }
@@ -95,25 +90,20 @@ class Scripts extends AbstractHelper
      * 
      * @param string $src The source href for the script.
      * 
-     * @param array $attr Additional attributes for the <script> tag.
-     * 
      * @param string $pos The script position in the stack.
      * 
      * @return null
      * 
      */
-    public function addCond($cond, $src, array $attr = array(), $pos = 100)
+    public function addCond($cond, $src, $pos = 100)
     {
-        $base = array(
-            'src' => $src,
-            'type' => 'text/javascript',
-        );
-        
-        unset($attr['src']);
-        
-        $attr = $this->escaper->attr(array_merge($base, $attr));
         $cond = $this->escaper->html($cond);
         
+        $attr = $this->escaper->attr(array(
+            'src' => $src,
+            'type' => 'text/javascript',
+        ));
+
         $tag = "<!--[if $cond]><script $attr></script><![endif]-->";
         $this->scripts[(int) $pos][] = $tag;
     }
