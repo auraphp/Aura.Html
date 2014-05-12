@@ -102,9 +102,11 @@ examples.
 
 ### Escaping
 
-One of the tasks with PHP-based template systems is to escape output properly. Invoking escaper functionality is often verbose makes the template code look cluttered.  The _Escaper_ comes with four static methods to reduce the verbosity and clutter:  `a()`, `c()`, `j()`, and `h(). These escape values for HTML attributes, CSS, JavaScript, and HTML values, respectively.
+One of the important but menial tasks with PHP-based template systems is that of escaping output properly. Escaping output is **absolutely necessary** from a security perspective. However, escaper functionality is often verbose, and can make the template code look cluttered.
 
-> N.b.: In Aura, we generally avoid static methods. However, we feel the tradeoff of less-cluttered templates is worth using static methods in this one case.
+The _Escaper_ in this package comes with four static methods to reduce verbosity and clutter:  `a()`, `c()`, `j()`, and `h()`. These escape values for HTML attribute values, CSS values, JavaScript values, and HTML tag values, respectively.
+
+> N.b.: In Aura, we generally avoid static methods. However, we feel the tradeoff of less-cluttered templates makes it worth using static methods in this one case.
 
 To call the static _Escaper_ methods in a PHP-based template, `use` the _Escaper_ as a short alias name, then call the static methods on the alias.  (If you did not instantiate a _HelperLocatorFactory_, you will need to prepare the static escaper methods by calling `Escaper::setStatic(new Escaper)`.)
 
@@ -114,18 +116,22 @@ Here is a contrived example of the various static methods:
 <?php use Aura\Html\Escaper as e; ?>
 
 <head>
+
     <style>
         body: {
             color: <?= e::c($theme->color) ?>;
             font-size: <?= e::c($theme->font_size) ?>;
         }
     </style>
+
     <script language="javascript">
         var foo = "<?= e::j($js->foo); ?>";
     </script>
+
 </head>
 
 <body>
+
     <h1><?= e::h($blog->title) ?></h1>
 
     <p class="byline">
@@ -136,5 +142,6 @@ Here is a contrived example of the various static methods:
     <div id="<?php e::a($blog->div_id) ?>">
         <?= $blog->raw_html ?>
     </div>
+
 </body>
 ```
