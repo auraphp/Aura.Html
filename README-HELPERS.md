@@ -15,7 +15,7 @@ Use a helper by calling it as a method on the _HelperLocator_. The available hel
 - [tag](#tag)
 - [title](#title)
 
-There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/functions/README-FORMS.md).
+There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/develop-2/README-FORMS.md).
 
 ## a
 
