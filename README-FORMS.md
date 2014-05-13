@@ -319,7 +319,7 @@ echo $helper->input(array(
 
 ### select
 
-Pseudo-attribute "placeholder".
+Helper for a `<select>` tag with `<option>` tags. The pseudo-attribute `placeholder` is honored as a placeholder label when no option is selected. Using the attribute `'multiple' => true` will set up a multiple select, and automatically add `[]` to the name if it is not already there.
 
 ```html+php
 <?php
@@ -331,23 +331,143 @@ echo $helper->input(array(
         'placeholder' => 'Please pick one',
     ),
     'options' => array(
-        'value1' => 'First Label',
-        'value2' => 'Second Label',
-        'value5' => 'Fifth Label',
-        'value3' => 'Third Label',
+        'baz' => 'Baz Label',
+        'dib' => 'Dib Label',
+        'bar' => 'Bar Label',
+        'zim' => 'Zim Label',
     ),
 ));
-
-/*
+?>
 <select name="foo">
     <option disabled value="">Please pick one</option>
-    <option value="value1">First Label</option>
-    <option value="value2">Second Label</option>
-    <option value="value5" selected>Fifth Label</option>
-    <option value="value3">Third Label</option>
+    <option value="baz">Baz Label</option>
+    <option value="dib">Dib Label</option>
+    <option value="bar" selected>Bar Label</option>
+    <option value="zim">Zim Label</option>
 </select>
-*/
+
+<?php
+// programatically build option-by-option
+$select = $helper->input(array(
+    'type'    => 'select',
+    'name'    => 'foo',
+));
+
+// set the currently selected value(s)
+$select->selected('bar');   // (string|array) the currently selected value(s)
+
+// set attributes for the select tag
+$select->attribs(array(
+    'placeholder' => 'Please pick one',
+));
+
+// add a single option
+$select->option(
+    'baz',                  // (string) the option value
+    'Baz Label',            // (string) the option label
+    array()                 // (array) optional attributes for the option tag
+);
+
+// add several options
+$select->options(array(
+    'dib' => 'Dib Label',
+    'bar' => 'Bar Label',
+    'zim' => 'Zim Label',
+));
+
+// output the select
+echo $select;
 ?>
+<select name="foo">
+    <option disabled value="">Please pick one</option>
+    <option value="baz">Baz Label</option>
+    <option value="dib">Dib Label</option>
+    <option value="bar" selected>Bar Label</option>
+    <option value="zim">Zim Label</option>
+</select>
+```
+
+The helper also supports option groups. If an `options` array value is itself an array, the key for that element will be used as an `<optgroup>` label and the array of values will be options under that group.
+
+```html+php
+<?php
+echo $helper->input(array(
+    'type'    => 'select',
+    'name'    => 'foo',
+    'value'   => 'bar',
+    'attribs' => array(),
+    'options' => array(
+        'Group A' => array(
+            'baz' => 'Baz Label',
+            'dib' => 'Dib Label',
+        ),
+        'Group B' => array(
+            'bar' => 'Bar Label',
+            'zim' => 'Zim Label',
+        ),
+    ),
+));
+?>
+<select name="foo">
+    <optgroup label="Group A">
+        <option value="baz">Baz Label</option>
+        <option value="dib">Dib Label</option>
+    </optgroup>
+    <optgroup label="Group B">
+        <option value="bar" selected>Bar Label</option>
+        <option value="zim">Zim Label</option>
+    </optgroup>
+</select>
+
+<?php
+// or do so programmatically
+$select = $helper->input(array(
+    'type'    => 'select',
+    'name'    => 'foo',
+));
+
+// set the currently selected value(s)
+$select->selected('bar');   // (string|array) the currently selected value(s)
+
+// start an option group
+$select->optgroup('Group A');
+
+// add several options
+$select->options(array(
+    'baz' => 'Baz Label',
+    'dib' => 'Dib Label',
+));
+
+// start another option group (sub-groups are not allowed by HTML spec)
+$select->optgroup('Group B');
+
+// add a single option
+$select->option(
+    'bar',                  // (string) the option value
+    'Bar Label',            // (string) the option label
+    array()                 // (array) optional attributes for the option tag
+);
+
+// add a single option
+$select->option(
+    'zim',                  // (string) the option value
+    'Zim Label',            // (string) the option label
+    array()                 // (array) optional attributes for the option tag
+);
+
+// output the select
+echo $select;
+?>
+<select name="foo">
+    <optgroup label="Group A">
+        <option value="baz">Baz Label</option>
+        <option value="dib">Dib Label</option>
+    </optgroup>
+    <optgroup label="Group B">
+        <option value="bar" selected>Bar Label</option>
+        <option value="zim">Zim Label</option>
+    </optgroup>
+</select>
 ```
 
 ### submit
