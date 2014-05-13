@@ -46,7 +46,7 @@ $helper = $factory->newInstance();
 
 ### Built-In Helpers
 
-Once you have a _HelperLocator_, you can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/develop-2/README-HELPERS.md) and [form helpers](https://github.com/auraphp/Aura.Html/blob/develop-2/README-HELPERs.md) pages for more information.
+Once you have a _HelperLocator_, you can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](https://github.com/auraphp/Aura.Html/blob/develop-2/README-HELPERS.md) and [form helpers](https://github.com/auraphp/Aura.Html/blob/develop-2/README-FORMS.md) pages for more information.
 
 > N.b.: All built-in helpers escape values appropriately; see the various helper class internals for more information.
 
