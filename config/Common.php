@@ -12,7 +12,10 @@ class Common extends Config
         /**
          * Services
          */
-        $di->set('html_escaper', $di->lazyNew('Aura\Html\Escaper'));
+        $di->set('html_escaper', $di->lazy(array(
+            $di->lazyNew('Aura\Html\EscaperFactory'),
+            'newInstance'
+        )));
         $di->set('html_helper', $di->lazyNew('Aura\Html\HelperLocator'));
 
         /**
