@@ -17,49 +17,8 @@ namespace Aura\Html\Helper;
  * @package Aura.Html
  * 
  */
-class Scripts extends AbstractHelper
+class Scripts extends AbstractStack
 {
-    /**
-     * 
-     * The array of all scripts added to the helper.
-     * 
-     * @var array
-     * 
-     */
-    protected $scripts = array();
-
-    /**
-     * 
-     * Returns the stack of <script> tags as a single block.
-     * 
-     * @return string The <script> tags.
-     * 
-     */
-    public function __toString()
-    {
-        $html = '';
-        ksort($this->scripts);
-        foreach ($this->scripts as $scripts) {
-            foreach ($scripts as $script) {
-                $html .= $this->indent . $script . PHP_EOL;
-            }
-        }
-        $this->scripts = array();
-        return $html;
-    }
-
-    /**
-     * 
-     * Returns the helper so you can call methods on it.
-     * 
-     * @return self
-     * 
-     */
-    public function __invoke()
-    {
-        return $this;
-    }
-
     /**
      * 
      * Adds a <script> tag to the stack.
@@ -77,9 +36,10 @@ class Scripts extends AbstractHelper
             'src' => $src,
             'type' => 'text/javascript',
         ));
-        
         $tag = "<script $attr></script>";
-        $this->scripts[(int) $pos][] = $tag;
+        $this->addToStack($pos, $tag);
+
+        return $this;
     }
 
     /**
@@ -99,13 +59,13 @@ class Scripts extends AbstractHelper
     public function addCond($cond, $src, $pos = 100)
     {
         $cond = $this->escaper->html($cond);
-        
         $attr = $this->escaper->attr(array(
             'src' => $src,
             'type' => 'text/javascript',
         ));
-
         $tag = "<!--[if $cond]><script $attr></script><![endif]-->";
-        $this->scripts[(int) $pos][] = $tag;
+        $this->addToStack($pos, $tag);
+
+        return $this;
     }
 }

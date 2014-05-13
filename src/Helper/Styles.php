@@ -12,55 +12,13 @@ namespace Aura\Html\Helper;
 
 /**
  * 
- * Helper for <link rel="stylesheet" ... /> tags.
+ * Helper for a stack of <link rel="stylesheet" ... /> tags.
  * 
  * @package Aura.Html
  * 
  */
-class Styles extends AbstractHelper
+class Styles extends AbstractStack
 {
-    /**
-     * 
-     * The array of all styles added to the helper.
-     * 
-     * @var array
-     * 
-     */
-    protected $styles = array();
-
-    /**
-     * 
-     * Returns the helper so you can call methods on it.
-     * 
-     * @return self
-     * 
-     */
-    public function __invoke()
-    {
-        return $this;
-    }
-
-    /**
-     * 
-     * Returns the stack of <link rel="stylesheet" ... /> tags as a single 
-     * block.
-     * 
-     * @return string The <link rel="stylesheet" ... /> tags.
-     * 
-     */
-    public function __toString()
-    {
-        $html = '';
-        ksort($this->styles);
-        foreach ($this->styles as $styles) {
-            foreach ($styles as $style) {
-                $html .= $this->indent . $style . PHP_EOL;
-            }
-        }
-        $this->styles = array();
-        return $html;
-    }
-
     /**
      * 
      * Adds a <link rel="stylesheet" ... /> tag to the stack.
@@ -78,7 +36,7 @@ class Styles extends AbstractHelper
     {
         $attr = $this->fixAttr($href, $attr);
         $tag = $this->void('link', $attr);
-        $this->styles[(int) $pos][] = $tag;
+        $this->addToStack($pos, $tag);
 
         return $this;
     }
@@ -105,7 +63,7 @@ class Styles extends AbstractHelper
         $link = $this->void('link', $attr);
         $cond  = $this->escaper->html($cond);
         $tag  = "<!--[if $cond]>$link<![endif]-->";
-        $this->styles[(int) $pos][] = $tag;
+        $this->addToStack($pos, $tag);
 
         return $this;
     }
