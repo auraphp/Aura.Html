@@ -72,42 +72,11 @@ class Select extends AbstractInput
      */
     public function __toString()
     {
-        $append_brackets = isset($this->attribs['multiple'])
-                        && $this->attribs['multiple']
-                        && isset($this->attribs['name'])
-                        && substr($this->attribs['name'], -2) != '[]';
-        
-        // if this is a multiple select, the name needs to end in "[]"
-        if ($append_brackets) {
-            $this->attribs['name'] .= '[]';
-        }
-        
-        // open the select
-        $attribs = $this->escaper->attr($this->attribs);
-        $html = $this->indent(0, "<select {$attribs}>");
-        
-        // is there a placeholder option?
-        if ($this->placeholder) {
-            $html .= $this->buildOption(array(
-                '',
-                $this->placeholder,
-                array('disabled' => true),
-            ));
-        }
-        
-        // build the options
-        foreach ($this->stack as $info) {
-            $method = array_shift($info);
-            $html .= $this->$method($info);
-        }
-        
-        // close any optgroup tags
-        if ($this->optgroup) {
-            $html .= $this->endOptgroup();
-        }
-        
-        // close the select
-        $html .= $this->indent(0, '</select>');
+        // build the html
+        $html = $this->buildSelect()
+              . $this->buildOptionPlaceholder()
+              . $this->buildOptions()
+              . $this->indent(0, '</select>');
         
         // reset for next time
         $this->stack = array();
@@ -118,7 +87,50 @@ class Select extends AbstractInput
         return $html;
     }
     
-    
+    protected function buildSelect()
+    {
+        $append_brackets = isset($this->attribs['multiple'])
+                        && $this->attribs['multiple']
+                        && isset($this->attribs['name'])
+                        && substr($this->attribs['name'], -2) != '[]';
+        
+        // if this is a multiple select, the name needs to end in "[]"
+        if ($append_brackets) {
+            $this->attribs['name'] .= '[]';
+        }
+
+        $attr = $this->escaper->attr($this->attribs);
+        return $this->indent(0, "<select {$attr}>");
+    }
+
+    protected function buildOptionPlaceholder()
+    {
+        if ($this->placeholder) {
+            return $this->buildOption(array(
+                '',
+                $this->placeholder,
+                array('disabled' => true),
+            ));
+        }
+    }
+
+    protected function buildOptions()
+    {
+        $html = '';
+
+        foreach ($this->stack as $info) {
+            $method = array_shift($info);
+            $html .= $this->$method($info);
+        }
+        
+        // close any optgroup tags
+        if ($this->optgroup) {
+            $html .= $this->endOptgroup();
+        }
+
+        return $html;
+    }
+
     /**
      * 
      * Sets the HTML attributes for the select tag.
