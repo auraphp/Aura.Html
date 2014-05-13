@@ -66,6 +66,13 @@ class Escaper
      * 
      * Constructor.
      * 
+     * @param HtmlEscaper $html An HtmlEscaper instance.
+     * 
+     * @param AttrEscaper $attr An AttrEscaper instance.
+     * 
+     * @param CssEscaper $css A CssEscaper instance.
+     * 
+     * @param JsEscaper $js A JsEscaper instance.
      * 
      */
     public function __construct(
@@ -82,9 +89,23 @@ class Escaper
 
     /**
      * 
+     * Read-only property access; mostly for testing.
+     * 
+     * @var string $key The property name.
+     * 
+     * @return mixed
+     * 
+     */
+    public function __get($key)
+    {
+        return $this->$key;
+    }
+
+    /**
+     * 
      * Sets the encoding on all escapers.
      * 
-     * @var string $encoding The encoding to use.
+     * @param string $encoding The encoding to use.
      * 
      * @return null
      * 
@@ -101,7 +122,7 @@ class Escaper
      * 
      * Sets the flags for `htmlspecialchars()` on the Html and Attr escapers.
      * 
-     * @var int $flags The `htmlspecialchars()` flags.
+     * @param int $flags The `htmlspecialchars()` flags.
      * 
      * @return null
      * 
