@@ -12,7 +12,7 @@ namespace Aura\Html;
 
 /**
  * 
- * Aura Html Exception
+ * Package-level exception.
  * 
  * @package Aura.Html
  * 

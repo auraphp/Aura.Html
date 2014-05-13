@@ -15,6 +15,13 @@ use Aura\Html\Escaper\AttrEscaper;
 use Aura\Html\Escaper\CssEscaper;
 use Aura\Html\Escaper\JsEscaper;
 
+/**
+ * 
+ * A proxy for the various escapers.
+ * 
+ * @package Aura.Html
+ * 
+ */
 class Escaper
 {
     /**

@@ -23,7 +23,7 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->escaper, Escaper::getStatic());
     }
 
-    public function setEncoding()
+    public function testSetEncoding()
     {
         $this->escaper->setEncoding('macroman');
         $this->assertSame('macroman', $this->escaper->html->getEncoding());
@@ -32,11 +32,11 @@ class EscaperTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('macroman', $this->escaper->js->getEncoding());
     }
 
-    public function setFlags()
+    public function testSetFlags()
     {
         $this->escaper->setFlags(ENT_NOQUOTES);
         $this->assertSame(ENT_NOQUOTES, $this->escaper->html->getFlags());
-        $this->assertSame(ENT_NOQUOTES, $this->escaper->attr->getFlags());
+        $this->assertSame(ENT_NOQUOTES, $this->escaper->attr->getHtml()->getFlags());
     }
 
     public function test_a()

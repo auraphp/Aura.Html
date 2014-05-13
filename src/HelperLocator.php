@@ -12,7 +12,7 @@ namespace Aura\Html;
 
 /**
  * 
- * A ServiceHelperLocator implementation for loading and retaining helper objects.
+ * A ServiceLocator implementation for loading and retaining helper objects.
  * 
  * @package Aura.Html
  * 
