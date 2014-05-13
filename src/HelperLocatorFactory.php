@@ -2,6 +2,7 @@
 namespace Aura\Html;
 
 use Aura\Html\Helper;
+use Aura\Html\Escaper;
 
 class HelperLocatorFactory
 {

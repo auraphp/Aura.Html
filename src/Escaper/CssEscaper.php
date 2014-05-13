@@ -3,14 +3,23 @@ namespace Aura\Html\Escaper;
 
 use Aura\Html\Exeption;
 
+/**
+ * 
+ * An escaper for CSS output.
+ * 
+ * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
+ * for conceptual integrity with the rest of Aura.  Some portions copyright
+ * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * under the New BSD License (http://framework.zend.com/license/new-bsd). 
+ * 
+ * @package Aura.Html
+ * 
+ */
 class CssEscaper extends AbstractEscaper
 {
     public function __invoke($raw)
     {
-        return $this->replace(
-            $raw,
-            '/[^a-z0-9]/iSu'
-        );
+        return $this->replace($raw, '/[^a-z0-9]/iSu');
     }
 
     /**

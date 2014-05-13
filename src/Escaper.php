@@ -15,21 +15,10 @@ use Aura\Html\Escaper\AttrEscaper;
 use Aura\Html\Escaper\CssEscaper;
 use Aura\Html\Escaper\JsEscaper;
 
-/**
- * 
- * A tool for escaping output.
- * 
- * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
- * for conceptual integrity with the rest of Aura.  Some portions copyright
- * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * under the New BSD License (http://framework.zend.com/license/new-bsd). 
- * 
- * @package Aura.Html
- * 
- */
 class Escaper
 {
     static protected $escaper;
+    
     protected $html;
     protected $attr;
     protected $css;
@@ -112,6 +101,38 @@ class Escaper
         return $this->js->__invoke($raw);
     }
 
+    public function setEncoding($encoding)
+    {
+        $this->html->setEncoding($encoding);
+        $this->attr->setEncoding($encoding);
+        $this->css->setEncoding($encoding);
+        $this->js->setEncoding($encoding);
+    }
+
+    public function setFlags($flags)
+    {
+        $this->html->setFlags($flags);
+    }
+
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    public function getAttr()
+    {
+        return $this->attr;
+    }
+
+    public function getCss()
+    {
+        return $this->css;
+    }
+
+    public function getJs()
+    {
+        return $this->js;
+    }
 
     public static function setStatic(Escaper $escaper)
     {

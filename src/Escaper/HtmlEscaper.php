@@ -1,6 +1,18 @@
 <?php
 namespace Aura\Html\Escaper;
 
+/**
+ * 
+ * An escaper for HTML output.
+ * 
+ * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
+ * for conceptual integrity with the rest of Aura.  Some portions copyright
+ * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * under the New BSD License (http://framework.zend.com/license/new-bsd). 
+ * 
+ * @package Aura.Html
+ * 
+ */
 class HtmlEscaper extends AbstractEscaper
 {
     /**
