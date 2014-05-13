@@ -333,26 +333,27 @@ class Escaper
      */
     protected function replaceAttr($matches)
     {
-        // get the character and its ord() value
         $chr = $matches[0];
-        $ord = ord($chr);
 
-        // handle characters undefined in HTML
-        $undef = ($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
-              || ($ord >= 0x7f && $ord <= 0x9f);
-        if ($undef) {
+        if ($this->charIsUndefinedInHtml($chr)) {
             // use the Unicode replacement char
             return '&#xFFFD;';
         }
 
-        // convert UTF-8 to UTF-16BE
-        if (strlen($chr) > 1) {
-            $chr = $this->convert($chr, 'UTF-8', 'UTF-16BE');
-        }
+        return $this->replaceAttrDefined($chr);
+    }
 
-        // retain the ord value
-        $ord = hexdec(bin2hex($chr));
-        
+    protected function charIsUndefinedInHtml($chr)
+    {
+        $ord = ord($chr);
+        return ($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
+              || ($ord >= 0x7f && $ord <= 0x9f);
+    }
+
+    protected function replaceAttrDefined($chr)
+    {
+        $ord = $this->getUtf16Ord($chr);
+
         // is this a mapped entity?
         if (isset($this->entities[$ord])) {
             return $this->entities[$ord];
@@ -365,6 +366,15 @@ class Escaper
         
         // everything else
         return sprintf('&#x%02X;', $ord);
+    }
+
+    protected function getUtf16Ord($chr)
+    {
+        // convert UTF-8 to UTF-16BE
+        if (strlen($chr) > 1) {
+            $chr = $this->convert($chr, 'UTF-8', 'UTF-16BE');
+        }
+        return hexdec(bin2hex($chr));
     }
 
     /**
