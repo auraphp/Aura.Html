@@ -169,27 +169,13 @@ class Escaper
             return $this->attrArray($raw);
         }
         
-        return $this->attrString($raw);
-    }
-
-    protected function attrString($raw)
-    {
-        // pre-empt escaping
-        if ($raw === '' || ctype_digit($raw)) {
-            return $raw;
-        }
-
-        // escape the string in UTF-8 encoding
-        $esc = preg_replace_callback(
+        return $this->replace(
+            $raw,
             '/[^a-z0-9,\.\-_]/iSu',
-            array($this, 'replaceAttr'),
-            $this->toUtf8($raw)
+            'replaceAttr'
         );
-        
-        // return using original encoding
-        return $this->fromUtf8($esc);
     }
-    
+
     /**
      * 
      * Converts an associative array to an attribute string.
@@ -279,20 +265,11 @@ class Escaper
      */
     public function css($raw)
     {
-        // pre-empt escaping
-        if ($raw === '' || ctype_digit($raw)) {
-            return $raw;
-        }
-
-        // escape the string in UTF-8 encoding
-        $esc = preg_replace_callback(
+        return $this->replace(
+            $raw,
             '/[^a-z0-9]/iSu',
-            array($this, 'replaceCss'),
-            $this->toUtf8($raw)
+            'replaceCss'
         );
-        
-        // return using original encoding
-        return $this->fromUtf8($esc);
     }
 
     /**
@@ -306,6 +283,15 @@ class Escaper
      */
     public function js($raw)
     {
+        return $this->replace(
+            $raw,
+            '/[^a-z0-9,\._]/iSu',
+            'replaceJs'
+        );
+    }
+
+    protected function replace($raw, $regex, $func)
+    {
         // pre-empt escaping
         if ($raw === '' || ctype_digit($raw)) {
             return $raw;
@@ -313,15 +299,15 @@ class Escaper
 
         // escape the string in UTF-8 encoding
         $esc = preg_replace_callback(
-            '/[^a-z0-9,\._]/iSu',
-            array($this, 'replaceJs'),
+            $regex,
+            array($this, $func),
             $this->toUtf8($raw)
         );
-        
+
         // return using original encoding
         return $this->fromUtf8($esc);
     }
-
+    
     /**
      * 
      * Replaces unsafe HTML attribute characters.
