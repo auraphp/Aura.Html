@@ -93,7 +93,6 @@ echo $helper->label(' (Foo)')
 <label><input type="text" name="foo" value="" /> (Foo)</label>
 ```
 
-
 ## links 
 
 Helper for a set of generic `<link>` tags. Build a set of links with `add()` then output them all at once.
@@ -226,6 +225,7 @@ echo $helper->ol();
 ## scripts
 
 Helper for a set of `<script>` tags. Build a set of script links, then output them all at once.
+
 ```html+php
 <?php
 // add a single script
@@ -286,7 +286,7 @@ $helper->ul()->rawItem(
 );
 
 // add several raw items not to be escaped
-$helper->ul()->rawItems(array(         // (array) the raw items to add
+$helper->ul()->rawItems(array(      // (array) the raw items to add
     '<a href="/prev">Prev</a>',     // the item text, no item attributes
     '<a href="/next">Next</a>',     
     '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
@@ -306,22 +306,43 @@ echo $helper->ul();
 </ul>
 ```
 
-
 ## styles
+
+Helper for a set of `<link>` tags for stylesheets. Build a set of style links, then output them all at once. As with the `script` helper, you can optionally set the priority order for each stylesheet.
 
 ```html+php
 <?php
-$helper->styles()->add('/css/middle.css', array('media' => 'print'));
-$helper->styles()->add('/css/last.css', null, 150);
-$helper->styles()->add('/css/first.css', null, 50);
-$helper->styles()->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
+// add a stylesheet link
+$helper->styles()->add(
+    '/css/middle.css',          // (string) the stylesheet href
+    array('media' => 'print')   // (array) optional attributes
+);
+
+// add another one after that
+$helper->styles()->add('/css/last.css');
+
+// add one at a specific priority order
+$helper->styles()->add(
+    '/css/first.css',           // (string) the stylesheet href
+    null,                       // (array) optional attributes
+    50                          // (int) optional priority order (default 100)
+);
+
+// add a conditional stylesheet
+$helper->styles()->addCond(
+    'ie6',                      // (string) the condition
+    '/css/ie6.css',             // (string) the stylesheet href
+    array('media' => 'print'),  // (array) optional attributes
+    25                          // (int) optional priority order (default 100)
+);
+
+// output the stylesheet links
 echo $helper->styles();
-/*
+?>
+<!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="print" /><![endif]-->
 <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />
-<!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="print" /><![endif]-->
 <link rel="stylesheet" href="/css/last.css" type="text/css" media="screen" />
-*/
 ?>
 ```
 
@@ -331,27 +352,53 @@ A generic tag helper.
 
 ```html+php
 <?php
-echo $helper->tag('div', array(
-    'id' => 'foo',
-));
-// <div id="foo">
+echo $helper->tag(
+    'div',                  // (string) the tag name
+    array('id' => 'foo')    // (array) optional array of attributes
+);
+echo $helper->tag('/div');
 ?>
+<div id="foo"></div>
 ```
 
 ## title
 
+Helper for the `<title>` tag.
+
 ```html+php
 <?php
-$helper->title()->set('This and That');
+// escaped variations (can be intermixed with raw variations)
 
-$helper->title()->append(' Suf1');
-$helper->title()->append(' Suf2');
+// set the title
+$helper->title()->set('This & That');
 
-$helper->title()->prepend('Pre1');
-$helper->title()->prepend('Pre2');
+// append the title
+$helper->title()->append(' > Suf1');
+$helper->title()->append(' > Suf2');
+
+// prepend the title
+$helper->title()->prepend('Pre1 > ');
+$helper->title()->prepend('Pre2 > ');
         
 echo $helper->title();
-
-// <title>Pre2Pre1This and That Suf1 Suf2</title>
 ?>
+<title>Pre2 &gt; Pre1 &gt; This &amp; That &gt; Suf1 &gt; Suf2</title>
+
+<?php
+// raw variations (can be intermixed with escaped variations):
+
+// set the title
+$helper->title()->set('This & That');
+
+// append the title
+$helper->title()->append(' > Suf1');
+$helper->title()->append(' > Suf2');
+
+// prepend the title
+$helper->title()->prepend('Pre1 > ');
+$helper->title()->prepend('Pre2 > ');
+        
+echo $helper->title();
+?>
+<title>Pre2 > Pre1 > This & That > Suf1 > Suf2</title>
 ``` 

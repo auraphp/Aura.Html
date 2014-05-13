@@ -39,11 +39,12 @@ class Scripts extends AbstractHelper
     {
         $html = '';
         ksort($this->scripts);
-        foreach ($this->scripts as $list) {
-            foreach ($list as $script) {
+        foreach ($this->scripts as $scripts) {
+            foreach ($scripts as $script) {
                 $html .= $this->indent . $script . PHP_EOL;
             }
         }
+        $this->scripts = array();
         return $html;
     }
 

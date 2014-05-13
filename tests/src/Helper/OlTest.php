@@ -34,7 +34,7 @@ class OlTest extends AbstractHelperTest
     {
         $ol = $this->helper;
         
-        $actual = $ol(array('id' => 'test'))
+        $actual = $ol()
                 ->rawItems(array(
                     '>foo',
                     '>bar',
@@ -43,7 +43,7 @@ class OlTest extends AbstractHelperTest
                 ))
                 ->__toString();
         
-        $expect = '<ol id="test">' . PHP_EOL
+        $expect = '<ol>' . PHP_EOL
                 . '    <li>>foo</li>' . PHP_EOL
                 . '    <li>>bar</li>' . PHP_EOL
                 . '    <li>>baz</li>' . PHP_EOL

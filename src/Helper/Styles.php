@@ -50,11 +50,15 @@ class Styles extends AbstractHelper
      */
     public function __toString()
     {
-        asort($this->styles);
-        $styles = array_keys($this->styles);
-        return $this->indent
-             . implode(PHP_EOL . $this->indent, $styles)
-             . PHP_EOL;
+        $html = '';
+        ksort($this->styles);
+        foreach ($this->styles as $styles) {
+            foreach ($styles as $style) {
+                $html .= $this->indent . $style . PHP_EOL;
+            }
+        }
+        $this->styles = array();
+        return $html;
     }
 
     /**
@@ -72,20 +76,9 @@ class Styles extends AbstractHelper
      */
     public function add($href, array $attr = null, $pos = 100)
     {
-        $attr = (array) $attr;
-        
-        $base = array(
-            'rel'   => 'stylesheet',
-            'href'  => $href,
-            'type'  => 'text/css',
-            'media' => 'screen',
-        );
-
-        unset($attr['href']);
-
-        $attr = array_merge($base, (array) $attr);
+        $attr = $this->fixAttr($href, $attr);
         $tag = $this->void('link', $attr);
-        $this->styles[$tag] = $pos;
+        $this->styles[(int) $pos][] = $tag;
 
         return $this;
     }
@@ -108,6 +101,17 @@ class Styles extends AbstractHelper
      */
     public function addCond($cond, $href, array $attr = null, $pos = 100)
     {
+        $attr = $this->fixAttr($href, $attr);
+        $link = $this->void('link', $attr);
+        $cond  = $this->escaper->html($cond);
+        $tag  = "<!--[if $cond]>$link<![endif]-->";
+        $this->styles[(int) $pos][] = $tag;
+
+        return $this;
+    }
+
+    protected function fixAttr($href, $attr)
+    {
         $attr = (array) $attr;
         
         $base = array(
@@ -117,14 +121,9 @@ class Styles extends AbstractHelper
             'media' => 'screen',
         );
 
+        unset($attr['rel']);
         unset($attr['href']);
 
-        $attr = array_merge($base, (array) $attr);
-        $link = $this->void('link', $attr);
-        $cond  = $this->escaper->html($cond);
-        $tag  = "<!--[if $cond]>$link<![endif]-->";
-        $this->styles[$tag] = $pos;
-
-        return $this;
+        return array_merge($base, (array) $attr);
     }
 }

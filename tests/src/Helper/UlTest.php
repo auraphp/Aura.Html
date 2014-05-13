@@ -34,7 +34,7 @@ class UlTest extends AbstractHelperTest
     {
         $ul = $this->helper;
         
-        $actual = $ul(array('id' => 'test'))
+        $actual = $ul()
                 ->rawItems(array(
                     '>foo',
                     '>bar',
@@ -43,7 +43,7 @@ class UlTest extends AbstractHelperTest
                 ))
                 ->__toString();
         
-        $expect = '<ul id="test">' . PHP_EOL
+        $expect = '<ul>' . PHP_EOL
                 . '    <li>>foo</li>' . PHP_EOL
                 . '    <li>>bar</li>' . PHP_EOL
                 . '    <li>>baz</li>' . PHP_EOL

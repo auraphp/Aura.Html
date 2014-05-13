@@ -7,6 +7,13 @@ namespace Aura\Html\Helper;
  */
 class ScriptsTest extends AbstractHelperTest
 {
+    public function test__invoke()
+    {
+        $scripts = $this->helper;
+        $actual = $scripts();
+        $this->assertInstanceOf('Aura\Html\Helper\Scripts', $actual);
+    }
+    
     public function test()
     {
         $scripts = $this->helper;
