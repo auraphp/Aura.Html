@@ -9,7 +9,8 @@ class HelperLocatorFactory
 
     public function __construct($encoding = null, $flags = null)
     {
-        $this->escaper = new Escaper($encoding, $flags);
+        $escaper_factory = new EscaperFactory;
+        $this->escaper = $escaper_factory->newInstance($encoding, $flags);
         Escaper::setStatic($this->escaper);
     }
 

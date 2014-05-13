@@ -3,13 +3,15 @@ namespace Aura\Html\Helper;
 
 use Aura\Html\HelperFactory;
 use Aura\Html\HelperLocator;
-use Aura\Html\Escaper;
+use Aura\Html\EscaperFactory;
 
 class InputTest extends AbstractHelperTest
 {
     protected function newHelper()
     {
-        $escaper = new Escaper;
+        $escaper_factory = new EscaperFactory;
+        $escaper = $escaper_factory->newInstance();
+        
         return new Input(new HelperLocator(array(
             'button'            => function () use ($escaper) { return new Input\Generic($escaper); },
             'checkbox'          => function () use ($escaper) { return new Input\Checkbox($escaper); },

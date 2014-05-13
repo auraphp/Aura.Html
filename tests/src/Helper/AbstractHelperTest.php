@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Html\Helper;
 
-use Aura\Html\Escaper;
+use Aura\Html\EscaperFactory;
 
 abstract class AbstractHelperTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,6 +16,7 @@ abstract class AbstractHelperTest extends \PHPUnit_Framework_TestCase
     protected function newHelper()
     {
         $class = substr(get_class($this), 0, -4);
-        return new $class(new Escaper);
+        $escaper_factory = new EscaperFactory;
+        return new $class($escaper_factory->newInstance());
     }
 }
