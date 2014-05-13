@@ -5,7 +5,7 @@ use Aura\Html\Exeption;
 
 /**
  * 
- * An escaper for HTML attribute output.
+ * An escaper for unquoted HTML attribute output.
  * 
  * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
  * for conceptual integrity with the rest of Aura.  Some portions copyright
@@ -33,21 +33,17 @@ class AttrEscaper extends AbstractEscaper
 
     protected $html;
 
-    public function __construct($html, $encoding = null)
+    public function __construct(HtmlEscaper $html, $encoding = null)
     {
         $this->html = $html;
         parent::__construct($encoding);
     }
     
-    public function __invoke($raw)
+    public function getHtml()
     {
-        if (is_array($raw)) {
-            return $this->attrArray($raw);
-        }
-        
-        return $this->replace($raw, '/[^a-z0-9,\.\-_]/iSu');
+        return $this->html;
     }
-
+    
     /**
      * 
      * Converts an associative array to an attribute string.
@@ -66,8 +62,12 @@ class AttrEscaper extends AbstractEscaper
      * string.
      * 
      */
-    protected function attrArray(array $raw)
+    public function __invoke($raw)
     {
+        if (! is_array($raw)) {
+            return $this->replace($raw, '/[^a-z0-9,\.\-_]/iSu');
+        }
+        
         $esc = '';
         foreach ($raw as $key => $val) {
 
@@ -101,7 +101,7 @@ class AttrEscaper extends AbstractEscaper
         // done; remove the last space
         return rtrim($esc);
     }
-    
+
     /**
      * 
      * Replaces unsafe HTML attribute characters.
@@ -115,22 +115,22 @@ class AttrEscaper extends AbstractEscaper
     {
         $chr = $matches[0];
 
-        if ($this->charIsUndefinedInHtml($chr)) {
+        if ($this->charIsUndefined($chr)) {
             // use the Unicode replacement char
             return '&#xFFFD;';
         }
 
-        return $this->replaceAttrDefined($chr);
+        return $this->replaceDefined($chr);
     }
 
-    protected function charIsUndefinedInHtml($chr)
+    protected function charIsUndefined($chr)
     {
         $ord = ord($chr);
         return ($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
               || ($ord >= 0x7f && $ord <= 0x9f);
     }
 
-    protected function replaceAttrDefined($chr)
+    protected function replaceDefined($chr)
     {
         $ord = $this->getUtf16Ord($chr);
 
