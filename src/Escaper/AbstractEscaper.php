@@ -1,8 +1,29 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Html
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Html\Escaper;
 
 use Aura\Html\Exception;
 
+/**
+ * 
+ * An asbtract escaper for output.
+ * 
+ * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
+ * for conceptual integrity with the rest of Aura.  Some portions copyright
+ * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * under the New BSD License (http://framework.zend.com/license/new-bsd). 
+ * 
+ * @package Aura.Html
+ * 
+ */
 abstract class AbstractEscaper
 {
     /**
@@ -30,6 +51,13 @@ abstract class AbstractEscaper
         'windows-1251', 'windows-1252',
     );
 
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param string $encoding The encoding to use for raw and escaped strings.
+     * 
+     */
     public function __construct($encoding = null)
     {
         if ($encoding !== null) {
@@ -37,6 +65,13 @@ abstract class AbstractEscaper
         }
     }
 
+    /**
+     * 
+     * Main function to escape output.
+     * 
+     * @param mixed $raw The raw value to escape.
+     * 
+     */
     abstract public function __invoke($raw);
 
     /**
@@ -69,9 +104,20 @@ abstract class AbstractEscaper
         return $this->encoding;
     }
 
+    /**
+     * 
+     * Replaces the raw value with an escaped value.
+     * 
+     * @param mixed $raw The raw value.
+     * 
+     * @param string $regex The regex to determine what characters to replace.
+     * 
+     * @return mixed The escaped value.
+     * 
+     */
     protected function replace($raw, $regex)
     {
-        // pre-empt escaping
+        // pre-empt replacement
         if ($raw === '' || ctype_digit($raw)) {
             return $raw;
         }
@@ -161,5 +207,22 @@ abstract class AbstractEscaper
         
         $message = "Extension 'iconv' or 'mbstring' is required.";
         throw new Exception\ExtensionNotInstalled($message);
+    }
+
+    /**
+     * 
+     * Get the UTF-16BE hexadecimal ordinal value for a character.
+     * 
+     * @param string $chr The character to get the value for.
+     * 
+     * @return string The hexadecimal ordinal value.
+     * 
+     */
+    protected function getHexOrd($chr)
+    {
+        if (strlen($chr) > 1) {
+            $chr = $this->convert($chr, 'UTF-8', 'UTF-16BE');
+        }
+        return hexdec(bin2hex($chr));
     }
 }

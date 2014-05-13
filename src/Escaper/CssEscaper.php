@@ -1,7 +1,14 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Html
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Html\Escaper;
-
-use Aura\Html\Exeption;
 
 /**
  * 
@@ -17,6 +24,15 @@ use Aura\Html\Exeption;
  */
 class CssEscaper extends AbstractEscaper
 {
+    /**
+     * 
+     * Escapes a CSS value.
+     * 
+     * @param mixed $raw The value to be escaped.
+     * 
+     * @return mixed The escaped value.
+     * 
+     */
     public function __invoke($raw)
     {
         return $this->replace($raw, '/[^a-z0-9]/iSu');
@@ -24,7 +40,7 @@ class CssEscaper extends AbstractEscaper
 
     /**
      * 
-     * Replaces unsafe JavaScript attribute characters.
+     * Replaces unsafe CSS characters.
      *
      * @param array $matches Matches from preg_replace_callback().
      * 
@@ -42,12 +58,10 @@ class CssEscaper extends AbstractEscaper
             $ord = ord($chr);
         } else {
             // no
-            $chr = $this->convert($chr, 'UTF-8', 'UTF-16BE');
-            $ord = hexdec(bin2hex($chr));
+            $ord = $this->getHexOrd($chr);
         }
         
         // done
         return sprintf('\\%X ', $ord);
     }
-
 }

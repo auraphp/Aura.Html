@@ -1,7 +1,14 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Html
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Html\Escaper;
-
-use Aura\Html\Exeption;
 
 /**
  * 
@@ -31,14 +38,37 @@ class AttrEscaper extends AbstractEscaper
         62 => '&gt;',
     );
 
+    /**
+     * 
+     * An HTML escaper.
+     * 
+     * @var HtmlEscaper
+     * 
+     */
     protected $html;
 
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param HtmlEscaper $html An HTML escaper.
+     * 
+     * @param string $encoding The encoding to use for raw and escaped strings.
+     * 
+     */
     public function __construct(HtmlEscaper $html, $encoding = null)
     {
         $this->html = $html;
         parent::__construct($encoding);
     }
     
+    /**
+     * 
+     * Gets the HTML escaper.
+     * 
+     * @return HtmlEscaper
+     * 
+     */
     public function getHtml()
     {
         return $this->html;
@@ -46,20 +76,20 @@ class AttrEscaper extends AbstractEscaper
     
     /**
      * 
-     * Converts an associative array to an attribute string.
+     * Escapes an unquoted HTML attribute, or converts an array of such
+     * attributes to a quoted-and-escaped attribute string.
      * 
-     * Keys are attribute names, and values are attribute values. A value
-     * of boolean true indicates a minimized attribute; for example,
-     * `['disabled' => 'disabled']` results in `disabled="disabled"`, but
-     * `['disabled' => true]` results in `disabled`.  Values of `false` or
+     * When converting associative array of HTML attributes to an escaped
+     * attribute string, leys are attribute names, and values are attribute
+     * values. A value of boolean true indicates a minimized attribute. For
+     *  example, `['disabled' => 'disabled']` results in `disabled="disabled"`,
+     * but `['disabled' => true]` results in `disabled`.  Values of `false` or
      * `null` will omit the attribute from output.  Array values will be
      * concatenated and space-separated before escaping.
      * 
-     * @param array $raw An array of key-value pairs where the key is the
-     * attribute name and the value is the attribute value.
+     * @param mixed $raw The attribute (or array of attributes) to escaped.
      * 
-     * @return string The attribute array converted to a properly-escaped
-     * string.
+     * @return string The escapted attribute string.
      * 
      */
     public function __invoke($raw)
@@ -123,6 +153,15 @@ class AttrEscaper extends AbstractEscaper
         return $this->replaceDefined($chr);
     }
 
+    /**
+     * 
+     * Is a character undefined in HTML?
+     * 
+     * @param string $chr The character to test.
+     * 
+     * @return bool
+     * 
+     */
     protected function charIsUndefined($chr)
     {
         $ord = ord($chr);
@@ -130,9 +169,18 @@ class AttrEscaper extends AbstractEscaper
               || ($ord >= 0x7f && $ord <= 0x9f);
     }
 
+    /**
+     * 
+     * Replace a character defined in HTML.
+     * 
+     * @param string $chr The character to replace.
+     * 
+     * @return string
+     * 
+     */
     protected function replaceDefined($chr)
     {
-        $ord = $this->getUtf16Ord($chr);
+        $ord = $this->getHexOrd($chr);
 
         // is this a mapped entity?
         if (isset($this->entities[$ord])) {
@@ -147,14 +195,4 @@ class AttrEscaper extends AbstractEscaper
         // everything else
         return sprintf('&#x%02X;', $ord);
     }
-
-    protected function getUtf16Ord($chr)
-    {
-        // convert UTF-8 to UTF-16BE
-        if (strlen($chr) > 1) {
-            $chr = $this->convert($chr, 'UTF-8', 'UTF-16BE');
-        }
-        return hexdec(bin2hex($chr));
-    }
-
 }

@@ -1,4 +1,13 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Html
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Html\Escaper;
 
 /**
@@ -24,6 +33,15 @@ class HtmlEscaper extends AbstractEscaper
      */
     protected $flags = ENT_QUOTES;
 
+    /**
+     * 
+     * Constructor.
+     * 
+     * @param int $flags Flags for `htmlspecialchars()`.
+     * 
+     * @param string $encoding The encoding to use for raw and escaped strings.
+     * 
+     */
     public function __construct($flags = null, $encoding = null)
     {
         if ($flags !== null) {
@@ -37,6 +55,15 @@ class HtmlEscaper extends AbstractEscaper
         parent::__construct($encoding);
     }
 
+    /**
+     * 
+     * Escapes an HTML value.
+     * 
+     * @param mixed $raw The value to be escaped.
+     * 
+     * @return mixed The escaped value.
+     * 
+     */
     public function __invoke($raw)
     {
         // pre-empt escaping
@@ -56,7 +83,7 @@ class HtmlEscaper extends AbstractEscaper
      * 
      * Sets the flags for `htmlspecialchars()`.
      * 
-     * @param mixed $flags The flags.
+     * @param int $flags The flags for `htmlspecialchars()`.
      * 
      * @return null
      * 
@@ -70,12 +97,11 @@ class HtmlEscaper extends AbstractEscaper
      * 
      * Gets the flags for `htmlspecialchars()`.
      * 
-     * @return mixed
+     * @return int
      * 
      */
     public function getFlags()
     {
         return $this->flags;
     }
-    
 }

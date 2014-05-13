@@ -1,7 +1,14 @@
 <?php
+/**
+ * 
+ * This file is part of Aura for PHP.
+ * 
+ * @package Aura.Html
+ * 
+ * @license http://opensource.org/licenses/bsd-license.php BSD
+ * 
+ */
 namespace Aura\Html\Escaper;
-
-use Aura\Html\Exeption;
 
 /**
  * 
@@ -17,6 +24,15 @@ use Aura\Html\Exeption;
  */
 class JsEscaper extends AbstractEscaper
 {
+    /**
+     * 
+     * Escapes a JavaScript value.
+     * 
+     * @param mixed $raw The value to be escaped.
+     * 
+     * @return mixed The escaped value.
+     * 
+     */
     public function __invoke($raw)
     {
         return $this->replace($raw, '/[^a-z0-9,\._]/iSu');
@@ -24,7 +40,7 @@ class JsEscaper extends AbstractEscaper
 
     /**
      * 
-     * Replaces unsafe JavaScript attribute characters.
+     * Replaces unsafe JavaScript characters.
      *
      * @param array $matches Matches from preg_replace_callback().
      * 
@@ -46,5 +62,4 @@ class JsEscaper extends AbstractEscaper
             return sprintf('\\u%04s', strtoupper(bin2hex($chr)));
         }
     }
-
 }
