@@ -64,6 +64,8 @@ abstract class AbstractChecked extends AbstractInput
      * 
      * Returns the HTML for a "label" (if any) wrapped around the input.
      * 
+     * @param string $input The input to be wrapped by the label.
+     * 
      * @return string
      * 
      */

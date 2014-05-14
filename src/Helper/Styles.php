@@ -12,22 +12,22 @@ namespace Aura\Html\Helper;
 
 /**
  * 
- * Helper for a stack of <link rel="stylesheet" ... /> tags.
+ * Helper for a series of <link rel="stylesheet" ... /> tags.
  * 
  * @package Aura.Html
  * 
  */
-class Styles extends AbstractStack
+class Styles extends AbstractSeries
 {
     /**
      * 
-     * Adds a <link rel="stylesheet" ... /> tag to the stack.
+     * Adds a <link rel="stylesheet" ... /> tag to the series.
      * 
      * @param string $href The source href for the stylesheet.
      * 
      * @param array $attr Additional attributes for the <link> tag.
      * 
-     * @param int $pos The stylesheet position in the stack.
+     * @param int $pos The stylesheet position in the series.
      * 
      * @return self
      * 
@@ -36,7 +36,7 @@ class Styles extends AbstractStack
     {
         $attr = $this->fixAttr($href, $attr);
         $tag = $this->void('link', $attr);
-        $this->addToStack($pos, $tag);
+        $this->addElement($pos, $tag);
 
         return $this;
     }
@@ -63,12 +63,23 @@ class Styles extends AbstractStack
         $link = $this->void('link', $attr);
         $cond  = $this->escaper->html($cond);
         $tag  = "<!--[if $cond]>$link<![endif]-->";
-        $this->addToStack($pos, $tag);
+        $this->addElement($pos, $tag);
 
         return $this;
     }
 
-    protected function fixAttr($href, $attr)
+    /**
+     * 
+     * Fixes the attributes for the stylesheet.
+     * 
+     * @param string $href The source href for the stylesheet.
+     * 
+     * @param array $attr Additional attributes for the <link> tag.
+     * 
+     * @return array The fixed attributes.
+     * 
+     */
+    protected function fixAttr($href, array $attr = null)
     {
         $attr = (array) $attr;
         

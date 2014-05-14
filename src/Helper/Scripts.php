@@ -17,7 +17,7 @@ namespace Aura\Html\Helper;
  * @package Aura.Html
  * 
  */
-class Scripts extends AbstractStack
+class Scripts extends AbstractSeries
 {
     /**
      * 
@@ -37,7 +37,7 @@ class Scripts extends AbstractStack
             'type' => 'text/javascript',
         ));
         $tag = "<script $attr></script>";
-        $this->addToStack($pos, $tag);
+        $this->addElement($pos, $tag);
 
         return $this;
     }
@@ -64,7 +64,7 @@ class Scripts extends AbstractStack
             'type' => 'text/javascript',
         ));
         $tag = "<!--[if $cond]><script $attr></script><![endif]-->";
-        $this->addToStack($pos, $tag);
+        $this->addElement($pos, $tag);
 
         return $this;
     }

@@ -91,7 +91,14 @@ abstract class AbstractInput extends AbstractHelper
      */
     abstract public function __toString();
     
-    protected function prep($spec)
+    /**
+     * 
+     * Prepares the properties on this helper.
+     * 
+     * @param array $spec The specification array.
+     * 
+     */
+    protected function prep(array $spec)
     {
         // base spec inputs
         $base = array(

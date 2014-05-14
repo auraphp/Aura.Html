@@ -98,7 +98,7 @@ class Escaper
      * 
      * Read-only property access; mostly for testing.
      * 
-     * @var string $key The property name.
+     * @param string $key The property name.
      * 
      * @return mixed
      * 

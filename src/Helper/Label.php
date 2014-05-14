@@ -20,12 +20,40 @@ namespace Aura\Html\Helper;
  */
 class Label extends AbstractHelper
 {
+    /**
+     * 
+     * Attributes for the label.
+     * 
+     * @var array
+     * 
+     */
     protected $attr;
 
+    /**
+     * 
+     * The label text goes before this raw HTML.
+     * 
+     * @var string
+     * 
+     */
     protected $before;
 
+    /**
+     * 
+     * The label text goes after this raw HTML.
+     * 
+     * @var string
+     * 
+     */
     protected $after;
 
+    /**
+     * 
+     * The label text.
+     * 
+     * @var string
+     * 
+     */
     protected $label;
 
     /**
@@ -36,21 +64,19 @@ class Label extends AbstractHelper
      * 
      * @param array $attr Additional attributes for the tag.
      *
-     * @param string $input An optional input to be wrapped by the label.
-     * 
      * @return self
      * 
      */
-    public function __invoke($label, $attr = array())
+    public function __invoke($label, array $attr = array())
     {
         $this->label = $label;
-        $this->attr = (array) $attr;
+        $this->attr = $attr;
         return $this;
     }
 
     /**
      * 
-     * Place the label text before raw HTML.
+     * Place the label text before this raw HTML.
      * 
      * @param string $before Place the label text before this raw HTML.
      * 
@@ -60,13 +86,12 @@ class Label extends AbstractHelper
     public function before($before)
     {
         $this->before = $before;
-        $this->after = null;
         return $this;
     }
 
     /**
      * 
-     * Place the label text after raw HTML.
+     * Place the label text after this raw HTML.
      * 
      * @param string $after Place the label text after this raw HTML.
      * 
@@ -75,7 +100,6 @@ class Label extends AbstractHelper
      */
     public function after($after)
     {
-        $this->before = null;
         $this->after = $after;
         return $this;
     }
@@ -91,15 +115,15 @@ class Label extends AbstractHelper
     {
         $attr = $this->escaper->attr($this->attr);
         $html = trim("<label $attr") . ">"
-              . $this->after
-              . $this->label
-              . $this->before
+              . $this->after // label goes after this html
+              . $this->escaper->html($this->label)
+              . $this->before // label goes before this html
               . "</label>";
 
         $this->attr = null;
         $this->label = null;
-        $this->html_before = null;
-        $this->html_after = null;
+        $this->before = null;
+        $this->after = null;
 
         return $html;
     }

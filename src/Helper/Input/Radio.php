@@ -39,6 +39,13 @@ class Radio extends AbstractChecked
         return $this->indent(0, $html);
     }
     
+    /**
+     * 
+     * Returns the HTML for multiple radios.
+     * 
+     * @return string
+     * 
+     */
     protected function multiple()
     {
         $html = '';

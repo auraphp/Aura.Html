@@ -56,7 +56,7 @@ class Title extends AbstractHelper
 
     /**
      * 
-     * Escapes and sets text as the <title> string
+     * Escapes and sets text as the <title> string.
      * 
      * @param string $text The title string.
      * 
@@ -71,16 +71,16 @@ class Title extends AbstractHelper
 
     /**
      * 
-     * Escapes and sets text as the <title> string
+     * Sets raw text as the <title> string.
      * 
-     * @param string $title The title string.
+     * @param string $text The title string.
      * 
      * @return self
      * 
      */
-    public function setRaw($title)
+    public function setRaw($text)
     {
-        $this->title = $title;
+        $this->title = $text;
         return $this;
     }
 
@@ -99,6 +99,15 @@ class Title extends AbstractHelper
         return $this;
     }
 
+    /**
+     * 
+     * Appends raw text to the end of the current <title> string.
+     * 
+     * @param string $text The string to be appended to the title.
+     * 
+     * @return self
+     * 
+     */
     public function appendRaw($text)
     {
         $this->title .= $text;
@@ -120,6 +129,15 @@ class Title extends AbstractHelper
         return $this;
     }
 
+    /**
+     * 
+     * Prepends raw text to the beginning of the current <title> string.
+     * 
+     * @param string $text The string to be appended to the title.
+     * 
+     * @return self
+     * 
+     */
     public function prependRaw($text)
     {
         $this->title = $text . $this->title;

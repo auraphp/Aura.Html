@@ -46,8 +46,25 @@ class Select extends AbstractInput
      */
     protected $optlevel = 1;
     
+    /**
+     * 
+     * The value of the 'placeholder' pseudo-attribute.
+     * 
+     * @var mixed
+     * 
+     */
     protected $placeholder;
     
+    /**
+     * 
+     * If a $spec is passed, returns a full select tag with options; if no $spec
+     * is passed, returns this helper object itself.
+     * 
+     * @param array $spec A select input specfication.
+     * 
+     * @return string|self
+     * 
+     */
     public function __invoke(array $spec = null)
     {
         // if there's no spec, return $this so we can build manually
@@ -87,50 +104,6 @@ class Select extends AbstractInput
         return $html;
     }
     
-    protected function buildSelect()
-    {
-        $append_brackets = isset($this->attribs['multiple'])
-                        && $this->attribs['multiple']
-                        && isset($this->attribs['name'])
-                        && substr($this->attribs['name'], -2) != '[]';
-        
-        // if this is a multiple select, the name needs to end in "[]"
-        if ($append_brackets) {
-            $this->attribs['name'] .= '[]';
-        }
-
-        $attr = $this->escaper->attr($this->attribs);
-        return $this->indent(0, "<select {$attr}>");
-    }
-
-    protected function buildOptionPlaceholder()
-    {
-        if ($this->placeholder) {
-            return $this->buildOption(array(
-                '',
-                $this->placeholder,
-                array('disabled' => true),
-            ));
-        }
-    }
-
-    protected function buildOptions()
-    {
-        $html = '';
-
-        foreach ($this->stack as $info) {
-            $method = array_shift($info);
-            $html .= $this->$method($info);
-        }
-        
-        // close any optgroup tags
-        if ($this->optgroup) {
-            $html .= $this->endOptgroup();
-        }
-
-        return $html;
-    }
-
     /**
      * 
      * Sets the HTML attributes for the select tag.
@@ -236,6 +209,71 @@ class Select extends AbstractInput
         return $this;
     }
     
+    /**
+     * 
+     * Builds the opening select tag.
+     * 
+     * @return string
+     * 
+     */
+    protected function buildSelect()
+    {
+        $append_brackets = isset($this->attribs['multiple'])
+                        && $this->attribs['multiple']
+                        && isset($this->attribs['name'])
+                        && substr($this->attribs['name'], -2) != '[]';
+        
+        // if this is a multiple select, the name needs to end in "[]"
+        if ($append_brackets) {
+            $this->attribs['name'] .= '[]';
+        }
+
+        $attr = $this->escaper->attr($this->attribs);
+        return $this->indent(0, "<select {$attr}>");
+    }
+
+    /**
+     * 
+     * Builds the 'placeholder' option (if any).
+     * 
+     * @return string
+     * 
+     */
+    protected function buildOptionPlaceholder()
+    {
+        if ($this->placeholder) {
+            return $this->buildOption(array(
+                '',
+                $this->placeholder,
+                array('disabled' => true),
+            ));
+        }
+    }
+
+    /**
+     * 
+     * Builds the collection of option tags.
+     * 
+     * @return string
+     * 
+     */
+    protected function buildOptions()
+    {
+        $html = '';
+
+        foreach ($this->stack as $info) {
+            $method = array_shift($info);
+            $html .= $this->$method($info);
+        }
+        
+        // close any optgroup tags
+        if ($this->optgroup) {
+            $html .= $this->endOptgroup();
+        }
+
+        return $html;
+    }
+
     /**
      * 
      * Builds the HTML for a single option.

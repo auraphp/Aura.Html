@@ -12,51 +12,27 @@ namespace Aura\Html\Helper;
 
 /**
  * 
- * Helper for a stack of <link ... /> tags.
+ * Helper for a series of <link ... /> tags.
  * 
  * @package Aura.Html
  * 
  */
-class Links extends AbstractHelper
+class Links extends AbstractSeries
 {
     /**
      * 
-     * The array of all links added to the helper.
-     * 
-     * @var array
-     * 
-     */
-    protected $links = array();
-
-    /**
-     * 
-     * Returns the helper so you can call methods on it.
-     * 
-     * @return self
-     * 
-     */
-    public function __invoke()
-    {
-        return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->indent(1, implode(PHP_EOL . $this->indent, $this->links));
-    }
-
-    /**
-     * 
-     * Adda a <link ... > tag to the stack.
+     * Adds a <link ... > tag to the series.
      * 
      * @param array $attr Attributes for the <link> tag.
      * 
+     * @param int $pos The link position in the series.
+     * 
      * @return self
      * 
      */
-    public function add(array $attr = array())
+    public function add(array $attr, $pos = 100)
     {
-        $this->links[] = $this->void('link', $attr);
+        $this->addElement($pos, $this->void('link', $attr));
         return $this;
     }
 }
