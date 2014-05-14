@@ -104,7 +104,7 @@ examples.
 
 One of the important but menial tasks with PHP-based template systems is that of escaping output properly. Escaping output is **absolutely necessary** from a security perspective. However, escaper functionality is often verbose, and can make the template code look cluttered.
 
-The _Escaper_ in this package comes with four static methods to reduce verbosity and clutter:  `a()`, `c()`, `j()`, and `h()`. These escape values for HTML attribute values, CSS values, JavaScript values, and HTML tag values, respectively.
+The _Escaper_ in this package comes with four static methods to reduce verbosity and clutter:  `h()`, `a()`, `c()`, `j()`, and. These escape values for HTML content values, unquoted HTML attribute values, CSS values, and JavaScript values, respectively.
 
 > N.b.: In Aura, we generally avoid static methods. However, we feel the tradeoff of less-cluttered templates makes it worth using static methods in this one case.
 
