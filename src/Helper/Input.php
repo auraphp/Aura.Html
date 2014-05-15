@@ -51,8 +51,12 @@ class Input
      * @return string
      * 
      */
-    public function __invoke(array $spec = array())
+    public function __invoke(array $spec = null)
     {
+        if ($spec === null) {
+            return $this;
+        }
+
         if (empty($spec['type'])) {
             $spec['type'] = 'text';
         }
