@@ -62,6 +62,7 @@ class HelperLocatorFactory
             'a'                 => function () use ($escaper) { return new Helper\Anchor($escaper); },
             'anchor'            => function () use ($escaper) { return new Helper\Anchor($escaper); },
             'base'              => function () use ($escaper) { return new Helper\Base($escaper); },
+            'escape'            => function () use ($escaper) { return $escaper; },
             'form'              => function () use ($escaper) { return new Helper\Form($escaper); },
             'img'               => function () use ($escaper) { return new Helper\Img($escaper); },
             'image'             => function () use ($escaper) { return new Helper\Img($escaper); },

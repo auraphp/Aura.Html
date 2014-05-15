@@ -110,6 +110,18 @@ class Escaper
 
     /**
      * 
+     * Allows this object to be used as a helper.
+     * 
+     * @return self
+     * 
+     */
+    public function __invoke()
+    {
+        return $this;
+    }
+
+    /**
+     * 
      * Sets the encoding on all escapers.
      * 
      * @param string $encoding The encoding to use.

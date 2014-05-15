@@ -25,6 +25,7 @@ class Common extends Config
             'a'                 => $di->lazyNew('Aura\Html\Helper\Anchor'),
             'anchor'            => $di->lazyNew('Aura\Html\Helper\Anchor'),
             'base'              => $di->lazyNew('Aura\Html\Helper\Base'),
+            'escape'            => $di->lazyGet('html_escaper'),
             'form'              => $di->lazyNew('Aura\Html\Helper\Form'),
             'img'               => $di->lazyNew('Aura\Html\Helper\Img'),
             'image'             => $di->lazyNew('Aura\Html\Helper\Img'),
