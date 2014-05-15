@@ -27,7 +27,7 @@ class Label extends AbstractHelper
      * @var array
      * 
      */
-    protected $attr;
+    protected $attr = array();
 
     /**
      * 
@@ -67,10 +67,16 @@ class Label extends AbstractHelper
      * @return self
      * 
      */
-    public function __invoke($label, array $attr = array())
+    public function __invoke($label = null, array $attr = null)
     {
-        $this->label = $label;
-        $this->attr = $attr;
+        if ($label !== null) {
+            $this->label = $label;
+        }
+
+        if ($attr !== null) {
+            $this->attr = $attr;
+        }
+
         return $this;
     }
 
