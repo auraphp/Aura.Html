@@ -57,6 +57,15 @@ class Select extends AbstractInput
     
     /**
      * 
+     * Use strict equality when matching selected option values?
+     * 
+     * @var bool
+     * 
+     */
+    protected $strict = false;
+
+    /**
+     * 
      * If a $spec is passed, returns a full select tag with options; if no $spec
      * is passed, returns this helper object itself.
      * 
@@ -99,6 +108,8 @@ class Select extends AbstractInput
         $this->stack = array();
         $this->optgroup = false;
         $this->optlevel = 1;
+        $this->placeholder = null;
+        $this->strict = false;
 
         // done!
         return $html;
@@ -114,10 +125,13 @@ class Select extends AbstractInput
     public function attribs(array $attribs)
     {
         $this->attribs = $attribs;
-        $this->placeholder = null;
         if (isset($this->attribs['placeholder'])) {
-            $this->placeholder = $this->attribs['placeholder'];
+            $this->placeholder($this->attribs['placeholder']);
             unset($this->attribs['placeholder']);
+        }
+        if (isset($this->attribs['strict'])) {
+            $this->strict($this->attribs['strict']);
+            unset($this->attribs['strict']);
         }
         return $this;
     }
@@ -211,6 +225,38 @@ class Select extends AbstractInput
     
     /**
      * 
+     * Sets the text for a placeholder option.
+     * 
+     * @param string $placeholder The placeholder text.
+     * 
+     * @return self
+     * 
+     */
+    public function placeholder($placeholder)
+    {
+        $this->placeholder = $placeholder;
+        return $this;
+    }
+
+    /**
+     * 
+     * Use strict equality when matching selected option values?
+     * 
+     * @param bool $strict True for strict equality, false for loose equality.
+     * 
+     * @return self
+     * 
+     * @see buildOption()
+     * 
+     */
+    public function strict($strict = true)
+    {
+        $this->strict = (bool) $strict;
+        return $this;
+    }
+
+    /**
+     * 
      * Builds the opening select tag.
      * 
      * @return string
@@ -290,9 +336,8 @@ class Select extends AbstractInput
         // set the option value into the attribs
         $attribs['value'] = $value;
         
-        // is the value selected? use strict checking to avoid confusion
-        // between 0/'0'/false/null/''.
-        if (in_array($value, $this->value, true)) {
+        // is the value selected?
+        if (in_array($value, $this->value, $this->strict)) {
             $attribs['selected'] = true;
         } else {
             unset($attribs['selected']);

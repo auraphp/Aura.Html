@@ -14,6 +14,7 @@ class SelectTest extends AbstractHelperTest
             'value' => 'value5',
             'attribs' => array(
                 'placeholder' => 'Please pick one',
+                'strict' => true,
             ),
             'options' => array(
                 'value1' => 'First Label',
