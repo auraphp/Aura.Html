@@ -57,7 +57,7 @@ class InputTest extends AbstractHelperTest
         );
         
         $input = $this->helper;
-        $actual = $input($spec);
+        $actual = $input($spec)->__toString();
         $expect = '<label><input type="checkbox" name="field_name" value="foo" checked /> DOOM</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -77,7 +77,7 @@ class InputTest extends AbstractHelperTest
         );
         
         $input = $this->helper;
-        $actual = $input($spec);
+        $actual = $input($spec)->__toString();
         $expect = '<input type="text" name="field_name" value="foo" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -96,7 +96,7 @@ class InputTest extends AbstractHelperTest
         );
         
         $input = $this->helper;
-        $actual = $input($spec);
+        $actual = $input($spec)->__toString();
         $expect = '<input type="text" name="field_name" value="foo" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -118,7 +118,7 @@ class InputTest extends AbstractHelperTest
         );
         
         $input = $this->helper;
-        $actual = $input($spec);
+        $actual = $input($spec)->__toString();
         $expect = '<label><input type="radio" name="field_name" foo="bar" value="opt1" /> Label 1</label>' . PHP_EOL
                 . '<label><input type="radio" name="field_name" foo="bar" value="opt2" checked /> Label 2</label>' . PHP_EOL
                 . '<label><input type="radio" name="field_name" foo="bar" value="opt3" /> Label 3</label>' . PHP_EOL;
@@ -155,7 +155,7 @@ class InputTest extends AbstractHelperTest
         );
         
         $input = $this->helper;
-        $actual = $input($spec);
+        $actual = $input($spec)->__toString();
         
         $expect = '<select name="field_name" foo="bar">' . PHP_EOL
                 . '    <option value="opt1">Label 1</option>' . PHP_EOL
@@ -193,7 +193,7 @@ class InputTest extends AbstractHelperTest
         );
         
         $input = $this->helper;
-        $actual = $input($spec);
+        $actual = $input($spec)->__toString();
         $expect = '<textarea name="field_name" foo="bar">Text in the textarea.</textarea>';
         $this->assertSame($expect, $actual);
     }

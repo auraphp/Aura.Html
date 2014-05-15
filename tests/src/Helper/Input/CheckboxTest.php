@@ -14,7 +14,7 @@ class CheckboxTest extends AbstractHelperTest
                 'value' => 'yes',
                 'label' => 'This is yes',
             )
-        ));
+        ))->__toString();
         $expect = '<label><input type="checkbox" value="yes" checked /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -28,7 +28,7 @@ class CheckboxTest extends AbstractHelperTest
                 'value' => 'yes',
                 'label' => 'This is yes',
             )
-        ));
+        ))->__toString();
         $expect = '<label><input type="checkbox" value="yes" /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -44,7 +44,7 @@ class CheckboxTest extends AbstractHelperTest
                 'value_unchecked' => 'no',
                 'label' => 'This is yes',
             ),
-        ));
+        ))->__toString();
         $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" checked /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -60,7 +60,7 @@ class CheckboxTest extends AbstractHelperTest
                 'value' => 'yes',
                 'value_unchecked' => 'no',
             ),
-        ));
+        ))->__toString();
         $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -73,7 +73,7 @@ class CheckboxTest extends AbstractHelperTest
             'attribs' => array(
                 'value' => 'yes',
             ),
-        ));
+        ))->__toString();
         $expect = '<input type="checkbox" value="yes" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
@@ -88,7 +88,7 @@ class CheckboxTest extends AbstractHelperTest
                 'value' => 'yes',
                 'label' => 'This is yes'
             )
-        ));
+        ))->__toString();
         
         $expect = '<label for="input-yes"><input id="input-yes" type="checkbox" value="yes" /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);

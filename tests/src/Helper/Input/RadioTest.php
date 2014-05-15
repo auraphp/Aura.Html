@@ -22,7 +22,7 @@ class RadioTest extends AbstractHelperTest
             'value' => 'baz',
             'attribs' => $attribs,
             'options' => $options,
-        ));
+        ))->__toString();
         
         $expect = '<label><input type="radio" name="field" value="foo" /> bar</label>' . PHP_EOL
                 . '<label><input type="radio" name="field" value="baz" checked /> dib</label>' . PHP_EOL

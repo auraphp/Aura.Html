@@ -22,7 +22,7 @@ class SelectTest extends AbstractHelperTest
                 'value5' => 'Fifth Label',
                 'value3' => 'Third Label',
             ),
-        ));
+        ))->__toString();
         
         $expect = '<select name="foo[bar]">' . PHP_EOL
                 . '    <option disabled value="">Please pick one</option>' . PHP_EOL

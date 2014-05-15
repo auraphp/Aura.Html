@@ -76,17 +76,14 @@ class Select extends AbstractInput
      */
     public function __invoke(array $spec = null)
     {
-        // if there's no spec, return $this so we can build manually
-        if ($spec === null) {
-            return $this;
+        if ($spec !== null) {
+            $this->prep($spec);
+            $this->attribs($this->attribs);
+            $this->options($this->options);
+            $this->selected($this->value);
         }
-        
-        // prep the spec, set up the stack, and deliver the html
-        $this->prep($spec);
-        $this->attribs($this->attribs);
-        $this->options($this->options);
-        $this->selected($this->value);
-        return $this->__toString();
+
+        return $this;
     }
     
     /**

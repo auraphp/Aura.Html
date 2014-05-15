@@ -21,7 +21,7 @@ class GenericTest extends AbstractHelperTest
                 // should get overridden
                 'value' => 'baz',
             ),
-        ));
+        ))->__toString();
         
         $expect = "<input type=\"$type\" name=\"foo\" value=\"bar\" />" . PHP_EOL;
         $this->assertSame($expect, $actual);
@@ -34,7 +34,7 @@ class GenericTest extends AbstractHelperTest
                 // should remain in place
                 'value' => 'baz',
             ),
-        ));
+        ))->__toString();
         
         $expect = "<input type=\"$type\" name=\"foo\" value=\"baz\" />" . PHP_EOL;
         $this->assertSame($expect, $actual);
