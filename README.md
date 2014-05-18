@@ -102,11 +102,95 @@ examples.
 
 ### Escaping
 
-One of the important but menial tasks with PHP-based template systems is that of escaping output properly. Escaping output is **absolutely necessary** from a security perspective. However, escaper functionality is often verbose, and can make the template code look cluttered.
+One of the important but menial tasks with PHP-based template systems is that of escaping output properly. Escaping output is **absolutely necessary** from a security perspective. This package comes with an `escape()` helper that has four escaping methods:
 
-The _Escaper_ in this package comes with four static methods to reduce verbosity and clutter:  `h()`, `a()`, `c()`, `j()`, and. These escape values for HTML content values, unquoted HTML attribute values, CSS values, and JavaScript values, respectively.
+- `$this->escape()->html('foo')` to escape HTML values
+- `$this->escape()->attr('foo')` to escape unquoted HTML attributes
+- `$this->escape()->css('foo')` to escape CSS values
+- `$this->escape()->js('foo')` to escape JavaScript values
 
-> N.b.: In Aura, we generally avoid static methods. However, we feel the tradeoff of less-cluttered templates makes it worth using static methods in this one case.
+Here is a contrived example of the various `escape()` helper methods:
+
+```html+php
+<head>
+
+    <style>
+        body: {
+            color: <?= $this->escape()->css($theme->color) ?>;
+            font-size: <?= $this->escape()->css($theme->font_size) ?>;
+        }
+    </style>
+
+    <script language="javascript">
+        var foo = "<?= $this->escape()->js($js->foo); ?>";
+    </script>
+
+</head>
+
+<body>
+
+    <h1><?= $this->escape()->html($blog->title) ?></h1>
+
+    <p class="byline">
+        by <?= $this->escape()->html($blog->author) ?>
+        on <?= $this->escape()->html($blog->date) ?>
+    </p>
+
+    <div id="<?php $this->escape()->attr($blog->div_id) ?>">
+        <?= $blog->raw_html ?>
+    </div>
+
+</body>
+```
+
+Unfortunately, escaper functionality is verbose, and can make the template code look cluttered.  There are two ways to mitigate this.  
+
+The first is to assign the `escape()` helper to a variable, and then invoke it as a callable. Here is a contrived example of the various escaping methods as callables:
+
+
+```html+php
+<?php
+// assign the escaper helper properties to callable variables
+$h = $this->escape()->html;
+$a = $this->escape()->attr;
+$c = $this->escape()->css;
+$j = $this->escape()->js;
+?>
+
+<head>
+
+    <style>
+        body: {
+            color: <?= $c($theme->color) ?>;
+            font-size: <?= $c($theme->font_size) ?>;
+        }
+    </style>
+
+    <script language="javascript">
+        var foo = "<?= $j($js->foo); ?>";
+    </script>
+
+</head>
+
+<body>
+
+    <h1><?= $h($blog->title) ?></h1>
+
+    <p class="byline">
+        by <?= $h($blog->author) ?>
+        on <?= $h($blog->date) ?>
+    </p>
+
+    <div id="<?php $a($blog->div_id) ?>">
+        <?= $blog->raw_html ?>
+    </div>
+
+</body>
+```
+
+Alternatively, the _Escaper_ class used by the `escape()` helper comes with four static methods to reduce verbosity and clutter:  `h()`, `a()`, `c()`, `j()`, and. These escape values for HTML content values, unquoted HTML attribute values, CSS values, and JavaScript values, respectively.
+
+> N.b.: In Aura, we generally avoid static methods. However, we feel the tradeoff of less-cluttered templates can be worth using static methods in this one case.
 
 To call the static _Escaper_ methods in a PHP-based template, `use` the _Escaper_ as a short alias name, then call the static methods on the alias.  (If you did not instantiate a _HelperLocatorFactory_, you will need to prepare the static escaper methods by calling `Escaper::setStatic(new Escaper)`.)
 
