@@ -13,18 +13,18 @@ class MetasTest extends AbstractHelperTest
         $actual = $metas();
         $this->assertInstanceOf('Aura\Html\Helper\Metas', $actual);
     }
-    
+
     public function testAddAndGet_noPosition()
     {
         $metas = $this->helper;
-        
+
         $metas->addHttp('Location', '/redirect/to/here');
         $metas->addName('foo', 'bar');
-        
+
         $actual = $metas->__toString();
         $expect = '    <meta http-equiv="Location" content="/redirect/to/here" />' . PHP_EOL
                 . '    <meta name="foo" content="bar" />' . PHP_EOL;
-        
+
         $this->assertSame($expect, $actual);
     }
 
@@ -34,11 +34,11 @@ class MetasTest extends AbstractHelperTest
         $metas->setIndent('  ');
         $metas->addHttp('Location', '/redirect/to/here');
         $metas->addName('foo', 'bar');
-        
+
         $actual = $metas->__toString();
         $expect = '  <meta http-equiv="Location" content="/redirect/to/here" />' . PHP_EOL
                 . '  <meta name="foo" content="bar" />' . PHP_EOL;
-        
+
         $this->assertSame($expect, $actual);
     }
 }

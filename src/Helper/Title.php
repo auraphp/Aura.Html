@@ -1,39 +1,39 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Html\Helper;
 
 /**
- * 
+ *
  * Helper to generate a `<title>` tag.
- *  
+ *
  * @package Aura.Html
- * 
+ *
  */
 class Title extends AbstractHelper
 {
     /**
-     * 
+     *
      * The title value.
-     * 
+     *
      * @var string
-     * 
+     *
      */
     protected $title = null;
 
     /**
-     * 
+     *
      * Returns the helper so you can call methods on it.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function __invoke()
     {
@@ -41,11 +41,11 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Returns the current title string.
-     * 
+     *
      * @return string The current title string.
-     * 
+     *
      */
     public function __toString()
     {
@@ -55,13 +55,13 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Escapes and sets text as the <title> string.
-     * 
+     *
      * @param string $text The title string.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function set($text)
     {
@@ -70,13 +70,13 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Sets raw text as the <title> string.
-     * 
+     *
      * @param string $text The title string.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function setRaw($text)
     {
@@ -85,13 +85,13 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Escapes and appends text to the end of the current <title> string.
-     * 
+     *
      * @param string $text The string to be appended to the title.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function append($text)
     {
@@ -100,13 +100,13 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Appends raw text to the end of the current <title> string.
-     * 
+     *
      * @param string $text The string to be appended to the title.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function appendRaw($text)
     {
@@ -115,13 +115,13 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Escapes and prepends text to the beginning of the current <title> string.
-     * 
+     *
      * @param string $text The string to be appended to the title.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function prepend($text)
     {
@@ -130,13 +130,13 @@ class Title extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Prepends raw text to the beginning of the current <title> string.
-     * 
+     *
      * @param string $text The string to be appended to the title.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function prependRaw($text)
     {

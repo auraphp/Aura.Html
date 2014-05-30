@@ -1,50 +1,50 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Html\Helper\Input;
 
 /**
- * 
+ *
  * An HTML radio input.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  */
 class Radio extends AbstractChecked
 {
     /**
-     * 
+     *
      * Returns the HTML for the input.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     public function __toString()
     {
         $this->attribs['type'] = 'radio';
-        
+
         if ($this->options) {
             return $this->multiple();
         }
-        
+
         $input = $this->htmlChecked();
         $html  = $this->htmlLabel($input);
         return $this->indent(0, $html);
     }
-    
+
     /**
-     * 
+     *
      * Returns the HTML for multiple radios.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     protected function multiple()
     {

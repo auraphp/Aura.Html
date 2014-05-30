@@ -6,7 +6,7 @@ class UlTest extends AbstractHelperTest
     public function testEscaped()
     {
         $ul = $this->helper;
-        
+
         $actual = $ul(array('id' => 'test'))
                 ->items(array(
                     '>foo',
@@ -15,16 +15,16 @@ class UlTest extends AbstractHelperTest
                     '>dib' => array('class' => 'callout')
                 ))
                 ->__toString();
-        
+
         $expect = '<ul id="test">' . PHP_EOL
                 . '    <li>&gt;foo</li>' . PHP_EOL
                 . '    <li>&gt;bar</li>' . PHP_EOL
                 . '    <li>&gt;baz</li>' . PHP_EOL
                 . '    <li class="callout">&gt;dib</li>' . PHP_EOL
                 . '</ul>' . PHP_EOL;
-        
+
         $this->assertSame($expect, $actual);
-        
+
         $actual = $ul()->__toString();
         $expect = null;
         $this->assertSame($expect, $actual);
@@ -33,7 +33,7 @@ class UlTest extends AbstractHelperTest
     public function testRaw()
     {
         $ul = $this->helper;
-        
+
         $actual = $ul()
                 ->rawItems(array(
                     '>foo',
@@ -42,16 +42,16 @@ class UlTest extends AbstractHelperTest
                     '>dib' => array('class' => 'callout')
                 ))
                 ->__toString();
-        
+
         $expect = '<ul>' . PHP_EOL
                 . '    <li>>foo</li>' . PHP_EOL
                 . '    <li>>bar</li>' . PHP_EOL
                 . '    <li>>baz</li>' . PHP_EOL
                 . '    <li class="callout">>dib</li>' . PHP_EOL
                 . '</ul>' . PHP_EOL;
-        
+
         $this->assertSame($expect, $actual);
-        
+
         $actual = $ul()->__toString();
         $expect = null;
         $this->assertSame($expect, $actual);

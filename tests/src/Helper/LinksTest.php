@@ -9,11 +9,11 @@ class LinksTest extends AbstractHelperTest
         $actual = $links();
         $this->assertInstanceOf('Aura\Html\Helper\Links', $actual);
     }
-    
+
     public function testAddAndGet()
     {
         $links = $this->helper;
-        
+
         $data = (object) array(
             'prev' => array(
                 'rel' => 'prev',
@@ -24,14 +24,14 @@ class LinksTest extends AbstractHelperTest
                 'href' => '/path/to/next',
             )
         );
-        
+
         $links->add($data->prev);
         $links->add($data->next);
-        
+
         $actual = $links->__toString();
         $expect = '    <link rel="prev" href="/path/to/prev" />' . PHP_EOL
                 . '    <link rel="next" href="/path/to/next" />' . PHP_EOL;
-       
+
         $this->assertSame($expect, $actual);
     }
 
@@ -39,7 +39,7 @@ class LinksTest extends AbstractHelperTest
     {
         $links = $this->helper;
         $links->setIndent('  ');
-        
+
         $data = (object) array(
             'prev' => array(
                 'rel' => 'prev',
@@ -50,21 +50,21 @@ class LinksTest extends AbstractHelperTest
                 'href' => '/path/to/next',
             )
         );
-        
+
         $links->add($data->prev);
         $links->add($data->next);
-        
+
         $actual = $links->__toString();
         $expect = '  <link rel="prev" href="/path/to/prev" />' . PHP_EOL
                 . '  <link rel="next" href="/path/to/next" />' . PHP_EOL;
-       
+
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testAddAndGetChaining()
     {
         $links = $this->helper;
-        
+
         $data = (object) array(
             'prev' => array(
                 'rel' => 'prev',
@@ -75,13 +75,13 @@ class LinksTest extends AbstractHelperTest
                 'href' => '/path/to/next',
             )
         );
-        
+
         $actual = $links->add($data->prev)
             ->add($data->next)
             ->__toString();
         $expect = '    <link rel="prev" href="/path/to/prev" />' . PHP_EOL
                 . '    <link rel="next" href="/path/to/next" />' . PHP_EOL;
-       
+
         $this->assertSame($expect, $actual);
     }
 }

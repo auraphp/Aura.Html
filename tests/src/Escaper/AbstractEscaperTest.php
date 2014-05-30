@@ -2,19 +2,19 @@
 namespace Aura\Html\Escaper;
 
 /**
- * 
+ *
  * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
  * for conceptual integrity with the rest of Aura.  Some portions copyright
  * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * under the New BSD License (http://framework.zend.com/license/new-bsd). 
- * 
+ * under the New BSD License (http://framework.zend.com/license/new-bsd).
+ *
  */
 abstract class AbstractEscaperTest extends \PHPUnit_Framework_TestCase
 {
     protected $escaper;
 
     abstract public function test__construct();
-    
+
     public function testSetAndGetEncoding()
     {
         $this->escaper->setEncoding('macroman');
@@ -23,7 +23,7 @@ abstract class AbstractEscaperTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Aura\Html\Exception\EncodingNotSupported');
         $this->escaper->setEncoding('invalid-encoding');
     }
-    
+
     public function testToUtf8()
     {
         $this->escaper->setEncoding('iso8859-1');
@@ -61,13 +61,13 @@ abstract class AbstractEscaperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * 
+     *
      * Convert a Unicode Codepoint to a literal UTF-8 character.
      *
      * @param int Unicode codepoint in hex notation
-     * 
+     *
      * @return string UTF-8 literal string
-     * 
+     *
      */
     protected function codepointToUtf8($codepoint)
     {

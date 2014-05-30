@@ -1,12 +1,12 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Html;
 
@@ -14,31 +14,31 @@ use Aura\Html\Helper;
 use Aura\Html\Escaper;
 
 /**
- * 
+ *
  * Factory to create a HelperLocator object with all helpers.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  */
 class HelperLocatorFactory
 {
     /**
-     * 
+     *
      * The Escaper for the helpers.
-     * 
+     *
      * @var Escaper
-     * 
+     *
      */
     protected $escaper;
 
     /**
-     * 
+     *
      * Constructor.
-     * 
+     *
      * @param string $encoding The encoding for the escapers.
-     * 
+     *
      * @param int $flags The `htmlspecialchars()` flags for the escapers.
-     * 
+     *
      */
     public function __construct($encoding = null, $flags = null)
     {
@@ -48,11 +48,11 @@ class HelperLocatorFactory
     }
 
     /**
-     * 
+     *
      * Returns a new HelperLocator with all helpers.
-     * 
+     *
      * @return HelperLocator
-     * 
+     *
      */
     public function newInstance()
     {
@@ -81,11 +81,11 @@ class HelperLocatorFactory
     }
 
     /**
-     * 
+     *
      * Returns a new Input helper locator.
-     * 
+     *
      * @return Helper\Input
-     * 
+     *
      */
     public function newInputInstance()
     {

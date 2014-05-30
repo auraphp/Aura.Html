@@ -18,7 +18,7 @@ class CheckboxTest extends AbstractHelperTest
         $expect = '<label><input type="checkbox" value="yes" checked /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testUnchecked()
     {
         $checkbox = $this->helper;
@@ -32,7 +32,7 @@ class CheckboxTest extends AbstractHelperTest
         $expect = '<label><input type="checkbox" value="yes" /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testCheckedWithUncheckedValue()
     {
         $checkbox = $this->helper;
@@ -48,7 +48,7 @@ class CheckboxTest extends AbstractHelperTest
         $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" checked /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testUncheckedWithUncheckedValue()
     {
         $checkbox = $this->helper;
@@ -64,7 +64,7 @@ class CheckboxTest extends AbstractHelperTest
         $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testNoLabel()
     {
         $checkbox = $this->helper;
@@ -77,7 +77,7 @@ class CheckboxTest extends AbstractHelperTest
         $expect = '<input type="checkbox" value="yes" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testLabelWithFor()
     {
         $checkbox = $this->helper;
@@ -89,7 +89,7 @@ class CheckboxTest extends AbstractHelperTest
                 'label' => 'This is yes'
             )
         ))->__toString();
-        
+
         $expect = '<label for="input-yes"><input id="input-yes" type="checkbox" value="yes" /> This is yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }

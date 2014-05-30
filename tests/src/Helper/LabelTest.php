@@ -10,7 +10,7 @@ class LabelTest extends AbstractHelperTest
         $expect = '<label>Foo</label>';
         $this->assertSame($actual, $expect);
     }
-    
+
     public function testWithAttr()
     {
         $label = $this->helper;
@@ -22,7 +22,7 @@ class LabelTest extends AbstractHelperTest
         $expect = '<label for="bar" class="dim">Foo</label>';
         $this->assertSame($actual, $expect);
     }
-    
+
     public function testBefore()
     {
         $label = $this->helper;
@@ -36,7 +36,7 @@ class LabelTest extends AbstractHelperTest
                 . '</label>';
         $this->assertSame($actual, $expect);
     }
-    
+
     public function testAfter()
     {
         $label = $this->helper;

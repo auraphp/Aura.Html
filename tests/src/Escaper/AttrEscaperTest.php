@@ -2,12 +2,12 @@
 namespace Aura\Html\Escaper;
 
 /**
- * 
+ *
  * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
  * for conceptual integrity with the rest of Aura.  Some portions copyright
  * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * under the New BSD License (http://framework.zend.com/license/new-bsd). 
- * 
+ * under the New BSD License (http://framework.zend.com/license/new-bsd).
+ *
  */
 class AttrEscaperTest extends AbstractEscaperTest
 {
@@ -21,7 +21,7 @@ class AttrEscaperTest extends AbstractEscaperTest
         $escaper = new AttrEscaper(new HtmlEscaper, 'iso8859-1');
         $this->assertSame('iso8859-1', $escaper->getEncoding());
     }
-    
+
     public function test__invoke()
     {
         $chars = array(

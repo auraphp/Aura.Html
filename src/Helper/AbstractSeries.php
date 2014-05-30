@@ -1,39 +1,39 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Html\Helper;
 
 /**
- * 
+ *
  * Abstract helper for an element series with positional ordering.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  */
 abstract class AbstractSeries extends AbstractHelper
 {
     /**
-     * 
+     *
      * The array of all elements in the series, by position.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $elements = array();
 
     /**
-     * 
+     *
      * Returns the helper so you can call methods on it.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function __invoke()
     {
@@ -41,11 +41,11 @@ abstract class AbstractSeries extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Returns the elements in order as a single string and resets the elements.
-     * 
+     *
      * @return string The elements as a string.
-     * 
+     *
      */
     public function __toString()
     {
@@ -61,15 +61,15 @@ abstract class AbstractSeries extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Adds an element at a certain position.
-     * 
+     *
      * @param int $pos The element position.
-     * 
+     *
      * @param string $element The element itself.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     protected function addElement($pos, $element)
     {

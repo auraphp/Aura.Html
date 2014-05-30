@@ -9,13 +9,13 @@ class AnchorTest extends AbstractHelperTest
             'href' => '/path/to/script.php',
             'text' => 'this',
         );
-        
+
         $anchor = $this->helper;
         $actual = $anchor($data->href, $data->text);
         $expect = '<a href="/path/to/script.php">this</a>';
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testWithAttribs()
     {
         $data = (object) array(
@@ -23,7 +23,7 @@ class AnchorTest extends AbstractHelperTest
             'text' => 'foo',
             'attribs' => array('bar' => 'baz', 'href' => 'skip-me'),
         );
-        
+
         $anchor = $this->helper;
         $actual = $anchor($data->href, $data->text, $data->attribs);
         $expect = '<a href="/path/to/script.php" bar="baz">foo</a>';

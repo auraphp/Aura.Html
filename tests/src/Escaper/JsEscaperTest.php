@@ -2,12 +2,12 @@
 namespace Aura\Html\Escaper;
 
 /**
- * 
+ *
  * Based almost entirely on Zend\Escaper by Padraic Brady et al. and modified
  * for conceptual integrity with the rest of Aura.  Some portions copyright
  * (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * under the New BSD License (http://framework.zend.com/license/new-bsd). 
- * 
+ * under the New BSD License (http://framework.zend.com/license/new-bsd).
+ *
  */
 class JsEscaperTest extends AbstractEscaperTest
 {
@@ -21,12 +21,12 @@ class JsEscaperTest extends AbstractEscaperTest
         $escaper = new JsEscaper('iso8859-1');
         $this->assertSame('iso8859-1', $escaper->getEncoding());
     }
-    
+
     public function test__invoke()
     {
         $this->assertEquals('', $this->escaper->__invoke(''));
         $this->assertEquals('123', $this->escaper->__invoke('123'));
-        
+
         $chars = array(
             /* HTML special chars - escape without exception to hex */
             '<'     => '\\x3C',

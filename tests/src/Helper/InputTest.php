@@ -11,7 +11,7 @@ class InputTest extends AbstractHelperTest
     {
         $escaper_factory = new EscaperFactory;
         $escaper = $escaper_factory->newInstance();
-        
+
         return new Input(new HelperLocator(array(
             'button'            => function () use ($escaper) { return new Input\Generic($escaper); },
             'checkbox'          => function () use ($escaper) { return new Input\Checkbox($escaper); },
@@ -40,7 +40,7 @@ class InputTest extends AbstractHelperTest
             'week'              => function () use ($escaper) { return new Input\Generic($escaper); },
         )));
     }
-    
+
     public function testCheckbox()
     {
         $spec = array(
@@ -55,13 +55,13 @@ class InputTest extends AbstractHelperTest
             ),
             'value' => 'foo',
         );
-        
+
         $input = $this->helper;
         $actual = $input($spec)->__toString();
         $expect = '<label><input type="checkbox" name="field_name" value="foo" checked /> DOOM</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testInput()
     {
         $spec = array(
@@ -75,13 +75,13 @@ class InputTest extends AbstractHelperTest
             'options' => array(),
             'value' => 'foo',
         );
-        
+
         $input = $this->helper;
         $actual = $input($spec)->__toString();
         $expect = '<input type="text" name="field_name" value="foo" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testNoType()
     {
         $spec = array(
@@ -94,13 +94,13 @@ class InputTest extends AbstractHelperTest
             'options' => array(),
             'value' => 'foo',
         );
-        
+
         $input = $this->helper;
         $actual = $input($spec)->__toString();
         $expect = '<input type="text" name="field_name" value="foo" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testRadio()
     {
         $spec = array(
@@ -116,7 +116,7 @@ class InputTest extends AbstractHelperTest
             'options' => array('opt1' => 'Label 1', 'opt2' => 'Label 2', 'opt3' => 'Label 3'),
             'value' => 'opt2',
         );
-        
+
         $input = $this->helper;
         $actual = $input($spec)->__toString();
         $expect = '<label><input type="radio" name="field_name" foo="bar" value="opt1" /> Label 1</label>' . PHP_EOL
@@ -124,7 +124,7 @@ class InputTest extends AbstractHelperTest
                 . '<label><input type="radio" name="field_name" foo="bar" value="opt3" /> Label 3</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testSelect()
     {
         $spec = array(
@@ -153,10 +153,10 @@ class InputTest extends AbstractHelperTest
             ),
             'value' => 'opt5',
         );
-        
+
         $input = $this->helper;
         $actual = $input($spec)->__toString();
-        
+
         $expect = '<select name="field_name" foo="bar">' . PHP_EOL
                 . '    <option value="opt1">Label 1</option>' . PHP_EOL
                 . '    <option value="opt2">Label 2</option>' . PHP_EOL
@@ -172,10 +172,10 @@ class InputTest extends AbstractHelperTest
                 . '        <option value="opt9">Label 9</option>' . PHP_EOL
                 . '    </optgroup>' . PHP_EOL
                 . '</select>' . PHP_EOL;
-        
+
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testTextarea()
     {
         $spec = array(
@@ -191,7 +191,7 @@ class InputTest extends AbstractHelperTest
             'options' => array('baz' => 'dib'),
             'value' => 'Text in the textarea.',
         );
-        
+
         $input = $this->helper;
         $actual = $input($spec)->__toString();
         $expect = '<textarea name="field_name" foo="bar">Text in the textarea.</textarea>';

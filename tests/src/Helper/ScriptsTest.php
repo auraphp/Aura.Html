@@ -13,7 +13,7 @@ class ScriptsTest extends AbstractHelperTest
         $actual = $scripts();
         $this->assertInstanceOf('Aura\Html\Helper\Scripts', $actual);
     }
-    
+
     public function test()
     {
         $scripts = $this->helper;
@@ -23,14 +23,14 @@ class ScriptsTest extends AbstractHelperTest
         $scripts->add('/js/first.js', 50);
         $scripts->add('/js/middle.js');
         $scripts->addCond('ie6', '/js/ie6.js');
-        
+
         $actual = $scripts->__toString();
-        
+
         $expect = '    <script src="/js/first.js" type="text/javascript"></script>' . PHP_EOL
                 . '    <script src="/js/middle.js" type="text/javascript"></script>' . PHP_EOL
                 . '    <!--[if ie6]><script src="/js/ie6.js" type="text/javascript"></script><![endif]-->' . PHP_EOL
                 . '    <script src="/js/last.js" type="text/javascript"></script>' . PHP_EOL;
-        
+
         $this->assertSame($expect, $actual);
     }
 }

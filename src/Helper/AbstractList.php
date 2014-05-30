@@ -1,59 +1,59 @@
 <?php
 /**
- * 
+ *
  * This file is part of Aura for PHP.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Html\Helper;
 
 /**
- * 
+ *
  * Helper for `<ul>` tag with `<li>` items.
- * 
+ *
  * @package Aura.Html
- * 
+ *
  */
 abstract class AbstractList extends AbstractHelper
 {
     /**
-     * 
+     *
      * Attributes for the ul tag.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $attr = array();
-    
+
     /**
-     * 
+     *
      * The stack of HTML elements.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $stack = array();
-    
+
     /**
-     * 
+     *
      * The generated HTML.
-     * 
+     *
      * @var string
-     * 
+     *
      */
     protected $html = '';
-    
+
     /**
-     * 
+     *
      * Initializes and returns the UL object.
-     * 
+     *
      * @param array $attr Attributes for the UL tag.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function __invoke(array $attr = null)
     {
@@ -62,13 +62,13 @@ abstract class AbstractList extends AbstractHelper
         }
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * Generates and returns the HTML for the list.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     public function __toString()
     {
@@ -77,7 +77,7 @@ abstract class AbstractList extends AbstractHelper
         if (! $this->stack) {
             return;
         }
-        
+
         $tag = $this->getTag();
         $attr = $this->escaper->attr($this->attr);
         if ($attr) {
@@ -85,11 +85,11 @@ abstract class AbstractList extends AbstractHelper
         } else {
             $this->html = $this->indent(0, "<{$tag}>");
         }
-        
+
         foreach ($this->stack as $item) {
             $this->buildItem($item);
         }
-        
+
         $html = $this->html . $this->indent(0, "</{$tag}>");
 
         $this->attr  = array();
@@ -98,17 +98,17 @@ abstract class AbstractList extends AbstractHelper
 
         return $html;
     }
-    
+
     /**
-     * 
+     *
      * Adds a single item to the stack; the text will be escaped.
-     * 
+     *
      * @param string $text The list item text.
-     * 
+     *
      * @param array $attr Attributes for the list item tag.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function item($text, array $attr = array())
     {
@@ -118,16 +118,16 @@ abstract class AbstractList extends AbstractHelper
         );
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * Adds multiple items to the stack; the text will be escaped.
-     * 
+     *
      * @param array $items An array of text, or text => attribs, for the list
      * items.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function items(array $items)
     {
@@ -140,17 +140,17 @@ abstract class AbstractList extends AbstractHelper
         }
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * Adds a single raw item to the stack; the text will **not** be escaped.
-     * 
+     *
      * @param string $text The list item text.
-     * 
+     *
      * @param array $attr Attributes for the list item tag.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function rawItem($text, array $attr = array())
     {
@@ -162,14 +162,14 @@ abstract class AbstractList extends AbstractHelper
     }
 
     /**
-     * 
+     *
      * Adds multiple raw items to the stack; the text will **not** be escaped.
-     * 
+     *
      * @param array $items An array of text, or text => attribs, for the list
      * items.
-     * 
+     *
      * @return self
-     * 
+     *
      */
     public function rawItems(array $items)
     {
@@ -182,15 +182,15 @@ abstract class AbstractList extends AbstractHelper
         }
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * Builds the HTML for a single list item.
-     * 
+     *
      * @param string $item The item HTML.
-     * 
+     *
      * @return null
-     * 
+     *
      */
     protected function buildItem($item)
     {
@@ -201,13 +201,13 @@ abstract class AbstractList extends AbstractHelper
             $this->html .= $this->indent(1, "<li>$html</li>");
         }
     }
-    
+
     /**
-     * 
+     *
      * Returns the tag name.
-     * 
+     *
      * @return string
-     * 
+     *
      */
     abstract protected function getTag();
 }

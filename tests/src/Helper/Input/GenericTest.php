@@ -11,7 +11,7 @@ class GenericTest extends AbstractHelperTest
     public function test($type)
     {
         $input = $this->helper;
-        
+
         // value should override attribute
         $actual = $input(array(
             'type'    => $type,
@@ -22,10 +22,10 @@ class GenericTest extends AbstractHelperTest
                 'value' => 'baz',
             ),
         ))->__toString();
-        
+
         $expect = "<input type=\"$type\" name=\"foo\" value=\"bar\" />" . PHP_EOL;
         $this->assertSame($expect, $actual);
-        
+
         // no value given so attribute should still be there
         $actual = $input(array(
             'type'     => $type,
@@ -35,11 +35,11 @@ class GenericTest extends AbstractHelperTest
                 'value' => 'baz',
             ),
         ))->__toString();
-        
+
         $expect = "<input type=\"$type\" name=\"foo\" value=\"baz\" />" . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
-    
+
     public function provideTypes()
     {
         return array(
