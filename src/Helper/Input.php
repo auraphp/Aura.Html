@@ -19,29 +19,8 @@ use Aura\Html\HelperLocator;
  * @package Aura.Html
  *
  */
-class Input
+class Input extends HelperLocator
 {
-    /**
-     *
-     * A locator for input elements.
-     *
-     * @var HelperLocator
-     *
-     */
-    protected $helper_locator;
-
-    /**
-     *
-     * Constructor.
-     *
-     * @param HelperLocator $helper_locator A locator for input helpers.
-     *
-     */
-    public function __construct(HelperLocator $helper_locator)
-    {
-        $this->helper_locator = $helper_locator;
-    }
-
     /**
      *
      * Given an input specification, returns the HTML for the input.
@@ -65,7 +44,7 @@ class Input
             $spec['attribs']['name'] = $spec['name'];
         }
 
-        $input = $this->helper_locator->get($spec['type']);
+        $input = $this->get($spec['type']);
         return $input($spec);
     }
 }

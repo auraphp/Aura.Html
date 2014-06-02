@@ -90,7 +90,7 @@ class HelperLocatorFactory
     public function newInputInstance()
     {
         $escaper = $this->escaper;
-        return new Helper\Input(new HelperLocator(array(
+        return new Helper\Input(array(
             'button'            => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
             'checkbox'          => function () use ($escaper) { return new Helper\Input\Checkbox($escaper); },
             'color'             => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
@@ -116,6 +116,6 @@ class HelperLocatorFactory
             'time'              => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
             'url'               => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
             'week'              => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
-        )));
+        ));
     }
 }

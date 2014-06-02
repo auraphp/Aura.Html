@@ -12,7 +12,7 @@ class InputTest extends AbstractHelperTest
         $escaper_factory = new EscaperFactory;
         $escaper = $escaper_factory->newInstance();
 
-        return new Input(new HelperLocator(array(
+        return new Input(array(
             'button'            => function () use ($escaper) { return new Input\Generic($escaper); },
             'checkbox'          => function () use ($escaper) { return new Input\Checkbox($escaper); },
             'color'             => function () use ($escaper) { return new Input\Generic($escaper); },
@@ -38,7 +38,7 @@ class InputTest extends AbstractHelperTest
             'time'              => function () use ($escaper) { return new Input\Generic($escaper); },
             'url'               => function () use ($escaper) { return new Input\Generic($escaper); },
             'week'              => function () use ($escaper) { return new Input\Generic($escaper); },
-        )));
+        ));
     }
 
     public function testCheckbox()
