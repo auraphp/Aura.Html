@@ -10,7 +10,7 @@
  */
 namespace Aura\Html\Helper;
 
-use Aura\Html\HelperLocator;
+use Aura\Html\AbstractHelperLocator;
 
 /**
  *
@@ -37,7 +37,7 @@ class Input
      * @param HelperLocator $helper_locator A locator for input helpers.
      *
      */
-    public function __construct(HelperLocator $helper_locator)
+    public function __construct(AbstractHelperLocator $helper_locator)
     {
         $this->helper_locator = $helper_locator;
     }
