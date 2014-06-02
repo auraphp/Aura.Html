@@ -8,7 +8,9 @@
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
  */
-namespace Aura\Html;
+namespace Aura\Html\Helper\Input;
+
+use Aura\Html\AbstractHelperLocator;
 
 /**
  *
@@ -17,6 +19,6 @@ namespace Aura\Html;
  * @package Aura.Html
  *
  */
-class HelperLocator extends AbstractHelperLocator
+class InputHelperLocator extends AbstractHelperLocator
 {    
 }

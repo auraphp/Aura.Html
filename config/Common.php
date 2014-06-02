@@ -50,7 +50,7 @@ class Common extends Config
         /**
          * Aura\Html\Helper\Input
          */
-        $di->params['Aura\Html\Helper\Input']['map'] = array(
+        $di->params['Aura\Html\Helper\Input\InputHelperLocator']['map'] = array(
             'button'            => $di->lazyNew('Aura\Html\Helper\Input\Generic'),
             'checkbox'          => $di->lazyNew('Aura\Html\Helper\Input\Checkbox'),
             'color'             => $di->lazyNew('Aura\Html\Helper\Input\Generic'),
@@ -77,6 +77,8 @@ class Common extends Config
             'url'               => $di->lazyNew('Aura\Html\Helper\Input\Generic'),
             'week'              => $di->lazyNew('Aura\Html\Helper\Input\Generic'),
         );
+
+        $di->params['Aura\Html\Helper\Input']['helper_locator'] = $di->lazyNew('Aura\Html\Helper\Input\InputHelperLocator');
     }
 
     public function modify(Container $di)
