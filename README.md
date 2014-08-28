@@ -14,8 +14,8 @@ Alternatively, [download a release](https://github.com/auraphp/Aura.Html/release
 
 ### Quality
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/quality-score.png?s=7341b8a60405c1fb59deeca9635df0c22dca641e)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
-[![Code Coverage](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/coverage.png?s=5c77a6d485b19a62edcd6da96ee9ed484c753cd0)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/quality-score.png?b=develop-2)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
+[![Code Coverage](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/coverage.png?b=develop-2)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
 [![Build Status](https://travis-ci.org/auraphp/Aura.Html.png?branch=develop-2)](https://travis-ci.org/auraphp/Aura.Html)
 
 To run the [PHPUnit][] tests at the command line, go to the _tests_ directory and issue `phpunit`.
@@ -87,7 +87,7 @@ $helper->set('obfuscate', function () {
 });
 ?>
 ```
-    
+
 The service name in the _HelperLocator_ doubles as a method name. This means we can call the helper via `$this->obfuscate()`:
 
 ```php
@@ -143,7 +143,7 @@ Here is a contrived example of the various `escape()` helper methods:
 </body>
 ```
 
-Unfortunately, escaper functionality is verbose, and can make the template code look cluttered.  There are two ways to mitigate this.  
+Unfortunately, escaper functionality is verbose, and can make the template code look cluttered.  There are two ways to mitigate this.
 
 The first is to assign the `escape()` helper to a variable, and then invoke it as a callable. Here is a contrived example of the various escaping methods as callables:
 
