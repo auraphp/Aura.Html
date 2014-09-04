@@ -16,8 +16,9 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function test()
     {
-        $this->assertGet('html_escaper', 'Aura\Html\Escaper');
-        $this->assertGet('html_helper', 'Aura\Html\HelperLocator');
+        $this->assertGet('aura/html:escaper', 'Aura\Html\Escaper');
+        $this->assertGet('aura/html:helper', 'Aura\Html\HelperLocator');
+        $this->assertNewInstance('Aura\Html\Escaper');
         $this->assertNewInstance('Aura\Html\HelperLocator');
         $this->assertNewInstance('Aura\Html\Helper\Input');
     }
