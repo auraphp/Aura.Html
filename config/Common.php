@@ -3,7 +3,7 @@ namespace Aura\Html\_Config;
 
 use Aura\Di\Config;
 use Aura\Di\Container;
-use Aura\Html\Functions\EscaperFunctions;
+use Aura\Html\Escaper;
 
 class Common extends Config
 {
@@ -81,6 +81,6 @@ class Common extends Config
 
     public function modify(Container $di)
     {
-        \Aura\Html\Escaper::setStatic($di->get('html_escaper'));
+        Escaper::setStatic($di->get('html_escaper'));
     }
 }
