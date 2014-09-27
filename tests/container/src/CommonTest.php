@@ -1,25 +1,31 @@
 <?php
 namespace Aura\Html\_Config;
 
-use Aura\Di\ContainerAssertionsTrait;
+use Aura\Di\_Config\AbstractContainerTest;
 
-class CommonTest extends \PHPUnit_Framework_TestCase
+class CommonTest extends AbstractContainerTest
 {
-    use ContainerAssertionsTrait;
-
-    public function setUp()
+    protected function getConfigClasses()
     {
-        $this->setUpContainer(array(
+        return array(
             'Aura\Html\_Config\Common',
-        ));
+        );
     }
 
-    public function test()
+    public function provideGet()
     {
-        $this->assertGet('aura/html:escaper', 'Aura\Html\Escaper');
-        $this->assertGet('aura/html:helper', 'Aura\Html\HelperLocator');
-        $this->assertNewInstance('Aura\Html\Escaper');
-        $this->assertNewInstance('Aura\Html\HelperLocator');
-        $this->assertNewInstance('Aura\Html\Helper\Input');
+        return array(
+            array('aura/html:escaper', 'Aura\Html\Escaper'),
+            array('aura/html:helper', 'Aura\Html\HelperLocator'),
+        );
+    }
+
+    public function provideNewInstance()
+    {
+        return array(
+            array('Aura\Html\Escaper'),
+            array('Aura\Html\HelperLocator'),
+            array('Aura\Html\Helper\Input'),
+        );
     }
 }
