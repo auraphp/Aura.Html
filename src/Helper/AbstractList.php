@@ -75,7 +75,7 @@ abstract class AbstractList extends AbstractHelper
         // if there is no stack of items, **do not** return an empty
         // <ul></ul> tag set.
         if (! $this->stack) {
-            return;
+            return '';
         }
 
         $tag = $this->getTag();
