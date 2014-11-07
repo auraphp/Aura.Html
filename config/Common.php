@@ -26,6 +26,13 @@ class Common extends Config
         );
 
         /**
+         * Aura\Html\Escaper\AttrEscaper
+         */
+        $di->params['Aura\Html\Escaper\AttrEscaper'] = array(
+            'html' => $di->lazyNew('Aura\Html\Escaper\HtmlEscaper'),
+        );
+
+        /**
          * Aura\Html\HelperLocator
          */
         $di->params['Aura\Html\HelperLocator']['map'] = array(
