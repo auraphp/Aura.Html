@@ -26,7 +26,7 @@ class UlTest extends AbstractHelperTest
         $this->assertSame($expect, $actual);
 
         $actual = $ul()->__toString();
-        $expect = null;
+        $expect = '';
         $this->assertSame($expect, $actual);
     }
 
@@ -53,7 +53,7 @@ class UlTest extends AbstractHelperTest
         $this->assertSame($expect, $actual);
 
         $actual = $ul()->__toString();
-        $expect = null;
+        $expect = '';
         $this->assertSame($expect, $actual);
     }
 }
