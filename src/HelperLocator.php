@@ -92,8 +92,6 @@ class HelperLocator
      *
      * @param string $name The helper name.
      *
-     * @param callable $callable A callable to create the helper object.
-     *
      * @return bool
      *
      */
