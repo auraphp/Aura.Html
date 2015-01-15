@@ -35,7 +35,7 @@ class AnchorTest extends AbstractHelperTest
         $data = (object) array(
             'href' => '/path/to/script.php',
             'text' => '<span>HTML</span>',
-            'attribs' => [],
+            'attribs' => array(),
             'escape' => false
         );
 
