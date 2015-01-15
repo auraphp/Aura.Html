@@ -25,7 +25,7 @@ class Anchor extends AbstractHelper
      *
      * @param string $href The anchor href specification.
      *
-     * @param string $text The text for the anchor.
+     * @param string $text The text for the anchor (optional. default: $href).
      *
      * @param array $attr Attributes for the anchor.
      *
@@ -34,8 +34,12 @@ class Anchor extends AbstractHelper
      * @return string
      *
      */
-    public function __invoke($href, $text, array $attr = array(), $escape = true)
+    public function __invoke($href, $text = null, array $attr = array(), $escape = true)
     {
+        if (null === $text) {
+            $text = $href;
+        }
+
         $base = array(
             'href' => $href,
         );

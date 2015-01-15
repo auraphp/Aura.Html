@@ -44,4 +44,16 @@ class AnchorTest extends AbstractHelperTest
         $expect = '<a href="/path/to/script.php"><span>HTML</span></a>';
         $this->assertSame($expect, $actual);
     }
+
+    public function testHrefOnly()
+    {
+        $data = (object) array(
+            'href' => '/path/to/script.php',
+        );
+
+        $anchor = $this->helper;
+        $actual = $anchor($data->href);
+        $expect = '<a href="/path/to/script.php">/path/to/script.php</a>';
+        $this->assertSame($expect, $actual);
+    }
 }
