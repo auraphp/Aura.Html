@@ -29,4 +29,19 @@ class AnchorTest extends AbstractHelperTest
         $expect = '<a href="/path/to/script.php" bar="baz">foo</a>';
         $this->assertSame($expect, $actual);
     }
+
+    public function testRawText()
+    {
+        $data = (object) array(
+            'href' => '/path/to/script.php',
+            'text' => '<span>HTML</span>',
+            'attribs' => [],
+            'escape' => false
+        );
+
+        $anchor = $this->helper;
+        $actual = $anchor($data->href, $data->text, $data->attribs, $data->escape);
+        $expect = '<a href="/path/to/script.php"><span>HTML</span></a>';
+        $this->assertSame($expect, $actual);
+    }
 }

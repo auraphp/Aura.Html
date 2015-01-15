@@ -29,10 +29,12 @@ class Anchor extends AbstractHelper
      *
      * @param array $attr Attributes for the anchor.
      *
+     * @param boolean $escape Set to false for raw text (default:true)
+     *
      * @return string
      *
      */
-    public function __invoke($href, $text, array $attr = array())
+    public function __invoke($href, $text, array $attr = array(), $escape = true)
     {
         $base = array(
             'href' => $href,
@@ -41,7 +43,11 @@ class Anchor extends AbstractHelper
         unset($attr['href']);
 
         $attr = $this->escaper->attr(array_merge($base, $attr));
-        $text = $this->escaper->html($text);
+
+        if ($escape) {
+            $text = $this->escaper->html($text);
+        }
+
         return "<a $attr>$text</a>";
     }
 }
