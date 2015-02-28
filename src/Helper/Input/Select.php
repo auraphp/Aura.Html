@@ -3,8 +3,6 @@
  *
  * This file is part of Aura for PHP.
  *
- * @package Aura.Html
- *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
  */
@@ -115,6 +113,8 @@ class Select extends AbstractInput
     /**
      *
      * Sets the HTML attributes for the select tag.
+     *
+     * @param array $attribs The attribues to set.
      *
      * @return string
      *
