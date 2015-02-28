@@ -2,7 +2,7 @@
 
 Use a helper by calling it as a method on the _HelperLocator_. The available helpers are:
 
-- [a](#a) / anchor
+- [a](#a) / anchor / aRaw / anchorRaw
 - [base](#base)
 - [img](#img) / image
 - [label](#label)
@@ -31,6 +31,23 @@ echo $helper->a(
 ?>
 <a href="http://auraphp.com" id="aura-link">Aura Project</a>
 ```
+
+Use `$helper->anchor()` as an alias for `$helper->a()`. All output will be escaped properly.
+
+To output the anchor text without escaped, use `$helper->aRaw()` or `$helper->anchorRaw()`.
+
+```html+php
+<?php
+echo $helper->a(
+    'http://auraphp.com',       // (string) href
+    '<em>Aura Project</em>',    // (string) text (WILL NOT be escaped)
+    array('id' => 'aura-link')  // (array) optional attributes
+);
+?>
+<a href="http://auraphp.com" id="aura-link"><em>Aura Project</em></a>
+```
+
+(The href and attributes will still be escaped properly.)
 
 ## base
 
@@ -93,7 +110,7 @@ echo $helper->label(' (Foo)')
 <label><input type="text" name="foo" value="" /> (Foo)</label>
 ```
 
-## links 
+## links
 
 Helper for a set of generic `<link>` tags. Build a set of links with `add()` then output them all at once.
 
@@ -132,7 +149,7 @@ echo $helper->links()
 <link rel="prev" href="/path/to/prev" />
 <link ref="next" href="/path/to/next" />
 
-## metas 
+## metas
 
 Helper for a set of `<meta>` tags. Build a set of metas with `add*()` then output them all at once.
 
@@ -204,7 +221,7 @@ $helper->ol()->rawItem(
 // add several raw items not to be escaped
 $helper->ol()->rawItems(array(         // (array) the raw items to add
     '<a href="/prev">Prev</a>',     // the item text, no item attributes
-    '<a href="/next">Next</a>',     
+    '<a href="/next">Next</a>',
     '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
 ));
 
@@ -288,7 +305,7 @@ $helper->ul()->rawItem(
 // add several raw items not to be escaped
 $helper->ul()->rawItems(array(      // (array) the raw items to add
     '<a href="/prev">Prev</a>',     // the item text, no item attributes
-    '<a href="/next">Next</a>',     
+    '<a href="/next">Next</a>',
     '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
 ));
 
@@ -379,7 +396,7 @@ $helper->title()->append(' > Suf2');
 // prepend the title
 $helper->title()->prepend('Pre1 > ');
 $helper->title()->prepend('Pre2 > ');
-        
+
 echo $helper->title();
 ?>
 <title>Pre2 &gt; Pre1 &gt; This &amp; That &gt; Suf1 &gt; Suf2</title>
@@ -397,8 +414,8 @@ $helper->title()->append(' > Suf2');
 // prepend the title
 $helper->title()->prepend('Pre1 > ');
 $helper->title()->prepend('Pre2 > ');
-        
+
 echo $helper->title();
 ?>
 <title>Pre2 > Pre1 > This & That > Suf1 > Suf2</title>
-``` 
+```
