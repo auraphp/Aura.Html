@@ -38,7 +38,7 @@ To output the anchor text without escaped, use `$helper->aRaw()` or `$helper->an
 
 ```html+php
 <?php
-echo $helper->a(
+echo $helper->anchorRaw(
     'http://auraphp.com',       // (string) href
     '<em>Aura Project</em>',    // (string) text (WILL NOT be escaped)
     array('id' => 'aura-link')  // (array) optional attributes
