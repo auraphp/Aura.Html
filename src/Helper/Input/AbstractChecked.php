@@ -40,7 +40,13 @@ abstract class AbstractChecked extends AbstractInput
         return $this->void('input', $this->attribs);
     }
 
-    // extract and retain the 'label' pseudo-attribute
+    /**
+     *
+     * Extracts and retains the "label" pseudo-attribute.
+     *
+     * @return null
+     *
+     */
     protected function setLabel()
     {
         $this->label = null;
@@ -52,6 +58,13 @@ abstract class AbstractChecked extends AbstractInput
         unset($this->attribs['label']);
     }
 
+    /**
+     *
+     * Sets the "checked" attribute appropriately.
+     *
+     * @return null
+     *
+     */
     protected function setChecked()
     {
         // by default, the input is unchecked
