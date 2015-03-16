@@ -11,11 +11,18 @@ namespace Aura\Html;
  */
 class EscaperTest extends \PHPUnit_Framework_TestCase
 {
+    protected $escaper;
+
     public function setUp()
     {
         $escaper_factory = new EscaperFactory;
         $this->escaper = $escaper_factory->newInstance();
         Escaper::setStatic($this->escaper);
+    }
+
+    public function test__invoke()
+    {
+        $this->assertSame($this->escaper, $this->escaper->__invoke());
     }
 
     public function testGetStatic()
