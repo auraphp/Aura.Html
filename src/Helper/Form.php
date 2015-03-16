@@ -19,11 +19,9 @@ class Form extends AbstractHelper
 {
     /**
      *
-     * Returns any kind of tag with attributes.
+     * Helper to generate an opening form tag.
      *
-     * @param string $tag The tag to generate.
-     *
-     * @param array $attr Attributes for the tag.
+     * @param array $attr Attributes for the form tag.
      *
      * @return string
      *
