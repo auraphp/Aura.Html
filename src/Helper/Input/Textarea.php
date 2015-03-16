@@ -27,6 +27,7 @@ class Textarea extends AbstractInput
     public function __toString()
     {
         $attribs = $this->escaper->attr($this->attribs);
-        return "<textarea {$attribs}>{$this->value}</textarea>";
+        $value = $this->escaper->html($this->value);
+        return "<textarea {$attribs}>{$value}</textarea>" . PHP_EOL;
     }
 }
