@@ -65,13 +65,13 @@ class Label extends AbstractHelper
      * @return self
      *
      */
-    public function __invoke($label = null, array $attr = null)
+    public function __invoke($label = null, array $attr = array())
     {
         if ($label !== null) {
             $this->label = $label;
         }
 
-        if ($attr !== null) {
+        if ($attr !== array) {
             $this->attr = $attr;
         }
 
@@ -124,7 +124,7 @@ class Label extends AbstractHelper
               . $this->before // label goes before this html
               . "</label>";
 
-        $this->attr = null;
+        $this->attr = array();
         $this->label = null;
         $this->before = null;
         $this->after = null;
