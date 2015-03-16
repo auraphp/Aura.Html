@@ -57,12 +57,7 @@ abstract class AbstractChecked extends AbstractInput
         // by default, the input is unchecked
         $this->attribs['checked'] = false;
 
-        // is the input checked? make sure there's a value to compare to, and
-        // use strict equality so that there is no confusion between
-        // 0/'0'/false/null/''.
-        $checked = isset($this->attribs['value'])
-                && $this->value === $this->attribs['value'];
-        if ($checked) {
+        if ($this->value !== null) {
             $this->attribs['checked'] = true;
         }
     }
