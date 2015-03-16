@@ -11,10 +11,10 @@ class TextareaTest extends AbstractHelperTest
 
         $actual = $textarea(array(
             'name' => 'field',
-            'value' => "the quick brown fox",
+            'value' => "the quick & brown fox",
         ))->__toString();
 
-        $expect = '<textarea name="field">the quick brown fox</textarea>';
+        $expect = '<textarea name="field">the quick &amp; brown fox</textarea>';
 
         $this->assertSame($expect, $actual);
     }

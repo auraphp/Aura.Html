@@ -20,7 +20,7 @@ class SelectTest extends AbstractHelperTest
                 'value1' => 'First Label',
                 'value2' => 'Second Label',
                 'value5' => 'Fifth Label',
-                'value3' => 'Third Label',
+                'value3' => 'Th&rd Label',
             ),
         ))->__toString();
 
@@ -29,7 +29,7 @@ class SelectTest extends AbstractHelperTest
                 . '    <option value="value1">First Label</option>' . PHP_EOL
                 . '    <option value="value2">Second Label</option>' . PHP_EOL
                 . '    <option value="value5" selected>Fifth Label</option>' . PHP_EOL
-                . '    <option value="value3">Third Label</option>' . PHP_EOL
+                . '    <option value="value3">Th&amp;rd Label</option>' . PHP_EOL
                 . '</select>' . PHP_EOL;
 
         $this->assertSame($expect, $actual);
@@ -52,7 +52,7 @@ class SelectTest extends AbstractHelperTest
             ->optgroup('Group B')
             ->options(array(
                'value5' => 'Fifth Label',
-               'value3' => 'Third Label',
+               'value3' => 'Th&rd Label',
             ))
             ->option(
                'counting',
@@ -69,7 +69,7 @@ class SelectTest extends AbstractHelperTest
                 . '    </optgroup>' . PHP_EOL
                 . '    <optgroup label="Group B">' . PHP_EOL
                 . '        <option value="value5">Fifth Label</option>' . PHP_EOL
-                . '        <option value="value3" selected>Third Label</option>' . PHP_EOL
+                . '        <option value="value3" selected>Th&amp;rd Label</option>' . PHP_EOL
                 . '        <option disabled value="counting">Three sir!</option>' . PHP_EOL
                 . '    </optgroup>' . PHP_EOL
                 . '</select>' . PHP_EOL;
