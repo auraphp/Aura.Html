@@ -1,11 +1,9 @@
-- FIX: Return empty string instead of null in AbstractList::__toString
+This release has SECURITY FIXES.  All users are encouraged to upgrade immediately.
 
-- DOC: Branch alias 2.1 for the service config has been changed
+- SEC: The AbstractChecked helper, which is the parent for Radio and Checkbox, now HTML-escapes the label. Previously, no escaping was applied.
 
-- DOC: Fix typo in AttrEscaper::__invoke() doc comment
+- SEC: The Textarea helper now HTML-escapes the value. Previously, no escaping was applied.
 
-- DOC: Fix typo in HelperLocator::has() doc comment
+- SEC: The Select helper now HTML-escapes each option label. Previously, no escaping was applied.
 
-- ADD: Add Helper/AnchorRaw for anchors w/ unescaped text; adds the helper, the factory to the locator, and the test.
-
-- DOC: Various fixes to soothe PHPDocumentor.
+- FIX: The attributes for the Label helper now default to `array()` instead of `null`.
