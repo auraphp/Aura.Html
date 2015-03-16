@@ -35,13 +35,25 @@ abstract class AbstractChecked extends AbstractInput
      */
     protected function htmlChecked()
     {
-        // extract and retain the 'label' pseudo-attribute
+        $this->setLabel();
+        $this->setChecked();
+        return $this->void('input', $this->attribs);
+    }
+
+    // extract and retain the 'label' pseudo-attribute
+    protected function setLabel()
+    {
         $this->label = null;
-        if (isset($this->attribs['label'])) {
-            $this->label = $this->attribs['label'];
-            unset($this->attribs['label']);
+        if (! isset($this->attribs['label'])) {
+            return;
         }
 
+        $this->label = $this->attribs['label'];
+        unset($this->attribs['label']);
+    }
+
+    protected function setChecked()
+    {
         // by default, the input is unchecked
         $this->attribs['checked'] = false;
 
@@ -53,9 +65,6 @@ abstract class AbstractChecked extends AbstractInput
         if ($checked) {
             $this->attribs['checked'] = true;
         }
-
-        // build the HTML for the input
-        return $this->void('input', $this->attribs);
     }
 
     /**
@@ -73,11 +82,13 @@ abstract class AbstractChecked extends AbstractInput
             return $input;
         }
 
+        $label = $this->escaper->html($this->label);
+
         if (isset($this->attribs['id'])) {
             $attribs = $this->escaper->attr(array('for' => $this->attribs['id']));
-            return "<label {$attribs}>{$input} {$this->label}</label>";
-        } else {
-            return "<label>{$input} {$this->label}</label>";
+            return "<label {$attribs}>{$input} {$label}</label>";
         }
+
+        return "<label>{$input} {$label}</label>";
     }
 }

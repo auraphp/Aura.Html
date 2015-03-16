@@ -12,10 +12,10 @@ class CheckboxTest extends AbstractHelperTest
             'value' => 'yes',
             'attribs' => array(
                 'value' => 'yes',
-                'label' => 'This is yes',
+                'label' => 'This & yes',
             )
         ))->__toString();
-        $expect = '<label><input type="checkbox" value="yes" checked /> This is yes</label>' . PHP_EOL;
+        $expect = '<label><input type="checkbox" value="yes" checked /> This &amp; yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -26,10 +26,10 @@ class CheckboxTest extends AbstractHelperTest
             'value' => 'no',
             'attribs' => array(
                 'value' => 'yes',
-                'label' => 'This is yes',
+                'label' => 'This & yes',
             )
         ))->__toString();
-        $expect = '<label><input type="checkbox" value="yes" /> This is yes</label>' . PHP_EOL;
+        $expect = '<label><input type="checkbox" value="yes" /> This &amp; yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -42,10 +42,10 @@ class CheckboxTest extends AbstractHelperTest
             'attribs' => array(
                 'value' => 'yes',
                 'value_unchecked' => 'no',
-                'label' => 'This is yes',
+                'label' => 'This & yes',
             ),
         ))->__toString();
-        $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" checked /> This is yes</label>' . PHP_EOL;
+        $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" checked /> This &amp; yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -56,12 +56,12 @@ class CheckboxTest extends AbstractHelperTest
             'value' => 'no',
             'name'=>'foo',
             'attribs' => array(
-                'label' => 'This is yes',
+                'label' => 'This & yes',
                 'value' => 'yes',
                 'value_unchecked' => 'no',
             ),
         ))->__toString();
-        $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" /> This is yes</label>' . PHP_EOL;
+        $expect = '<input type="hidden" value="no" name="foo" /><label><input type="checkbox" name="foo" value="yes" /> This &amp; yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -86,11 +86,11 @@ class CheckboxTest extends AbstractHelperTest
             'attribs' => array(
                 'id' => 'input-yes',
                 'value' => 'yes',
-                'label' => 'This is yes'
+                'label' => 'This & yes'
             )
         ))->__toString();
 
-        $expect = '<label for="input-yes"><input id="input-yes" type="checkbox" value="yes" /> This is yes</label>' . PHP_EOL;
+        $expect = '<label for="input-yes"><input id="input-yes" type="checkbox" value="yes" /> This &amp; yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 }

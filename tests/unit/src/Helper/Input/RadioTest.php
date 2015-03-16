@@ -12,7 +12,7 @@ class RadioTest extends AbstractHelperTest
         $options = array(
             'foo' => 'bar',
             'baz' => 'dib',
-            'zim' => 'gir',
+            'zim' => 'gir & doom',
         );
 
         $radio = $this->helper;
@@ -26,7 +26,7 @@ class RadioTest extends AbstractHelperTest
 
         $expect = '<label><input type="radio" name="field" value="foo" /> bar</label>' . PHP_EOL
                 . '<label><input type="radio" name="field" value="baz" checked /> dib</label>' . PHP_EOL
-                . '<label><input type="radio" name="field" value="zim" /> gir</label>' . PHP_EOL;
+                . '<label><input type="radio" name="field" value="zim" /> gir &amp; doom</label>' . PHP_EOL;
 
         $this->assertSame($expect, $actual);
     }
