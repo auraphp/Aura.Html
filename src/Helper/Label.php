@@ -71,7 +71,7 @@ class Label extends AbstractHelper
             $this->label = $label;
         }
 
-        if ($attr !== array) {
+        if ($attr !== array()) {
             $this->attr = $attr;
         }
 
