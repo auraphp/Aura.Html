@@ -342,7 +342,8 @@ class Select extends AbstractInput
 
         // build attributes and return option tag with label text
         $attribs = $this->escaper->attr($attribs);
-        return $this->indent($this->optlevel, "<option {$attribs}>$label</option>");
+        $label = $this->escaper->html($label);
+        return $this->indent($this->optlevel, "<option {$attribs}>{$label}</option>");
     }
 
     /**
