@@ -28,6 +28,6 @@ class Textarea extends AbstractInput
     {
         $attribs = $this->escaper->attr($this->attribs);
         $value = $this->escaper->html($this->value);
-        return "<textarea {$attribs}>{$value}</textarea>" . PHP_EOL;
+        return "<textarea {$attribs}>{$value}</textarea>";
     }
 }
