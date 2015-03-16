@@ -13,6 +13,7 @@ class HtmlEscaperTest extends AbstractEscaperTest
 {
     public function setUp()
     {
+        parent::setUp();
         $this->escaper = new HtmlEscaper;
     }
 
