@@ -1,9 +1,3 @@
-This release has SECURITY FIXES.  All users are encouraged to upgrade immediately.
+This release fixes a bug in Checkbox/Radio helpers by adding a feature. Previously, the helpers used strict checking of values, which was an unintentional holdover from previous versions. They both now have a `strict()` method, just like the Select helper, that allows you to turn strict checking off and on. The default is "off."
 
-- SEC: The AbstractChecked helper, which is the parent for Radio and Checkbox, now HTML-escapes the label. Previously, no escaping was applied.
-
-- SEC: The Textarea helper now HTML-escapes the value. Previously, no escaping was applied.
-
-- SEC: The Select helper now HTML-escapes each option label. Previously, no escaping was applied.
-
-- FIX: The attributes for the Label helper now default to `array()` instead of `null`.
+It also includes a fix to the Escaper encoding lists: they were previously using "iso8859-*" and now use "iso-8859-*" (note the added dash, per the listing at <http://php.net/manual/en/mbstring.supported-encodings.php>).
