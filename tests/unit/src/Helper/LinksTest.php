@@ -8,6 +8,13 @@ class LinksTest extends AbstractHelperTest
         $links = $this->helper;
         $actual = $links();
         $this->assertInstanceOf('Aura\Html\Helper\Links', $actual);
+
+        $actual = $links(array(
+            'rel' => 'prev',
+            'href' => '/path/to/prev',
+        ))->__toString();
+        $expect = '    <link rel="prev" href="/path/to/prev" />' . PHP_EOL;
+        $this->assertSame($expect, $actual);
     }
 
     public function testAddAndGet()

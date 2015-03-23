@@ -35,6 +35,10 @@ abstract class AbstractSeries extends AbstractHelper
      */
     public function __invoke()
     {
+        $args = func_get_args();
+        if ($args) {
+            call_user_func_array(array($this, 'add'), $args);
+        }
         return $this;
     }
 

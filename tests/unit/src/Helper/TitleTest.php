@@ -12,6 +12,10 @@ class TitleTest extends AbstractHelperTest
         $title = $this->helper;
         $actual = $title();
         $this->assertInstanceOf('Aura\Html\Helper\Title', $actual);
+
+        $expect = '    <title>Foo &amp; Bar</title>' . PHP_EOL;
+        $actual = $title('Foo & Bar')->__toString();
+        $this->assertSame($expect, $actual);
     }
 
     public function testEscaped()

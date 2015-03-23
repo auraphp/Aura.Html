@@ -12,6 +12,10 @@ class StylesTest extends AbstractHelperTest
         $styles = $this->helper;
         $actual = $styles();
         $this->assertInstanceOf('Aura\Html\Helper\Styles', $actual);
+
+        $actual = $styles('style.css')->__toString();
+        $expect = '    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />' . PHP_EOL;
+        $this->assertSame($expect, $actual);
     }
 
     public function testAddAndGet()

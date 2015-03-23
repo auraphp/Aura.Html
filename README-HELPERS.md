@@ -10,10 +10,10 @@ Use a helper by calling it as a method on the _HelperLocator_. The available hel
 - [metas](#metas)
 - [ol](#ol)
 - [scripts](#scripts) / scriptsFoot
-- [ul](#ul)
 - [styles](#styles)
 - [tag](#tag)
 - [title](#title)
+- [ul](#ul)
 
 There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/develop-2/README-FORMS.md).
 
@@ -145,9 +145,23 @@ echo $helper->links()
         'href' => '/path/to/next',
     ));
 ?>
-```
+
 <link rel="prev" href="/path/to/prev" />
 <link ref="next" href="/path/to/next" />
+```
+
+Finally, you can output a one-off `<link>` tag by echoing the helper directly
+with an array of attributes:
+
+```html+php
+<?php
+echo $helper->links(array(
+    'rel' => 'prev',
+    'href' => '/path/to/prev',
+));
+?>
+<link rel="prev" href="/path/to/prev" />
+```
 
 ## metas
 
@@ -186,6 +200,19 @@ echo $helper->metas()
     );
 ?>
 <meta http-equiv="Location" content="/redirect/to/here">
+<meta name="foo" content="bar">
+```
+
+Finally, you can output a one-off `<meta>` tag by echoing the helper directly
+with an array of attributes:
+
+```html+php
+<?php
+echo $helper->metas(array(
+    'name' => 'foo',
+    'content' => 'bar',
+));
+?>
 <meta name="foo" content="bar">
 ```
 
@@ -241,7 +268,8 @@ echo $helper->ol();
 
 ## scripts
 
-Helper for a set of `<script>` tags. Build a set of script links, then output them all at once.
+Helper for a set of `<script>` tags. Build a set of script links, then output
+them all at once.
 
 ```html+php
 <?php
@@ -249,10 +277,10 @@ Helper for a set of `<script>` tags. Build a set of script links, then output th
 $helper->scripts()->add('/js/middle.js');
 
 // add another script after that one
-$helper->add('/js/last.js');
+$helper->scripts()->add('/js/last.js');
 
 // add another at a specific priority order
-echo $helper->scripts(
+echo $helper->scripts->add(
     '/js/first.js',     // (string) the script src
     50                  // (int) optional priority order (default 100)
 );
@@ -271,56 +299,16 @@ $helper->scripts->addCond(
 <script src="/js/last.js" type="text/javascript"></script>
 ```
 
-The `scriptsFoot()` helper works the same way, but is intended for placing a separate set of scripts at the end of the HTML body.
+> N.b.: The `scriptsFoot()` helper works the same way, but is intended for placing a separate set of scripts at the end of the HTML body.
 
-## ul
-
-Helper for `<ul>` tags with `<li>` items.  Build the set of items (both raw and escaped) then output them all at once.
+Finally, you can output a one-off `<script>` tag by echoing the helper directly
+with the source string:
 
 ```html+php
 <?php
-// start the list of items
-$helper->ul(array(                  // (array) optional attributes
-    'id' => 'test',
-));
-
-// add a single item to be escaped
-$helper->ul()->item(
-    'foo',                          // (string) the item text
-    array('id' => 'foo')            // (array) optional attributes
-);
-
-// add several items to be escaped
-$helper->ul()->items(array(         // (array) the items to add
-    'bar',                          // the item text, no item attributes
-    'baz' => array('id' => 'baz'),  // item text with item attributes
-));
-
-// add a single raw item not to be escaped
-$helper->ul()->rawItem(
-    '<a href="/first">First</a>',   // (string) the raw item html
-    array('id' => 'first')          // (array) optional attributes
-);
-
-// add several raw items not to be escaped
-$helper->ul()->rawItems(array(      // (array) the raw items to add
-    '<a href="/prev">Prev</a>',     // the item text, no item attributes
-    '<a href="/next">Next</a>',
-    '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
-));
-
-// output the list
-echo $helper->ul();
+echo $helper->scripts('/js/script.js');
 ?>
-<ul id="test">
-    <li id="foo">foo</li>
-    <li>bar</li>
-    <li id="baz">baz</li>
-    <li><a href="/first">First</a></li>
-    <li><a href="/prev">Prev</a></li>
-    <li><a href="/next">Next</a></li>
-    <li><a href="/last">Last</a></li>
-</ul>
+<script src="/js/script.js" type="text/javascript"></script>
 ```
 
 ## styles
@@ -361,6 +349,20 @@ echo $helper->styles();
 <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />
 <link rel="stylesheet" href="/css/last.css" type="text/css" media="screen" />
 ?>
+```
+
+Finally, you can output a one-off `<script>` tag by echoing the helper directly
+with the href string and optional attributes:
+
+```html+php
+<?php
+echo $helper->styles('/css/screen.css');
+echo $helper->styles('/css/print.css', array(
+    'media' => 'print',
+))
+?>
+<link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
 ```
 
 ## tag
@@ -419,3 +421,54 @@ echo $helper->title();
 ?>
 <title>Pre2 > Pre1 > This & That > Suf1 > Suf2</title>
 ```
+
+## ul
+
+Helper for `<ul>` tags with `<li>` items.  Build the set of items (both raw and escaped) then output them all at once.
+
+```html+php
+<?php
+// start the list of items
+$helper->ul(array(                  // (array) optional attributes
+    'id' => 'test',
+));
+
+// add a single item to be escaped
+$helper->ul()->item(
+    'foo',                          // (string) the item text
+    array('id' => 'foo')            // (array) optional attributes
+);
+
+// add several items to be escaped
+$helper->ul()->items(array(         // (array) the items to add
+    'bar',                          // the item text, no item attributes
+    'baz' => array('id' => 'baz'),  // item text with item attributes
+));
+
+// add a single raw item not to be escaped
+$helper->ul()->rawItem(
+    '<a href="/first">First</a>',   // (string) the raw item html
+    array('id' => 'first')          // (array) optional attributes
+);
+
+// add several raw items not to be escaped
+$helper->ul()->rawItems(array(      // (array) the raw items to add
+    '<a href="/prev">Prev</a>',     // the item text, no item attributes
+    '<a href="/next">Next</a>',
+    '<a href="/last">Last</a>' => array('id' => 'last') // text and attributes
+));
+
+// output the list
+echo $helper->ul();
+?>
+<ul id="test">
+    <li id="foo">foo</li>
+    <li>bar</li>
+    <li id="baz">baz</li>
+    <li><a href="/first">First</a></li>
+    <li><a href="/prev">Prev</a></li>
+    <li><a href="/next">Next</a></li>
+    <li><a href="/last">Last</a></li>
+</ul>
+```
+

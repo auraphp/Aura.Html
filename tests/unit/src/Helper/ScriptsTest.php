@@ -12,6 +12,10 @@ class ScriptsTest extends AbstractHelperTest
         $scripts = $this->helper;
         $actual = $scripts();
         $this->assertInstanceOf('Aura\Html\Helper\Scripts', $actual);
+
+        $actual = $scripts('script.js')->__toString();
+        $expect = '    <script src="script.js" type="text/javascript"></script>' . PHP_EOL;
+        $this->assertSame($expect, $actual);
     }
 
     public function test()

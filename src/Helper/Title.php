@@ -28,13 +28,18 @@ class Title extends AbstractHelper
 
     /**
      *
-     * Returns the helper so you can call methods on it.
+     * Returns the helper so you can call methods on it; alternatively, if you
+     * pass a title string, it will be as you called `append()`.
      *
-     * @return self
+     * @return mixed Returns a string if $text was specified, otherwise returns
+     * this object for a fluent interface.
      *
      */
-    public function __invoke()
+    public function __invoke($text = null)
     {
+        if ($text) {
+            $this->append($text);
+        }
         return $this;
     }
 

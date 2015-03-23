@@ -12,6 +12,13 @@ class MetasTest extends AbstractHelperTest
         $metas = $this->helper;
         $actual = $metas();
         $this->assertInstanceOf('Aura\Html\Helper\Metas', $actual);
+
+        $actual = $metas(array(
+            'name' => 'foo',
+            'content' => 'bar',
+        ))->__toString();
+        $expect = '    <meta name="foo" content="bar" />' . PHP_EOL;
+        $this->assertSame($expect, $actual);
     }
 
     public function testAddAndGet_noPosition()
