@@ -93,4 +93,39 @@ class CheckboxTest extends AbstractHelperTest
         $expect = '<label for="input-yes"><input id="input-yes" type="checkbox" value="yes" /> This &amp; yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
+
+    public function testNoValueAttrib()
+    {
+        $checkbox = $this->helper;
+        $actual = $checkbox(array(
+            'value' => 'no',
+        ))->__toString();
+        $expect = '<input type="checkbox" />' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+    }
+
+    public function testStrict()
+    {
+        $checkbox = $this->helper;
+        $checkbox->strict();
+
+        $actual = $checkbox(array(
+            'value' => 1, // INTEGER
+            'attribs' => array(
+                'value' => '1',
+            )
+        ))->__toString();
+        $expect = '<input type="checkbox" value="1" />' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+
+        $checkbox = $this->helper;
+        $actual = $checkbox(array(
+            'value' => '1', // STRING
+            'attribs' => array(
+                'value' => '1',
+            )
+        ))->__toString();
+        $expect = '<input type="checkbox" value="1" checked />' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+    }
 }
