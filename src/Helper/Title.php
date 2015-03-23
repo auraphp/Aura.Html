@@ -31,8 +31,9 @@ class Title extends AbstractHelper
      * Returns the helper so you can call methods on it; alternatively, if you
      * pass a title string, it will be as you called `append()`.
      *
-     * @return mixed Returns a string if $text was specified, otherwise returns
-     * this object for a fluent interface.
+     * @param string $text Text to append to the existing title.
+     *
+     * @return self
      *
      */
     public function __invoke($text = null)

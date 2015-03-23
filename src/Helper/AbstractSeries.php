@@ -30,6 +30,9 @@ abstract class AbstractSeries extends AbstractHelper
      *
      * Returns the helper so you can call methods on it.
      *
+     * If you pass arguments to __invoke(), it will call `$this->add()` with
+     * those arguments.
+     *
      * @return self
      *
      */
