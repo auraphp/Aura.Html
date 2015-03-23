@@ -29,11 +29,29 @@ abstract class AbstractEscaperTest extends \PHPUnit_Framework_TestCase
         FakePhp::$function_exists['mb_convert_encoding'] = \function_exists('mb_convert_encoding');
     }
 
-    public function testMissingExtensions()
+    public function testMissingIconvExtension()
+    {
+        FakePhp::$function_exists['iconv'] = false;
+        FakePhp::$function_exists['mb_convert_encoding'] = true;
+        $this->escaper->setEncoding('iso-8859-1');
+        $actual = $this->escaper->toUtf8('x');
+        $this->assertSame('x', $actual);
+    }
+
+    public function testMissingMbstringExtension()
+    {
+        FakePhp::$function_exists['iconv'] = true;
+        FakePhp::$function_exists['mb_convert_encoding'] = false;
+        $this->escaper->setEncoding('iso-8859-1');
+        $actual = $this->escaper->toUtf8('x');
+        $this->assertSame('x', $actual);
+    }
+
+    public function testMissingBothExtensions()
     {
         FakePhp::$function_exists['iconv'] = false;
         FakePhp::$function_exists['mb_convert_encoding'] = false;
-        $this->escaper->setEncoding('iso8859-1');
+        $this->escaper->setEncoding('iso-8859-1');
         $this->setExpectedException('Aura\Html\Exception\ExtensionNotInstalled');
         $this->escaper->toUtf8('x');
     }
@@ -49,7 +67,7 @@ abstract class AbstractEscaperTest extends \PHPUnit_Framework_TestCase
 
     public function testToUtf8()
     {
-        $this->escaper->setEncoding('iso8859-1');
+        $this->escaper->setEncoding('iso-8859-1');
         $this->assertSame('', $this->escaper->toUtf8(''));
         $this->assertSame('foo', $this->escaper->toUtf8('foo'));
     }
@@ -63,7 +81,7 @@ abstract class AbstractEscaperTest extends \PHPUnit_Framework_TestCase
 
     public function testFromUtf8()
     {
-        $this->escaper->setEncoding('iso8859-1');
+        $this->escaper->setEncoding('iso-8859-1');
         $this->assertSame('', $this->escaper->fromUtf8(''));
         $this->assertSame('foo', $this->escaper->fromUtf8('foo'));
     }

@@ -19,8 +19,8 @@ class CssEscaperTest extends AbstractEscaperTest
 
     public function test__construct()
     {
-        $escaper = new CssEscaper('iso8859-1');
-        $this->assertSame('iso8859-1', $escaper->getEncoding());
+        $escaper = new CssEscaper('iso-8859-1');
+        $this->assertSame('iso-8859-1', $escaper->getEncoding());
     }
 
     public function test__invoke()

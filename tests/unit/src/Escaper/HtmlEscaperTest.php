@@ -19,8 +19,8 @@ class HtmlEscaperTest extends AbstractEscaperTest
 
     public function test__construct()
     {
-        $escaper = new HtmlEscaper(ENT_NOQUOTES, 'iso8859-1');
-        $this->assertSame('iso8859-1', $escaper->getEncoding());
+        $escaper = new HtmlEscaper(ENT_NOQUOTES, 'iso-8859-1');
+        $this->assertSame('iso-8859-1', $escaper->getEncoding());
         $this->assertSame(ENT_NOQUOTES, $escaper->getFlags());
     }
 
