@@ -25,7 +25,7 @@ class Input extends HelperLocator
      *
      * @param array $spec The element specification.
      *
-     * @return string
+     * @return mixed
      *
      */
     public function __invoke(array $spec = null)
