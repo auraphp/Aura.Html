@@ -28,6 +28,30 @@ abstract class AbstractChecked extends AbstractInput
 
     /**
      *
+     * Use strict equality when setting the checked value?
+     *
+     * @var bool
+     *
+     */
+    protected $strict = false;
+
+    /**
+     *
+     * Use strict equality when setting the checked value?
+     *
+     * @param bool $strict True for strict equality, false for loose equality.
+     *
+     * @return self
+     *
+     */
+    public function strict($strict = true)
+    {
+        $this->strict = (bool) $strict;
+        return $this;
+    }
+
+    /**
+     *
      * Returns the HTML for the "checked" part of the input.
      *
      * @return string
@@ -67,17 +91,18 @@ abstract class AbstractChecked extends AbstractInput
      */
     protected function setChecked()
     {
-        // by default, the input is unchecked
         $this->attribs['checked'] = false;
 
-        // is the input checked? make sure there's a value to compare to, and
-        // use strict equality so that there is no confusion between
-        // 0/'0'/false/null/''.
-        $checked = isset($this->attribs['value'])
-                && $this->value === $this->attribs['value'];
-        if ($checked) {
-            $this->attribs['checked'] = true;
+        if (! array_key_exists('value', $this->attribs)) {
+            return;
         }
+
+        if ($this->strict) {
+            $this->attribs['checked'] = $this->value === $this->attribs['value'];
+            return;
+        }
+
+        $this->attribs['checked'] = $this->value == $this->attribs['value'];
     }
 
     /**
