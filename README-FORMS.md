@@ -38,7 +38,7 @@ The array is used so that other libraries can generate form element descriptions
 The available input element `type` values are:
 
 - [button](#button)
-- [checkbok](#checkbok)
+- [checkbox](#checkbox)
 - [color](#color)
 - [date](#date)
 - [datetime](#datetime)
