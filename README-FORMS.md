@@ -488,7 +488,7 @@ echo $helper->input(array(
 
 ```html+php
 <?php
-echo $helper->irnput(array(
+echo $helper->input(array(
     'type'    => 'tel',
     'name'    => 'foo',
     'value'   => 'bar',
