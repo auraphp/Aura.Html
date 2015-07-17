@@ -37,4 +37,30 @@ class ScriptsTest extends AbstractHelperTest
 
         $this->assertSame($expect, $actual);
     }
+
+    public function testInternal()
+    {
+        $scripts = $this->helper;
+        $scripts->addInternal('alert("foo");');
+        $scripts->addCondInternal('ie6', 'alert("ie6");');
+
+        $scripts->beginInternal();
+        echo 'alert("captured");';
+        $scripts->endInternal();
+
+        $scripts->beginCondInternal('ie6');
+        echo 'alert("captured ie6");';
+        $scripts->endInternal();
+
+
+        $actual = $scripts->__toString();
+
+        $expect = '    <script type="text/javascript">alert("foo");</script>' . PHP_EOL
+            . '    <!--[if ie6]><script type="text/javascript">alert("ie6");</script><![endif]-->' . PHP_EOL
+            . '    <script type="text/javascript">alert("captured");</script>' . PHP_EOL
+            . '    <!--[if ie6]><script type="text/javascript">alert("captured ie6");</script><![endif]-->' . PHP_EOL;
+
+
+        $this->assertSame($expect, $actual);
+    }
 }

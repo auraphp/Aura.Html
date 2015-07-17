@@ -292,11 +292,45 @@ $helper->scripts->addCond(
     25                  // (int) optional priority order (default 100)
 ));
 
+// add an internal script
+$helper->scripts()->addInternal(
+    'alert("foo");',     // (string) script
+    1000                // (int) optional priority order (default 100)
+);
+
+// add an internal conditional script
+$helper->scripts()->addCondInternal(
+    'ie6',                // (string) the condition
+    'alert("ie6");',     // (string) script
+    1000                // (int) optional priority order (default 100)
+);
+
+// capture an internal script
+$helper->scripts()->beginInternal(
+    1000                // (int) optional priority order (default 100)
+);
+echo 'alert("captured")';
+$helper->scripts()->endInternal();
+
+// capture an internal conditional script
+$helper->scripts()->beginCondInternal(
+    'ie6',                    // (string) the condition
+    'alert("capture ie6");',  // (string) script
+    1000                      // (int) optional priority order (default 100)
+);
+echo 'alert("capture ie6")';
+$helper->scripts()->endInternal();
+
 ?>
 <!--[if ie6]><script src="/js/ie6.js" type="text/javascript"></script><![endif]-->
 <script src="/js/first.js" type="text/javascript"></script>
 <script src="/js/middle.js" type="text/javascript"></script>
 <script src="/js/last.js" type="text/javascript"></script>
+<script type="text/javascript">alert("foo");</script>
+<!--[if ie6]><script type="text/javascript">alert("ie6");</script><![endif]-->
+<script type="text/javascript">alert("captured");</script>
+<!--[if ie6]><script type="text/javascript">alert("capture ie6");</script><![endif]-->
+
 ```
 
 > N.b.: The `scriptsFoot()` helper works the same way, but is intended for placing a separate set of scripts at the end of the HTML body.
@@ -341,6 +375,38 @@ $helper->styles()->addCond(
     25                          // (int) optional priority order (default 100)
 );
 
+// add an internal style
+$helper->styles()->addInternal(
+    '.foo{color:red;}', // (string) style
+    null,              // (array) optional attributes
+    1000              // (int) optional priority order (default 100)
+);
+
+// add an internal conditional style
+$helper->styles()->addCondInternal(
+    'ie6',                 // (string) the condition
+    '.foo{color:pink;}',  // (string) style
+    null,                // (array) optional attributes
+    1000                // (int) optional priority order (default 100)
+);
+
+// capture an internal style
+$helper->styles()->beginInternal(
+    null,                // (array) optional attributes
+    1000,               // (int) optional priority order (default 100)
+);
+echo '.bar{color:red;}';
+$helper->styles()->endInternal();
+
+// capture an internal conditional style
+$helper->styles()->beginCondInternal(
+    'ie6',                // (string) the condition
+    null,                // (array) optional attributes
+    1000                // (int) optional priority order (default 100)
+);
+echo '.bar{color:pink;}';
+$helper->styles()->endInternal();
+
 // output the stylesheet links
 echo $helper->styles();
 ?>
@@ -348,6 +414,10 @@ echo $helper->styles();
 <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />
 <link rel="stylesheet" href="/css/last.css" type="text/css" media="screen" />
+<style type="text/css" media="screen">.foo{color:red;}</style>
+<!--[if ie6]><style type="text/css" media="screen">.foo{color:pink;}</style><![endif]-->
+<style type="text/css" media="screen">.bar{color:red;}</style>
+<!--[if ie6]><style type="text/css" media="screen">.bar{color:pink;}</style><![endif]-->
 ?>
 ```
 
