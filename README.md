@@ -114,7 +114,7 @@ Here is a contrived example of the various `escape()` helper methods:
 <head>
 
     <style>
-        body: {
+        body {
             color: <?= $this->escape()->css($theme->color) ?>;
             font-size: <?= $this->escape()->css($theme->font_size) ?>;
         }
@@ -159,7 +159,7 @@ $j = $this->escape()->js;
 <head>
 
     <style>
-        body: {
+        body {
             color: <?= $c($theme->color) ?>;
             font-size: <?= $c($theme->font_size) ?>;
         }
@@ -201,7 +201,7 @@ Here is a contrived example of the various static methods:
 <head>
 
     <style>
-        body: {
+        body {
             color: <?= e::c($theme->color) ?>;
             font-size: <?= e::c($theme->font_size) ?>;
         }
