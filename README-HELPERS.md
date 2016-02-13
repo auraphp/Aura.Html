@@ -182,7 +182,7 @@ $helper->metas()->addName(
 );
 
 // output the metas
-echo $helper->meta();
+echo $helper->metas();
 ?>
 <meta http-equiv="Location" content="/redirect/to/here">
 <meta name="foo" content="bar">
@@ -280,13 +280,13 @@ $helper->scripts()->add('/js/middle.js');
 $helper->scripts()->add('/js/last.js');
 
 // add another at a specific priority order
-echo $helper->scripts->add(
+echo $helper->scripts()->add(
     '/js/first.js',     // (string) the script src
     50                  // (int) optional priority order (default 100)
 );
 
 // add a conditional script
-$helper->scripts->addCond(
+$helper->scripts()->addCond(
     'ie6',              // (string) the condition
     '/js/ie6.js',       // (string) the script src
     25                  // (int) optional priority order (default 100)
@@ -541,4 +541,3 @@ echo $helper->ul();
     <li><a href="/last">Last</a></li>
 </ul>
 ```
-
