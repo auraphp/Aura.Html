@@ -154,7 +154,7 @@ class CheckboxTest extends AbstractHelperTest
         $checkbox = $this->helper;
         $actual = $checkbox(array(
             'name' => 'foo',
-            'value' => ['yes', 'no'],
+            'value' => array('yes', 'no'),
             'options' => array(
                 'yes' => 'Yes',
                 'no' => 'No',
