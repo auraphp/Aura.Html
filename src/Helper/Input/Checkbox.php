@@ -17,6 +17,33 @@ namespace Aura\Html\Helper\Input;
  */
 class Checkbox extends AbstractChecked
 {
+
+    /**
+     *
+     * Individual attributes for each option (only for multi checkbox)
+     *
+     * @var array
+     *
+     */
+    protected $optionsAttribs = array();
+
+    /**
+     *
+     * Prepares the properties on this helper.
+     *
+     * @param array $spec The specification array.
+     *
+     */
+    protected function prep(array $spec)
+    {
+        if (isset($spec['optionsAttribs'])) {
+            $this->optionsAttribs = $spec['optionsAttribs'];
+            unset($spec['optionsAttribs']);
+        }
+
+        parent::prep($spec);
+    }
+
     /**
      *
      * Returns the HTML for the input.
@@ -80,10 +107,12 @@ class Checkbox extends AbstractChecked
             $this->attribs['value'] = $value;
             $this->attribs['label'] = $label;
 
+            $optionAttribs = isset($this->optionsAttribs[$value]) ? $this->optionsAttribs[$value] : [];
+
             $html .= $checkbox(array(
                 'name'    => $this->attribs['name'],
                 'value'   => $this->value,
-                'attribs' => $this->attribs
+                'attribs' => $this->attribs+$optionAttribs
             ));
         }
         return $html;
