@@ -25,7 +25,7 @@ class Checkbox extends AbstractChecked
      * @var array
      *
      */
-    protected $optionsAttribs = array();
+    protected $options_attribs = array();
 
     /**
      *
@@ -36,9 +36,9 @@ class Checkbox extends AbstractChecked
      */
     protected function prep(array $spec)
     {
-        if (isset($spec['optionsAttribs'])) {
-            $this->optionsAttribs = $spec['optionsAttribs'];
-            unset($spec['optionsAttribs']);
+        if (isset($spec['options_attribs'])) {
+            $this->options_attribs = $spec['options_attribs'];
+            unset($spec['options_attribs']);
         }
 
         parent::prep($spec);
@@ -107,12 +107,12 @@ class Checkbox extends AbstractChecked
             $this->attribs['value'] = $value;
             $this->attribs['label'] = $label;
 
-            $optionAttribs = isset($this->optionsAttribs[$value]) ? $this->optionsAttribs[$value] : [];
+            $optionAttribs = isset($this->options_attribs[$value]) ? $this->options_attribs[$value] : array();
 
             $html .= $checkbox(array(
                 'name'    => $this->attribs['name'],
                 'value'   => $this->value,
-                'attribs' => $this->attribs+$optionAttribs
+                'attribs' => $this->attribs + $optionAttribs
             ));
         }
         return $html;

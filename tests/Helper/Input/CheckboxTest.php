@@ -180,7 +180,7 @@ class CheckboxTest extends AbstractHelperTest
                 'yes' => 'Yes',
                 'no' => 'No',
             ),
-            'optionsAttribs' => array(
+            'options_attribs' => array(
                 'yes' => array(
                     'class' => 'test-class'
                 ),
