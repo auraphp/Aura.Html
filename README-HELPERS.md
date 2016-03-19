@@ -14,6 +14,7 @@ Use a helper by calling it as a method on the _HelperLocator_. The available hel
 - [tag](#tag)
 - [title](#title)
 - [ul](#ul)
+- [void](#void)
 
 There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/2.x/README-FORMS.md).
 
@@ -540,4 +541,17 @@ echo $helper->ul();
     <li><a href="/next">Next</a></li>
     <li><a href="/last">Last</a></li>
 </ul>
+```
+
+## void
+
+Helper for self closing void tags.
+
+```html+php
+<?php
+echo $helper->void('meta', ['itemprop' => 'duration', 'content' => 'T1M33S']);
+echo $helper->void('br');
+?>
+<meta itemprop="duration" content="T1M33S" />
+<br  />
 ```
