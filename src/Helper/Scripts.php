@@ -44,6 +44,39 @@ class Scripts extends AbstractSeries
 
     /**
      *
+     * Adds a <script> tag to the stack with additional attributes
+     *
+     * @param string $src The source href for the script.
+     *
+     * @param string $attr The additional attributes
+     *
+     * @param int $pos The script position in the stack.
+     *
+     * @return null
+     *
+     */
+    public function addAttr($src, array $attr = null, $pos = 100)
+    {
+        $attr = (array) $attr;
+
+        $base = array(
+            'src' => $src,
+            'type' => 'text/javascript',
+        );
+
+        unset($attr['src']);
+        unset($attr['type']);
+
+        $attr = $this->escaper->attr(array_merge($base, $attr));
+
+        $tag = "<script $attr></script>";
+        $this->addElement($pos, $tag);
+
+        return $this;
+    }
+
+    /**
+     *
      * Adds a conditional `<!--[if ...]><script><![endif] -->` tag to the
      * stack.
      *
