@@ -323,8 +323,10 @@ echo 'alert("capture ie6")';
 $helper->scripts()->endInternal();
 
 // add a script tag with additional attributes
-$helper->script()->addAttr(
+// by passing an attribute array as the last parameter of any of the method
+$helper->scripts()->add(
     'https://cdn.tld/foo.js',
+    100,
     [
         'async' => true,
         'defer' => true,
