@@ -322,6 +322,19 @@ $helper->scripts()->beginCondInternal(
 echo 'alert("capture ie6")';
 $helper->scripts()->endInternal();
 
+// add a script tag with additional attributes
+// by passing an attribute array as the last parameter of any of the method
+$helper->scripts()->add(
+    'https://cdn.tld/foo.js',
+    100,
+    [
+        'async' => true,
+        'defer' => true,
+        'crossorigin' => 'anonymous',
+        'integrity' => 'sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo='
+    ]
+);
+
 ?>
 <!--[if ie6]><script src="/js/ie6.js" type="text/javascript"></script><![endif]-->
 <script src="/js/first.js" type="text/javascript"></script>
@@ -331,6 +344,7 @@ $helper->scripts()->endInternal();
 <!--[if ie6]><script type="text/javascript">alert("ie6");</script><![endif]-->
 <script type="text/javascript">alert("captured");</script>
 <!--[if ie6]><script type="text/javascript">alert("capture ie6");</script><![endif]-->
+<script src="http://cdn.tld/foo.js" type="text/javascript" async defer crossorigin="anonymous" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="></script>
 
 ```
 

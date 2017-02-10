@@ -27,15 +27,14 @@ class Scripts extends AbstractSeries
      *
      * @param int $pos The script position in the stack.
      *
-     * @return null
+     * @param array $attr The additional attributes
+     *
+     * @return self
      *
      */
-    public function add($src, $pos = 100)
+    public function add($src, $pos = 100, array $attr = array())
     {
-        $attr = $this->escaper->attr(array(
-            'src' => $src,
-            'type' => 'text/javascript',
-        ));
+        $attr = $this->attr($src, $attr);
         $tag = "<script $attr></script>";
         $this->addElement($pos, $tag);
 
@@ -53,16 +52,15 @@ class Scripts extends AbstractSeries
      *
      * @param string $pos The script position in the stack.
      *
-     * @return null
+     * @param array $attr The additional attributes
+     *
+     * @return self
      *
      */
-    public function addCond($cond, $src, $pos = 100)
+    public function addCond($cond, $src, $pos = 100, array $attr = array())
     {
         $cond = $this->escaper->html($cond);
-        $attr = $this->escaper->attr(array(
-            'src' => $src,
-            'type' => 'text/javascript',
-        ));
+        $attr = $this->attr($src, $attr);
         $tag = "<!--[if $cond]><script $attr></script><![endif]-->";
         $this->addElement($pos, $tag);
 
@@ -74,39 +72,36 @@ class Scripts extends AbstractSeries
      *
      * @param mixed $script The script
      * @param int   $pos    The script position in the stack.
+     * @param array $attr The additional attributes
      *
-     * @return Scripts
+     * @return self
      *
      * @access public
      */
-    public function addInternal($script, $pos = 100)
+    public function addInternal($script, $pos = 100, array $attr = array())
     {
-        $attr = $this->escaper->attr(array(
-            'type' => 'text/javascript'
-        ));
+        $attr = $this->attr(null, $attr);
         $tag = "<script $attr>$script</script>";
         $this->addElement($pos, $tag);
         return $this;
     }
 
     /**
-     * addCondInternal
+     * Add Conditional internal script
      *
      * @param mixed $cond   The conditional expression for the script.
      * @param mixed $script The script
      * @param int   $pos    The script position in the stack.
+     * @param array $attr   The additional attributes
      *
-     * @return mixed
-     * @throws exceptionclass [description]
+     * @return self
      *
      * @access public
      */
-    public function addCondInternal($cond, $script, $pos = 100)
+    public function addCondInternal($cond, $script, $pos = 100, array $attr = array())
     {
         $cond = $this->escaper->html($cond);
-        $attr = $this->escaper->attr(array(
-            'type' => 'text/javascript',
-        ));
+        $attr = $this->attr(null, $attr);
         $tag = "<!--[if $cond]><script $attr>$script</script><![endif]-->";
         $this->addElement($pos, $tag);
 
@@ -116,36 +111,39 @@ class Scripts extends AbstractSeries
     /**
      * Adds internal script
      *
-     * @param int $pos The script position in the stack.
+     * @param int   $pos  The script position in the stack.
+     * @param array $attr The additional attributes
      *
-     * @return Scripts
+     *
+     * @return null
      *
      * @access public
      */
-    public function beginInternal($pos = 100)
+    public function beginInternal($pos = 100, array $attr = array())
     {
-        $this->capture[] = $pos;
+        $this->capture[] = array($pos, $attr);
          ob_start();
     }
 
     /**
-     * beginInternalCond
+     * Begin Conditional Internal Capture
      *
-     * @param mixed $cond DESCRIPTION
-     * @param int   $pos  DESCRIPTION
+     * @param mixed $cond condition
+     * @param int   $pos  position
+     * @param array $attr The additional attributes
      *
-     * @return mixed
+     * @return null
      *
      * @access public
      */
-    public function beginCondInternal($cond, $pos = 100)
+    public function beginCondInternal($cond, $pos = 100, array $attr = array())
     {
-        $this->capture[] = array($cond, $pos);
+        $this->capture[] = array($cond, $pos, $attr);
         ob_start();
     }
 
     /**
-     * endInternal
+     * End internal script capture
      *
      * @return mixed
      *
@@ -155,13 +153,33 @@ class Scripts extends AbstractSeries
     {
         $script = ob_get_clean();
         $params = array_pop($this->capture);
-        if (is_array($params)) {
+        if (count($params) > 2) {
             return $this->addCondInternal(
                 $params[0],
                 $script,
-                $params[1]
+                $params[1],
+                $params[2]
             );
         }
-        return $this->addInternal($script, $params);
+        return $this->addInternal($script, $params[0], $params[1]);
+    }
+
+    /**
+     * Fix and escape script attributes
+     *
+     * @param mixed $src  script source
+     * @param array $attr additional attributes
+     *
+     * @return string
+     *
+     * @access protected
+     */
+    protected function attr($src = null, array $attr = array())
+    {
+        if (null !== $src) {
+            $attr['src'] = $src;
+        }
+        $attr['type'] = 'text/javascript';
+        return $this->escaper->attr($attr);
     }
 }
