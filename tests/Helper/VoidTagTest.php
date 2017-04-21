@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Html\Helper;
 
-class VoidTest extends AbstractHelperTest
+class VoidTagTest extends AbstractHelperTest
 {
     public function test()
     {

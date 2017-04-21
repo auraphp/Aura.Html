@@ -81,7 +81,7 @@ class HelperLocatorFactory
             'tag'               => function () use ($escaper) { return new Helper\Tag($escaper); },
             'title'             => function () use ($escaper) { return new Helper\Title($escaper); },
             'ul'                => function () use ($escaper) { return new Helper\Ul($escaper); },
-            'void'              => function () use ($escaper) { return new Helper\Void($escaper); }
+            'void'              => function () use ($escaper) { return new Helper\VoidTag($escaper); }
         ));
     }
 
