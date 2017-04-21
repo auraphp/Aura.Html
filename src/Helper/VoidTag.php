@@ -15,7 +15,7 @@ namespace Aura\Html\Helper;
  * @package Aura.Html
  *
  */
-class Void extends AbstractHelper
+class VoidTag extends AbstractHelper
 {
     /**
      *
