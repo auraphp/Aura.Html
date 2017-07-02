@@ -69,6 +69,13 @@ class Checkbox extends AbstractChecked
         return $this->void('input', $attribs);
     }
 
+    /**
+     *
+     * Returns the HTML for multiple checkboxes.
+     *
+     * @return string
+     *
+     */
     protected function multiple()
     {
         $html = '';
