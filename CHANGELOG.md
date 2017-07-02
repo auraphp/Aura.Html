@@ -7,7 +7,7 @@
 - ADD: Support additional attributes on Scripts helper
 - ADD: Support multi check boxes
 - ADD: Support "Internal" Styles and Scripts
-- DOC: Various documentation fixes.
+- DOC: Various documentation and phpDoc fixes.
 
 ## 2.4.1
 
