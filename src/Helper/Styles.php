@@ -18,6 +18,15 @@ namespace Aura\Html\Helper;
 class Styles extends AbstractSeries
 {
     /**
+     * Temporary storage or params passed to caputre functions
+     *
+     * @var mixed
+     *
+     * @access private
+     */
+    private $capture;
+
+    /**
      *
      * Adds a <link rel="stylesheet" ... /> tag to the series.
      *
