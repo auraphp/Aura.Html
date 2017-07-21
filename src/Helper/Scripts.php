@@ -17,6 +17,13 @@ namespace Aura\Html\Helper;
  */
 class Scripts extends AbstractSeries
 {
+    /**
+     * Temporary storage or params passed to caputre functions
+     *
+     * @var mixed
+     *
+     * @access private
+     */
     private $capture;
 
     /**
