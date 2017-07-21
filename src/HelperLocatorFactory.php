@@ -52,11 +52,11 @@ class HelperLocatorFactory
      * @return HelperLocator
      *
      */
-    public function newInstance()
+    public function newInstance(array $helpers = array(), array $input_helpers = array())
     {
         $escaper = $this->escaper;
-        $input = $this->newInputInstance();
-        return new HelperLocator(array(
+        $input = $this->newInputInstance($input_helpers);
+        return new HelperLocator(array_replace(array(
             'a'                 => function () use ($escaper) { return new Helper\Anchor($escaper); },
             'anchor'            => function () use ($escaper) { return new Helper\Anchor($escaper); },
             'aRaw'              => function () use ($escaper) { return new Helper\AnchorRaw($escaper); },
@@ -82,7 +82,7 @@ class HelperLocatorFactory
             'title'             => function () use ($escaper) { return new Helper\Title($escaper); },
             'ul'                => function () use ($escaper) { return new Helper\Ul($escaper); },
             'void'              => function () use ($escaper) { return new Helper\VoidTag($escaper); }
-        ));
+        ), $helpers));
     }
 
     /**
@@ -92,10 +92,10 @@ class HelperLocatorFactory
      * @return Helper\Input
      *
      */
-    public function newInputInstance()
+    public function newInputInstance(array $helpers = array())
     {
         $escaper = $this->escaper;
-        return new Helper\Input(array(
+        return new Helper\Input(array_replace(array(
             'button'            => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
             'checkbox'          => function () use ($escaper) { return new Helper\Input\Checkbox($escaper); },
             'color'             => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
@@ -121,6 +121,6 @@ class HelperLocatorFactory
             'time'              => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
             'url'               => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
             'week'              => function () use ($escaper) { return new Helper\Input\Generic($escaper); },
-        ));
+        ), $helpers));
     }
 }

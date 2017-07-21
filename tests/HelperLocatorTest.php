@@ -28,4 +28,25 @@ class HelperLocatorTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Aura\Html\Exception\HelperNotFound');
         $this->helper_locator->get('noSuchHelper');
     }
+
+    public function testFactoryAddHelpers()
+    {
+        $factory = new HelperLocatorFactory;
+        $override = array('a' => function () {
+            return new Helper\MockHelper;
+        });
+        $helpers = $factory->newInstance($override);
+        $expect = 'Aura\Html\Helper\MockHelper';
+        $actual = $helpers->get('a');
+        $this->assertInstanceOf($expect, $actual);
+
+
+        $additional = array('mockHelper' => function () {
+            return new Helper\MockHelper;
+        });
+        $helpers = $factory->newInstance($additional);
+        $expect = 'Aura\Html\Helper\MockHelper';
+        $actual = $helpers->get('mockHelper');
+        $this->assertInstanceOf($expect, $actual);
+    }
 }
