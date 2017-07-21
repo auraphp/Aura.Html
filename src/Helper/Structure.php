@@ -10,20 +10,20 @@ namespace Aura\Html\Helper;
 
 /**
  *
- * Helper to generate a complete element.
+ * Helper to generate a snippet of nested HTML.
  *
  * @package Aura.Html
  *
  */
-class Element extends AbstractElement
+class Structure extends AbstractElement
 {
     /**
      *
-     * Returns any kind of complete HTML element with attributes.
+     * Returns any kind of nestd HTML elements with attributes.
      *
      * @param string $tag The tag to generate.
      *
-     * @param string $content The element content
+     * @param string|array $content The element content
      *
      * @param array $attr Attributes for the tag.
      *
@@ -32,6 +32,14 @@ class Element extends AbstractElement
      */
     public function __invoke($tag, $content, array $attr = array())
     {
+        if (is_array($content)) {
+            return $this->raw(
+                $tag,
+                call_user_func_array($this, $content),
+                $attr
+            );
+        }
+
         return $this->escaped($tag, $content, $attr);
     }
 }
