@@ -81,4 +81,17 @@ class TitleTest extends AbstractHelperTest
         $expect = '  <title>This and That</title>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
+
+    public function testGet()
+    {
+        $title = $this->helper;
+        $this->assertInstanceOf('Aura\Html\Helper\Title', $title);
+
+        $title->set('Bar');
+        $title->prepend('Foo ');
+
+        $actual = $title->get();
+        $expect = 'Foo Bar';
+        $this->assertSame($expect, $actual);
+    }
 }

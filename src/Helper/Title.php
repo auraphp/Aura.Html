@@ -90,6 +90,18 @@ class Title extends AbstractHelper
 
     /**
      *
+     * Gets the currently set title string without HTML tag
+     *
+     * @return string
+     *
+     */
+    public function get()
+    {
+        return $this->title;
+    }
+
+    /**
+     *
      * Escapes and appends text to the end of the current <title> string.
      *
      * @param string $text The string to be appended to the title.
