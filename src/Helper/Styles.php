@@ -220,7 +220,6 @@ class Styles extends AbstractSeries
         $attr = (array) $attr;
 
         $base = array(
-            'type' => 'text/css',
             'media' => 'screen',
         );
 
