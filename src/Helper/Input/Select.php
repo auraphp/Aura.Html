@@ -279,7 +279,7 @@ class Select extends AbstractInput
      *
      * Builds the 'placeholder' option (if any).
      *
-     * @return string|null
+     * @return string
      *
      */
     protected function buildOptionPlaceholder()
@@ -291,6 +291,7 @@ class Select extends AbstractInput
                 array('disabled' => true),
             ));
         }
+        return '';
     }
 
     /**

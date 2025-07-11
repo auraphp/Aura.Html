@@ -119,7 +119,7 @@ class Styles extends AbstractSeries
      *
      * @param array $attr Additional attributes for the <style> tag.
      *
-     * @param string $pos The position in the stack.
+     * @param int $pos The position in the stack.
      *
      * @return self
      *

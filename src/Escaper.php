@@ -124,7 +124,7 @@ class Escaper
      *
      * @param string $encoding The encoding to use.
      *
-     * @return null
+     * @return void
      *
      */
     public function setEncoding($encoding)
@@ -141,7 +141,7 @@ class Escaper
      *
      * @param int $flags The `htmlspecialchars()` flags.
      *
-     * @return null
+     * @return void
      *
      */
     public function setFlags($flags)
@@ -212,7 +212,7 @@ class Escaper
      *
      * @param Escaper $escaper The Escaper to use as the singleton.
      *
-     * @return null
+     * @return void
      *
      */
     public static function setStatic(Escaper $escaper)

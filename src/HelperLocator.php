@@ -75,7 +75,7 @@ class HelperLocator
      *
      * @param callable $callable A callable to create the helper object.
      *
-     * @return null
+     * @return void
      *
      */
     public function set($name, $callable)

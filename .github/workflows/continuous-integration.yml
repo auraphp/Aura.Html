@@ -89,5 +89,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
+      - name: Install PHPStan
+        run: composer require --dev phpstan/phpstan --with-all-dependencies
+
       - name: Run PHPStan
         run: composer phpstan

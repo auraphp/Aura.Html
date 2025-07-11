@@ -85,7 +85,7 @@ class HtmlEscaper extends AbstractEscaper
      *
      * @param int $flags The flags for `htmlspecialchars()`.
      *
-     * @return null
+     * @return void
      *
      */
     public function setFlags($flags)

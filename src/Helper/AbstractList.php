@@ -186,7 +186,7 @@ abstract class AbstractList extends AbstractHelper
      *
      * @param string $item The item HTML.
      *
-     * @return null
+     * @return void
      *
      */
     protected function buildItem($item)
