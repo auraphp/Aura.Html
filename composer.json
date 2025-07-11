@@ -41,6 +41,11 @@
     "require-dev": {
         "yoast/phpunit-polyfills": "~1.0"
     },
+    "scripts": {
+        "phpstan": "./vendor/bin/phpstan analyse --level=1 src/",
+        "test": "./vendor/bin/phpunit",
+        "test-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-clover=coverage.xml"
+    },
     "autoload-dev": {
         "psr-4": {
             "Aura\\Html\\": "tests/",

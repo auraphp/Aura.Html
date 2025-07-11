@@ -23,10 +23,9 @@ class Input extends HelperLocator
      *
      * Given an input specification, returns the HTML for the input.
      *
-     * @param array $spec The element specification.
+     * @param array{type?: string, name?: string, attribs?: array<string, scalar|null>, value?: mixed, options?: array<string, string>}|null $spec HTML input element specification
      *
-     * @return mixed
-     *
+     * @return self|string
      */
     public function __invoke(array $spec = null)
     {

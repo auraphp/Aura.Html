@@ -279,7 +279,7 @@ class Select extends AbstractInput
      *
      * Builds the 'placeholder' option (if any).
      *
-     * @return string
+     * @return string|null
      *
      */
     protected function buildOptionPlaceholder()

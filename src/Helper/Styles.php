@@ -18,9 +18,10 @@ namespace Aura\Html\Helper;
 class Styles extends AbstractSeries
 {
     /**
-     * Temporary storage or params passed to caputre functions
+     * Temporary storage for capture functions
      *
-     * @var mixed
+     * @var array<int, array{attr: mixed, pos: int, cond?: string}>
+     * @readonly
      *
      * @access private
      */
@@ -28,16 +29,15 @@ class Styles extends AbstractSeries
 
     /**
      *
-     * Adds a <link rel="stylesheet" ... /> tag to the series.
+     * Adds a stylesheet link to the series.
      *
-     * @param string $href The source href for the stylesheet.
+     * @param string $href CSS file URL or path
      *
-     * @param array $attr Additional attributes for the <link> tag.
+     * @param array<string, scalar|null>|null $attr Additional HTML attributes
      *
-     * @param int $pos The stylesheet position in the series.
+     * @param int $pos Position in the output series
      *
      * @return self
-     *
      */
     public function add($href, array $attr = null, $pos = 100)
     {
@@ -50,19 +50,17 @@ class Styles extends AbstractSeries
 
     /**
      *
-     * Adds a conditional `<!--[if ...]><link rel="stylesheet" ... /><![endif] -->`
-     * tag to the stack.
+     * Adds a conditional stylesheet link.
      *
-     * @param string $cond The conditional expression for the stylesheet.
+     * @param string $cond IE conditional expression
      *
-     * @param string $href The source href for the stylesheet.
+     * @param string $href CSS file URL or path
      *
-     * @param array $attr Additional attributes for the <link> tag.
+     * @param array<string, scalar|null>|null $attr Additional HTML attributes
      *
-     * @param string $pos The stylesheet position in the stack.
+     * @param int $pos Position in the output series
      *
      * @return self
-     *
      */
     public function addCond($cond, $href, array $attr = null, $pos = 100)
     {
