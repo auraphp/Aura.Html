@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": "^8.4"
     },
     "autoload": {
         "psr-4": {
@@ -39,7 +39,8 @@
         }
     },
     "require-dev": {
-        "yoast/phpunit-polyfills": "~1.0"
+        "phpstan/phpstan": "^2.0",
+        "yoast/phpunit-polyfills": "^3.0"
     },
     "scripts": {
         "phpstan": "phpstan analyse --level=2 src/",
