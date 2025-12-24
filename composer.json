@@ -31,8 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aura\\Html\\": "src/",
-            "Aura\\Html\\_Config\\": "config/"
+            "Aura\\Html\\": "src/"
         }
     },
     "autoload-dev": {
@@ -44,13 +43,5 @@
         "test": "phpunit",
         "test-coverage": "php -d xdebug.mode=coverage phpunit --coverage-clover=coverage.xml",
         "phpstan": "phpstan analyse --level=2 src/"
-    },
-    "extra": {
-        "aura": {
-            "type": "library",
-            "config": {
-                "common": "Aura\\Html\\_Config\\Common"
-            }
-        }
     }
 }

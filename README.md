@@ -6,30 +6,19 @@ Provides HTML escapers and helpers, including form input helpers, that can be us
 
 ### Installation
 
-This library requires PHP 5.3 or later  with `mbstring` and/or `iconv` installed; we recommend using the latest available version of PHP as a matter of principle. It has no userland dependencies.
+This library requires PHP 8.4 or later with `mbstring` and/or `iconv` installed. It has no userland dependencies.
 
 It is installable and autoloadable via Composer as [aura/html](https://packagist.org/packages/aura/html).
 
-Alternatively, [download a release](https://github.com/auraphp/Aura.Html/releases) or clone this repository, then require or include its _autoload.php_ file.
-
 ### Quality
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/quality-score.png?b=2.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
-[![codecov](https://codecov.io/gh/auraphp/Aura.Html/branch/2.x/graph/badge.svg?token=UASDouLxyc)](https://codecov.io/gh/auraphp/Aura.Html)
-[![Continuous Integration](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml/badge.svg?branch=2.x)](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/quality-score.png?b=6.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
+[![codecov](https://codecov.io/gh/auraphp/Aura.Html/branch/6.x/graph/badge.svg?token=UASDouLxyc)](https://codecov.io/gh/auraphp/Aura.Html)
+[![Continuous Integration](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml/badge.svg?branch=6.x)](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml)
 
 To run the unit tests at the command line, issue `composer install` and then `vendor/bin/phpunit` at the package root. This requires [Composer](http://getcomposer.org/) to be available as `composer`.
 
-This library attempts to comply with [PSR-1][], [PSR-2][], and [PSR-4][]. If
-you notice compliance oversights, please send a patch via pull request.
-
-[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
-[PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
-[PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
-
-### Community
-
-To ask questions, provide feedback, or otherwise communicate with the Aura community, please join our [Google Group](http://groups.google.com/group/auraphp), follow [@auraphp on Twitter](http://twitter.com/auraphp), or chat with us on #auraphp on Freenode.
+This library attempts to comply with PSR-1, PSR-12, and PSR-4.
 
 
 ## Getting Started
