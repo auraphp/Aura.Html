@@ -2,12 +2,11 @@
 namespace Aura\Html\Helper\Input;
 
 use Aura\Html\Helper\AbstractHelperTest;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class GenericTest extends AbstractHelperTest
 {
-    /**
-     * @dataProvider provideTypes
-     */
+    #[DataProvider('provideTypes')]
     public function test($type)
     {
         $input = $this->helper;
@@ -40,7 +39,7 @@ class GenericTest extends AbstractHelperTest
         $this->assertSame($expect, $actual);
     }
 
-    public function provideTypes()
+    public static function provideTypes(): array
     {
         return array(
             array('button'),
