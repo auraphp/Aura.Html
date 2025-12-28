@@ -74,7 +74,7 @@ abstract class AbstractInput extends AbstractHelper
      *
      * @return self
      */
-    public function __invoke(array $spec = null)
+    public function __invoke(?array $spec = null)
     {
         if ($spec !== null) {
             $this->prep($spec);

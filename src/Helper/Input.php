@@ -27,7 +27,7 @@ class Input extends HelperLocator
      *
      * @return self|string
      */
-    public function __invoke(array $spec = null)
+    public function __invoke(?array $spec = null)
     {
         if ($spec === null) {
             return $this;
