@@ -20,6 +20,9 @@ To run the unit tests at the command line, issue `composer install` and then `ve
 
 This library attempts to comply with PSR-1, PSR-12, and PSR-4.
 
+### Community
+
+To ask questions, provide feedback, or otherwise communicate with the Aura community, please join our [Google Group](http://groups.google.com/group/auraphp), follow [@auraphp on X](https://x.com/auraphp), or chat with us on #auraphp on Freenode.
 
 ## Getting Started
 
