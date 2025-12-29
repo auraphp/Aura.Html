@@ -18,7 +18,11 @@ It is installable and autoloadable via Composer as [aura/html](https://packagist
 
 To run the unit tests at the command line, issue `composer install` and then `vendor/bin/phpunit` at the package root. This requires [Composer](http://getcomposer.org/) to be available as `composer`.
 
-This library attempts to comply with PSR-1, PSR-12, and PSR-4.
+This library attempts to comply with [PSR-1][], [PSR-12][], and [PSR-4][].
+
+[PSR-1]: https://www.php-fig.org/psr/psr-1/
+[PSR-12]: https://www.php-fig.org/psr/psr-12/
+[PSR-4]: https://www.php-fig.org/psr/psr-4/
 
 ### Community
 
