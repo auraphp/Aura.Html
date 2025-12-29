@@ -21,7 +21,7 @@ abstract class AbstractList extends AbstractHelper
      *
      * Attributes for the ul tag.
      *
-     * @var array
+     * @var array<string, scalar|null>
      *
      */
     protected $attr = array();
@@ -30,7 +30,7 @@ abstract class AbstractList extends AbstractHelper
      *
      * The stack of HTML elements.
      *
-     * @var array
+     * @var array<int, array{string, string}>
      *
      */
     protected $stack = array();
@@ -46,14 +46,13 @@ abstract class AbstractList extends AbstractHelper
 
     /**
      *
-     * Initializes and returns the UL object.
+     * Initializes and returns the list object.
      *
-     * @param array $attr Attributes for the UL tag.
+     * @param array<string, scalar|null>|null $attr HTML element attributes
      *
      * @return self
-     *
      */
-    public function __invoke(array $attr = null)
+    public function __invoke(?array $attr = null)
     {
         if ($attr !== null) {
             $this->attr = $attr;
@@ -187,7 +186,7 @@ abstract class AbstractList extends AbstractHelper
      *
      * @param string $item The item HTML.
      *
-     * @return null
+     * @return void
      *
      */
     protected function buildItem($item)

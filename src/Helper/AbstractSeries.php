@@ -73,7 +73,7 @@ abstract class AbstractSeries extends AbstractHelper
      *
      * @param string $element The element itself.
      *
-     * @return null
+     * @return void
      *
      */
     protected function addElement($pos, $element)

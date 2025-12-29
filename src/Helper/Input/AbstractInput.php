@@ -25,6 +25,7 @@ abstract class AbstractInput extends AbstractHelper
      * The input type.
      *
      * @var string
+     * @readonly
      *
      */
     protected $type;
@@ -51,7 +52,7 @@ abstract class AbstractInput extends AbstractHelper
      *
      * HTML attributes for the input.
      *
-     * @var array
+     * @var array<string, scalar|null>
      *
      */
     protected $attribs = array();
@@ -60,21 +61,20 @@ abstract class AbstractInput extends AbstractHelper
      *
      * Value options for the input.
      *
-     * @var array
+     * @var array<string, string>
      *
      */
     protected $options = array();
 
     /**
      *
-     * Given a input spec, returns the HTML for the input.
+     * Returns the input helper with optional specification.
      *
-     * @param array $spec The input spec.
+     * @param array{type?: string, name?: string, attribs?: array<string, scalar|null>, value?: mixed, options?: array<string, string>}|null $spec HTML input element specification
      *
-     * @return string
-     *
+     * @return self
      */
-    public function __invoke(array $spec = null)
+    public function __invoke(?array $spec = null)
     {
         if ($spec !== null) {
             $this->prep($spec);

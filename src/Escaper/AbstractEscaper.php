@@ -78,7 +78,7 @@ abstract class AbstractEscaper
      *
      * @param string $encoding The encoding.
      *
-     * @return null
+     * @return void
      *
      */
     public function setEncoding($encoding)

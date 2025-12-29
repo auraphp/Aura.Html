@@ -57,7 +57,7 @@ class Scripts extends AbstractSeries
      *
      * @param string $src The source href for the script.
      *
-     * @param string $pos The script position in the stack.
+     * @param int $pos The script position in the stack.
      *
      * @param array $attr The additional attributes
      *
@@ -122,7 +122,7 @@ class Scripts extends AbstractSeries
      * @param array $attr The additional attributes
      *
      *
-     * @return null
+     * @return void
      *
      * @access public
      */
@@ -139,7 +139,7 @@ class Scripts extends AbstractSeries
      * @param int   $pos  position
      * @param array $attr The additional attributes
      *
-     * @return null
+     * @return void
      *
      * @access public
      */

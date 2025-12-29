@@ -66,7 +66,7 @@ abstract class AbstractHelper
      *
      * @param string $indent The indent string.
      *
-     * @return null
+     * @return void
      *
      */
     public function setIndent($indent)

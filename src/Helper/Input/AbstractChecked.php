@@ -68,7 +68,7 @@ abstract class AbstractChecked extends AbstractInput
      *
      * Extracts and retains the "label" pseudo-attribute.
      *
-     * @return null
+     * @return void
      *
      */
     protected function setLabel()
@@ -86,7 +86,7 @@ abstract class AbstractChecked extends AbstractInput
      *
      * Sets the "checked" attribute appropriately.
      *
-     * @return null
+     * @return void
      *
      */
     protected function setChecked()

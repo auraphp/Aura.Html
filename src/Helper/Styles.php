@@ -18,9 +18,10 @@ namespace Aura\Html\Helper;
 class Styles extends AbstractSeries
 {
     /**
-     * Temporary storage or params passed to caputre functions
+     * Temporary storage for capture functions
      *
-     * @var mixed
+     * @var array<int, array{attr: mixed, pos: int, cond?: string}>
+     * @readonly
      *
      * @access private
      */
@@ -28,18 +29,17 @@ class Styles extends AbstractSeries
 
     /**
      *
-     * Adds a <link rel="stylesheet" ... /> tag to the series.
+     * Adds a stylesheet link to the series.
      *
-     * @param string $href The source href for the stylesheet.
+     * @param string $href CSS file URL or path
      *
-     * @param array $attr Additional attributes for the <link> tag.
+     * @param array<string, scalar|null>|null $attr Additional HTML attributes
      *
-     * @param int $pos The stylesheet position in the series.
+     * @param int $pos Position in the output series
      *
      * @return self
-     *
      */
-    public function add($href, array $attr = null, $pos = 100)
+    public function add($href, ?array $attr = null, $pos = 100)
     {
         $attr = $this->fixAttr($href, $attr);
         $tag = $this->void('link', $attr);
@@ -50,21 +50,19 @@ class Styles extends AbstractSeries
 
     /**
      *
-     * Adds a conditional `<!--[if ...]><link rel="stylesheet" ... /><![endif] -->`
-     * tag to the stack.
+     * Adds a conditional stylesheet link.
      *
-     * @param string $cond The conditional expression for the stylesheet.
+     * @param string $cond IE conditional expression
      *
-     * @param string $href The source href for the stylesheet.
+     * @param string $href CSS file URL or path
      *
-     * @param array $attr Additional attributes for the <link> tag.
+     * @param array<string, scalar|null>|null $attr Additional HTML attributes
      *
-     * @param string $pos The stylesheet position in the stack.
+     * @param int $pos Position in the output series
      *
      * @return self
-     *
      */
-    public function addCond($cond, $href, array $attr = null, $pos = 100)
+    public function addCond($cond, $href, ?array $attr = null, $pos = 100)
     {
         $attr = $this->fixAttr($href, $attr);
         $link = $this->void('link', $attr);
@@ -85,7 +83,7 @@ class Styles extends AbstractSeries
      *
      * @access protected
      */
-    protected function style($css, array $attr = null)
+    protected function style($css, ?array $attr = null)
     {
         $attr = $this->fixInternalAttr($attr);
         $attr = $this->escaper->attr($attr);
@@ -103,7 +101,7 @@ class Styles extends AbstractSeries
      *
      * @access public
      */
-    public function addInternal($css, array $attr = null, $pos = 100)
+    public function addInternal($css, ?array $attr = null, $pos = 100)
     {
         $style = $this->style($css, $attr);
         $this->addElement($pos, $style);
@@ -121,12 +119,12 @@ class Styles extends AbstractSeries
      *
      * @param array $attr Additional attributes for the <style> tag.
      *
-     * @param string $pos The position in the stack.
+     * @param int $pos The position in the stack.
      *
      * @return self
      *
      */
-    public function addCondInternal($cond, $css, array $attr = null, $pos = 100)
+    public function addCondInternal($cond, $css, ?array $attr = null, $pos = 100)
     {
         $style = $this->style($css, $attr);
         $cond  = $this->escaper->html($cond);
@@ -146,7 +144,7 @@ class Styles extends AbstractSeries
      *
      * @access public
      */
-    public function beginInternal(array $attr = null, $pos = 100)
+    public function beginInternal(?array $attr = null, $pos = 100)
     {
         $this->capture[] = array(
             'attr' => $attr,
@@ -167,7 +165,7 @@ class Styles extends AbstractSeries
      *
      * @access public
      */
-    public function beginCondInternal($cond, array $attr = null, $pos = 100)
+    public function beginCondInternal($cond, ?array $attr = null, $pos = 100)
     {
         $this->capture[] = array(
             'attr' => $attr,
@@ -215,7 +213,7 @@ class Styles extends AbstractSeries
      *
      * @access protected
      */
-    protected function fixInternalAttr(array $attr = null)
+    protected function fixInternalAttr(?array $attr = null)
     {
         $attr = (array) $attr;
 
@@ -241,7 +239,7 @@ class Styles extends AbstractSeries
      * @return array The fixed attributes.
      *
      */
-    protected function fixAttr($href, array $attr = null)
+    protected function fixAttr($href, ?array $attr = null)
     {
         $attr = (array) $attr;
 

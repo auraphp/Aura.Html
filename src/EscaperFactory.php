@@ -60,10 +60,6 @@ class EscaperFactory
      *
      * Creates a new Escaper object.
      *
-     * @param string $encoding The encoding for the escapers.
-     *
-     * @param int $flags The `htmlspecialchars()` flags for the escapers.
-     *
      * @return Escaper
      *
      */

@@ -72,7 +72,7 @@ class Select extends AbstractInput
      * @return string|self
      *
      */
-    public function __invoke(array $spec = null)
+    public function __invoke(?array $spec = null)
     {
         if ($spec !== null) {
             $this->prep($spec);
@@ -291,6 +291,7 @@ class Select extends AbstractInput
                 array('disabled' => true),
             ));
         }
+        return '';
     }
 
     /**

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 6.0.0
+
+- PHP 8.4+ required
+- Removed Aura.Di integration (config/Common.php)
+
 ## 2.6.0
 - ADD: Nested HTML snippet/structure helper via #41 by @jakejohns
 - ADD: Overriding helper factories via #55 by @jakejohns
