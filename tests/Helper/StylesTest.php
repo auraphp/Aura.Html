@@ -14,7 +14,7 @@ class StylesTest extends AbstractHelperTest
         $this->assertInstanceOf('Aura\Html\Helper\Styles', $actual);
 
         $actual = $styles('style.css')->__toString();
-        $expect = '    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />' . PHP_EOL;
+        $expect = '    <link rel="stylesheet" href="style.css" media="screen" />' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -28,10 +28,10 @@ class StylesTest extends AbstractHelperTest
         $styles->addCond('ie6', '/css/ie6.css');
 
         $actual = $styles->__toString();
-        $expect = '    <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />' . PHP_EOL
-                . '    <link rel="stylesheet" href="/css/middle.css" type="text/css" media="screen" />' . PHP_EOL
-                . '    <!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="screen" /><![endif]-->' . PHP_EOL
-                . '    <link rel="stylesheet" href="/css/last.css" type="text/css" media="screen" />' . PHP_EOL;
+        $expect = '    <link rel="stylesheet" href="/css/first.css" media="screen" />' . PHP_EOL
+                . '    <link rel="stylesheet" href="/css/middle.css" media="screen" />' . PHP_EOL
+                . '    <!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" media="screen" /><![endif]-->' . PHP_EOL
+                . '    <link rel="stylesheet" href="/css/last.css" media="screen" />' . PHP_EOL;
 
         $this->assertSame($expect, $actual);
     }
@@ -47,10 +47,10 @@ class StylesTest extends AbstractHelperTest
         $styles->addCond('ie6', '/css/ie6.css', array('media' => 'print'));
         $actual = $styles->__toString();
 
-        $expect = '  <link rel="stylesheet" href="/css/first.css" type="text/css" media="screen" />' . PHP_EOL
-                . '  <link rel="stylesheet" href="/css/middle.css" type="text/css" media="print" />' . PHP_EOL
-                . '  <!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" type="text/css" media="print" /><![endif]-->' . PHP_EOL
-                . '  <link rel="stylesheet" href="/css/last.css" type="text/css" media="screen" />' . PHP_EOL;
+        $expect = '  <link rel="stylesheet" href="/css/first.css" media="screen" />' . PHP_EOL
+                . '  <link rel="stylesheet" href="/css/middle.css" media="print" />' . PHP_EOL
+                . '  <!--[if ie6]><link rel="stylesheet" href="/css/ie6.css" media="print" /><![endif]-->' . PHP_EOL
+                . '  <link rel="stylesheet" href="/css/last.css" media="screen" />' . PHP_EOL;
 
         $this->assertSame($expect, $actual);
     }
@@ -72,10 +72,10 @@ class StylesTest extends AbstractHelperTest
 
         $actual = $styles->__toString();
 
-        $expect = '    <style type="text/css" media="screen">.foo{color:red;}</style>' . PHP_EOL
-            . '    <!--[if ie6]><style type="text/css" media="screen">.foo{color:yellow;}</style><![endif]-->' . PHP_EOL
-            . '    <style type="text/css" media="screen">.bar{color:green;}</style>' . PHP_EOL
-            . '    <!--[if ie6]><style type="text/css" media="screen">.bar{color:pink;}</style><![endif]-->' . PHP_EOL;
+        $expect = '    <style media="screen">.foo{color:red;}</style>' . PHP_EOL
+            . '    <!--[if ie6]><style media="screen">.foo{color:yellow;}</style><![endif]-->' . PHP_EOL
+            . '    <style media="screen">.bar{color:green;}</style>' . PHP_EOL
+            . '    <!--[if ie6]><style media="screen">.bar{color:pink;}</style><![endif]-->' . PHP_EOL;
 
         $this->assertSame($expect, $actual);
     }

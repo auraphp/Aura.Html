@@ -14,7 +14,7 @@ class ScriptsTest extends AbstractHelperTest
         $this->assertInstanceOf('Aura\Html\Helper\Scripts', $actual);
 
         $actual = $scripts('script.js')->__toString();
-        $expect = '    <script src="script.js" type="text/javascript"></script>' . PHP_EOL;
+        $expect = '    <script src="script.js"></script>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -31,11 +31,11 @@ class ScriptsTest extends AbstractHelperTest
 
         $actual = $scripts->__toString();
 
-        $expect = '    <script src="/js/first.js" type="text/javascript"></script>' . PHP_EOL
-                . '    <script foo bar="baz" bing="true" src="/js/attr.js" type="text/javascript"></script>'. PHP_EOL
-                . '    <script src="/js/middle.js" type="text/javascript"></script>' . PHP_EOL
-                . '    <!--[if ie6]><script src="/js/ie6.js" type="text/javascript"></script><![endif]-->' . PHP_EOL
-                . '    <script src="/js/last.js" type="text/javascript"></script>' . PHP_EOL;
+        $expect = '    <script src="/js/first.js"></script>' . PHP_EOL
+                . '    <script foo bar="baz" bing="true" src="/js/attr.js"></script>'. PHP_EOL
+                . '    <script src="/js/middle.js"></script>' . PHP_EOL
+                . '    <!--[if ie6]><script src="/js/ie6.js"></script><![endif]-->' . PHP_EOL
+                . '    <script src="/js/last.js"></script>' . PHP_EOL;
 
         $this->assertSame($expect, $actual);
     }
@@ -57,10 +57,10 @@ class ScriptsTest extends AbstractHelperTest
 
         $actual = $scripts->__toString();
 
-        $expect = '    <script type="text/javascript">alert("foo");</script>' . PHP_EOL
-            . '    <!--[if ie6]><script type="text/javascript">alert("ie6");</script><![endif]-->' . PHP_EOL
-            . '    <script type="text/javascript">alert("captured");</script>' . PHP_EOL
-            . '    <!--[if ie6]><script type="text/javascript">alert("captured ie6");</script><![endif]-->' . PHP_EOL;
+        $expect = '    <script>alert("foo");</script>' . PHP_EOL
+            . '    <!--[if ie6]><script>alert("ie6");</script><![endif]-->' . PHP_EOL
+            . '    <script>alert("captured");</script>' . PHP_EOL
+            . '    <!--[if ie6]><script>alert("captured ie6");</script><![endif]-->' . PHP_EOL;
 
 
         $this->assertSame($expect, $actual);

@@ -245,7 +245,6 @@ class Styles extends AbstractSeries
         $base = array(
             'rel'   => 'stylesheet',
             'href'  => $href,
-            'type'  => 'text/css',
             'media' => 'screen',
         );
 
