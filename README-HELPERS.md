@@ -507,6 +507,39 @@ echo $helper->title();
 <title>Pre2 > Pre1 > This & That > Suf1 > Suf2</title>
 ```
 
+### Reading back the title value
+
+Use `get()` to retrieve the HTML-escaped title string, and `getRaw()` to retrieve
+the original unescaped string. This is useful when you need to reuse the title
+in other contexts such as an `og:title` meta tag.
+
+```html+php
+<?php
+// In a child view (page.php):
+$helper->title()->set('Café & Bistro');
+
+// In the layout:
+$helper->metas()->add([
+    'name'     => 'title',
+    'property' => 'og:title',
+    'content'  => $helper->title()->getRaw(), // "Café & Bistro" — plain text, safe for attributes
+]);
+
+$helper->title()->prepend('Site Name | ');
+
+echo $helper->title();
+?>
+<meta name="title" property="og:title" content="Café &amp; Bistro" />
+<title>Site Name | Caf&eacute; &amp; Bistro</title>
+```
+
+> **Note:** `getRaw()` is only reliable when the title has been built exclusively
+> using the escaped methods (`set()`, `append()`, `prepend()`). If you mix in the
+> raw variants (`setRaw()`, `appendRaw()`, `prependRaw()`), the raw title will
+> contain whatever HTML was passed to those methods (including any entities or
+> markup), rather than plain text. In that case, `get()` remains correct for
+> HTML output, but `getRaw()` should not be relied upon for non-HTML contexts.
+
 ## ul
 
 Helper for `<ul>` tags with `<li>` items.  Build the set of items (both raw and escaped) then output them all at once.

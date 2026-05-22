@@ -19,12 +19,21 @@ class Title extends AbstractHelper
 {
     /**
      *
-     * The title value.
+     * The escaped title value (for HTML output).
      *
      * @var string
      *
      */
     protected $title = null;
+
+    /**
+     *
+     * The raw (unescaped) title value.
+     *
+     * @var string
+     *
+     */
+    protected $rawTitle = null;
 
     /**
      *
@@ -53,9 +62,32 @@ class Title extends AbstractHelper
      */
     public function __toString()
     {
-        $title = $this->indent(1, "<title>{$this->title}</title>");
-        $this->title = null;
-        return $title;
+        return $this->indent(1, "<title>{$this->title}</title>");
+    }
+
+    /**
+     *
+     * Returns the escaped title string for use in HTML contexts.
+     *
+     * @return string The escaped title string.
+     *
+     */
+    public function get()
+    {
+        return $this->title;
+    }
+
+    /**
+     *
+     * Returns the raw (unescaped) title string for use in non-HTML contexts
+     * such as og:title meta tags or JavaScript.
+     *
+     * @return string The raw title string.
+     *
+     */
+    public function getRaw()
+    {
+        return $this->rawTitle;
     }
 
     /**
@@ -70,6 +102,7 @@ class Title extends AbstractHelper
     public function set($text)
     {
         $this->title = $this->escaper->html($text);
+        $this->rawTitle = $text;
         return $this;
     }
 
@@ -85,6 +118,7 @@ class Title extends AbstractHelper
     public function setRaw($text)
     {
         $this->title = $text;
+        $this->rawTitle = $text;
         return $this;
     }
 
@@ -100,6 +134,7 @@ class Title extends AbstractHelper
     public function append($text)
     {
         $this->title .= $this->escaper->html($text);
+        $this->rawTitle .= $text;
         return $this;
     }
 
@@ -115,6 +150,7 @@ class Title extends AbstractHelper
     public function appendRaw($text)
     {
         $this->title .= $text;
+        $this->rawTitle .= $text;
         return $this;
     }
 
@@ -130,6 +166,7 @@ class Title extends AbstractHelper
     public function prepend($text)
     {
         $this->title = $this->escaper->html($text) . $this->title;
+        $this->rawTitle = $text . $this->rawTitle;
         return $this;
     }
 
@@ -145,6 +182,7 @@ class Title extends AbstractHelper
     public function prependRaw($text)
     {
         $this->title = $text . $this->title;
+        $this->rawTitle = $text . $this->rawTitle;
         return $this;
     }
 }
