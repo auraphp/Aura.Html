@@ -14,6 +14,36 @@ namespace Aura\Html;
  *
  * @package Aura.Html
  *
+ * @method string a($href, $text, array $attr = [])
+ * @method string anchor($href, $text, array $attr = [])
+ * @method string aRaw($href, $text, array $attr = [])
+ * @method string anchorRaw($href, $text, array $attr = [])
+ * @method string base($href)
+ * @method Escaper escape()
+ * @method string element($tag, array $attr = [], $text = null)
+ * @method string ele($tag, array $attr = [], $text = null)
+ * @method string elementRaw($tag, array $attr = [], $text = null)
+ * @method string eleRaw($tag, array $attr = [], $text = null)
+ * @method string img($src, array $attr = [])
+ * @method string image($src, array $attr = [])
+ * @method Helper\Form form(array $attr = [])
+ * @method Helper\Input input(array $spec)
+ * @method string label($text = null, array $attr = [])
+ * @method Helper\Links links()
+ * @method Helper\Metas metas()
+ * @method Helper\Ol ol(array $attr = [])
+ * @method Helper\Scripts scripts()
+ * @method Helper\Scripts scriptsFoot()
+ * @method Helper\Styles styles()
+ * @method Helper\Structure structure($tag = null, array $attr = [])
+ * @method Helper\Structure structureRaw($tag = null, array $attr = [])
+ * @method Helper\Structure struct($tag = null, array $attr = [])
+ * @method Helper\Structure structRaw($tag = null, array $attr = [])
+ * @method string tag($tag, array $attr = [])
+ * @method Helper\Title title($text = null)
+ * @method Helper\Ul ul(array $attr = [])
+ * @method string void($tag, array $attr = [])
+ *
  */
 class HelperLocator
 {
