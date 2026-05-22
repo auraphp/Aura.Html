@@ -88,7 +88,7 @@ class Scripts extends AbstractSeries
     public function addInternal($script, $pos = 100, array $attr = array())
     {
         $attr = $this->attr(null, $attr);
-        $tag = "<script $attr>$script</script>";
+        $tag = $attr ? "<script $attr>$script</script>" : "<script>$script</script>";
         $this->addElement($pos, $tag);
         return $this;
     }
@@ -109,7 +109,7 @@ class Scripts extends AbstractSeries
     {
         $cond = $this->escaper->html($cond);
         $attr = $this->attr(null, $attr);
-        $tag = "<!--[if $cond]><script $attr>$script</script><![endif]-->";
+        $tag = $attr ? "<!--[if $cond]><script $attr>$script</script><![endif]-->" : "<!--[if $cond]><script>$script</script><![endif]-->";
         $this->addElement($pos, $tag);
 
         return $this;
@@ -186,7 +186,6 @@ class Scripts extends AbstractSeries
         if (null !== $src) {
             $attr['src'] = $src;
         }
-        $attr['type'] = 'text/javascript';
         return $this->escaper->attr($attr);
     }
 }
