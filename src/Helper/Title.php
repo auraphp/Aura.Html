@@ -74,7 +74,7 @@ class Title extends AbstractHelper
      */
     public function get()
     {
-        return $this->title;
+        return (string) $this->title;
     }
 
     /**
@@ -87,7 +87,7 @@ class Title extends AbstractHelper
      */
     public function getRaw()
     {
-        return $this->rawTitle;
+        return (string) $this->rawTitle;
     }
 
     /**
