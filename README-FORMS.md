@@ -98,6 +98,56 @@ echo $helper->input(array(
 <label><input type="checkbox" name="foo" value="y" checked /> Check me</label>
 ```
 
+#### Multiple checkboxes
+
+Pass an `options` array to render a group of checkboxes. Each key is the submitted value and each value is the label string. The `name` attribute will automatically have `[]` appended.
+
+```html+php
+<?php
+echo $helper->input(array(
+    'type'    => 'checkbox',
+    'name'    => 'foo',
+    'value'   => array('yes', 'maybe'),  // (array) currently checked values
+    'options' => array(
+        'yes'   => 'Yes',
+        'no'    => 'No',
+        'maybe' => 'Maybe',
+    ),
+));
+?>
+<label><input type="checkbox" name="foo[]" value="yes" checked /> Yes</label>
+<label><input type="checkbox" name="foo[]" value="no" /> No</label>
+<label><input type="checkbox" name="foo[]" value="maybe" checked /> Maybe</label>
+```
+
+#### Per-option attributes
+
+To add HTML attributes to individual checkboxes, use an array spec for that option with `label` and `attribs` keys. Plain string values (as above) and array specs can be mixed freely. Per-option `attribs` are merged on top of any shared `attribs`, so they can override global attributes.
+
+```html+php
+<?php
+echo $helper->input(array(
+    'type'    => 'checkbox',
+    'name'    => 'foo',
+    'value'   => 'yes',
+    'options' => array(
+        'yes' => array(
+            'label'  => 'Yes',
+            'attribs' => array('class' => 'positive'),
+        ),
+        'no' => array(
+            'label'  => 'No',
+            'attribs' => array('class' => 'negative', 'data-warn' => 1),
+        ),
+        'maybe' => 'Maybe',         // plain string still works
+    ),
+));
+?>
+<label><input type="checkbox" name="foo[]" value="yes" class="positive" checked /> Yes</label>
+<label><input type="checkbox" name="foo[]" value="no" class="negative" data-warn="1" /> No</label>
+<label><input type="checkbox" name="foo[]" value="maybe" /> Maybe</label>
+```
+
 ### color
 
 ```html+php
@@ -272,6 +322,34 @@ echo $helper->input(array(
 ?>
 <label><input type="radio" name="foo" value="bar" checked /> baz</label>
 <label><input type="radio" name="foo" value="dib" /> zim</label>
+<label><input type="radio" name="foo" value="gir" /> irk</label>
+```
+
+#### Per-option attributes
+
+Individual radio buttons can carry their own HTML attributes using an array spec with `label` and `attribs` keys. Plain strings and array specs can be mixed. Per-option `attribs` are merged on top of any shared `attribs`, so they can override global attributes.
+
+```html+php
+<?php
+echo $helper->input(array(
+    'type'    => 'radio',
+    'name'    => 'foo',
+    'value'   => 'bar',
+    'options' => array(
+        'bar' => array(
+            'label'  => 'baz',
+            'attribs' => array('class' => 'highlight'),
+        ),
+        'dib' => array(
+            'label'  => 'zim',
+            'attribs' => array('data-id' => 42),
+        ),
+        'gir' => 'irk',             // plain string still works
+    ),
+));
+?>
+<label><input type="radio" name="foo" value="bar" class="highlight" checked /> baz</label>
+<label><input type="radio" name="foo" value="dib" data-id="42" /> zim</label>
 <label><input type="radio" name="foo" value="gir" /> irk</label>
 ```
 
