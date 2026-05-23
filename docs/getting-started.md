@@ -11,7 +11,7 @@ $helper = $factory->newInstance();
 
 ### Built-In Helpers
 
-Once you have a _HelperLocator_, you can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](helpers.md) and [form helpers](forms.md) pages for more information.
+Once you have a _HelperLocator_, you can then use the helpers by calling them as methods on the _HelperLocator_ instance.  See the [tag helpers](tag-helpers.md) and [form helpers](form-helpers.md) pages for more information.
 
 > N.b.: All built-in helpers escape values appropriately; see the various helper class internals for more information.
 
