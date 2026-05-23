@@ -16,7 +16,7 @@ Use a helper by calling it as a method on the _HelperLocator_. The available hel
 - [ul](#ul)
 - [void](#void)
 
-There is also a series of [helpers for forms](https://github.com/auraphp/Aura.Html/blob/2.x/README-FORMS.md).
+There is also a series of [helpers for forms](forms.md).
 
 ## a
 
