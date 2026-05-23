@@ -87,10 +87,14 @@ class Checkbox extends AbstractChecked
             $this->attribs['value'] = $value;
             $this->attribs['label'] = $label;
 
+            $option_attribs = isset($this->options_attribs[$value])
+                ? $this->options_attribs[$value]
+                : array();
+
             $html .= $checkbox(array(
                 'name'    => $this->attribs['name'],
                 'value'   => $this->value,
-                'attribs' => $this->attribs
+                'attribs' => array_merge($this->attribs, $option_attribs),
             ));
         }
         return $html;

@@ -1,14 +1,12 @@
 # CHANGELOG
 
-## 6.1.0
+## 6.0.0
 
 - ADD: `Helper\Title::get()` to retrieve the HTML-escaped title string for use in HTML contexts.
 - ADD: `Helper\Title::getRaw()` to retrieve the unescaped title string for use in non-HTML contexts such as `og:title` meta tags. Reliable only when built with escaped methods (`set()`, `append()`, `prepend()`); unreliable when mixed with raw variants.
 - FIX: `Helper\Title::__toString()` no longer resets the title state after rendering, allowing `get()`, `getRaw()`, and further mutations to work correctly regardless of render order.
 - DOC: Added `@method` PHPDoc tags to `HelperLocator` for IDE autocomplete support (fixes #58).
-
-## 6.0.0
-
+- ADD: Per-option HTML attributes for `checkbox` and `radio` multi-option inputs. Each entry in `options` may now be either a plain label string (backward-compatible) or an array of `['label' => '...', 'attribs' => [...]]`. Per-option attribs are merged on top of shared attribs so they can override global attributes (closes #48). Thank you @rodsouto and @jakejohns for the valuable input.
 - PHP 8.4+ required
 - Removed Aura.Di integration (config/Common.php)
 
@@ -83,4 +81,3 @@ This release has SECURITY FIXES. All users are encouraged to upgrade immediately
 ## 2.0.0-beta1
 
 Extracted from Aura.View package.
-

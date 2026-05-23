@@ -28,6 +28,16 @@ abstract class AbstractChecked extends AbstractInput
 
     /**
      *
+     * Per-option HTML attributes for multi-option inputs (checkbox, radio).
+     * Keyed by option value.
+     *
+     * @var array<string, array<string, scalar|null>>
+     *
+     */
+    protected $options_attribs = array();
+
+    /**
+     *
      * Use strict equality when setting the checked value?
      *
      * @var bool
@@ -48,6 +58,36 @@ abstract class AbstractChecked extends AbstractInput
     {
         $this->strict = (bool) $strict;
         return $this;
+    }
+
+    /**
+     *
+     * Prepares the properties on this helper.
+     *
+     * Normalises per-option specs so that an option value may be either a
+     * plain label string (backward-compatible) or an array of the form:
+     *
+     *   ['label' => 'My Label', 'attribs' => ['class' => 'foo', 'data-x' => 1]]
+     *
+     * Per-option attribs are merged on top of the shared attribs at render
+     * time, so they can override global attributes.
+     *
+     * @param array $spec The specification array.
+     *
+     * @return void
+     *
+     */
+    protected function prep(array $spec)
+    {
+        $this->options_attribs = array();
+        parent::prep($spec);
+
+        foreach ($this->options as $value => $option) {
+            if (is_array($option)) {
+                $this->options_attribs[$value] = isset($option['attribs']) ? $option['attribs'] : array();
+                $this->options[$value] = isset($option['label']) ? $option['label'] : '';
+            }
+        }
     }
 
     /**

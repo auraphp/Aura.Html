@@ -170,4 +170,64 @@ class CheckboxTest extends AbstractHelperTest
             . '<label><input type="checkbox" name="foo[]" value="maybe" /> Maybe</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
+
+    public function testMultiCheckboxWithInlineOptionAttribs()
+    {
+        $checkbox = $this->helper;
+        $actual = $checkbox(array(
+            'name' => 'foo',
+            'value' => 'yes',
+            'options' => array(
+                'yes' => array('label' => 'Yes', 'attribs' => array('class' => 'test-class')),
+                'no'  => array('label' => 'No',  'attribs' => array('data-no' => 1)),
+                'maybe' => 'Maybe', // plain string still works
+            ),
+        ))->__toString();
+        $expect = '<label><input type="checkbox" name="foo[]" value="yes" class="test-class" checked /> Yes</label>' . PHP_EOL
+            . '<label><input type="checkbox" name="foo[]" value="no" data-no="1" /> No</label>' . PHP_EOL
+            . '<label><input type="checkbox" name="foo[]" value="maybe" /> Maybe</label>' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+    }
+
+    public function testMultiCheckboxOptionAttribsOverrideGlobal()
+    {
+        $checkbox = $this->helper;
+        $actual = $checkbox(array(
+            'name' => 'foo',
+            'value' => 'yes',
+            'attribs' => array('class' => 'global'),
+            'options' => array(
+                'yes' => array('label' => 'Yes', 'attribs' => array('class' => 'override')),
+                'no'  => 'No',
+            ),
+        ))->__toString();
+        $expect = '<label><input type="checkbox" name="foo[]" class="override" value="yes" checked /> Yes</label>' . PHP_EOL
+            . '<label><input type="checkbox" name="foo[]" class="global" value="no" /> No</label>' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+    }
+
+    public function testMultiCheckboxOptionAttribsResetBetweenCalls()
+    {
+        $checkbox = $this->helper;
+
+        // First call with per-option attribs
+        $checkbox(array(
+            'name' => 'foo',
+            'value' => 'yes',
+            'options' => array(
+                'yes' => array('label' => 'Yes', 'attribs' => array('class' => 'first')),
+            ),
+        ))->__toString();
+
+        // Second call without per-option attribs — no bleed-through
+        $actual = $checkbox(array(
+            'name' => 'foo',
+            'value' => 'yes',
+            'options' => array(
+                'yes' => 'Yes',
+            ),
+        ))->__toString();
+        $expect = '<label><input type="checkbox" name="foo[]" value="yes" checked /> Yes</label>' . PHP_EOL;
+        $this->assertSame($expect, $actual);
+    }
 }
