@@ -1,7 +1,6 @@
 {
     "title": "Aura.Html 6.x",
     "content": [
-        "index.md",
         "getting-started.md",
         "tag-helpers.md",
         "form-helpers.md"
