@@ -1,6 +1,7 @@
 <?php
 namespace Aura\Html\Helper\Input;
 
+use Aura\Html\Exception\InvalidArgument;
 use Aura\Html\Helper\AbstractHelperTest;
 
 class CheckboxTest extends AbstractHelperTest
@@ -229,5 +230,20 @@ class CheckboxTest extends AbstractHelperTest
         ))->__toString();
         $expect = '<label><input type="checkbox" name="foo[]" value="yes" checked /> Yes</label>' . PHP_EOL;
         $this->assertSame($expect, $actual);
+    }
+
+    public function testInvalidOptionAttribsThrows()
+    {
+        $this->expectException(InvalidArgument::class);
+        $this->expectExceptionMessage("Option 'attribs' must be an array for option 'yes'.");
+
+        $checkbox = $this->helper;
+        $checkbox(array(
+            'name'  => 'foo',
+            'value' => 'yes',
+            'options' => array(
+                'yes' => array('label' => 'Yes', 'attribs' => 'not-an-array'),
+            ),
+        ))->__toString();
     }
 }

@@ -8,6 +8,8 @@
  */
 namespace Aura\Html\Helper\Input;
 
+use Aura\Html\Exception\InvalidArgument;
+
 /**
  *
  * Abstact helper for inputs that can be checked (e.g. radio or checkbox).
@@ -84,7 +86,13 @@ abstract class AbstractChecked extends AbstractInput
 
         foreach ($this->options as $value => $option) {
             if (is_array($option)) {
-                $this->options_attribs[$value] = isset($option['attribs']) ? $option['attribs'] : array();
+                $attribs = $option['attribs'] ?? array();
+                if (! is_array($attribs)) {
+                    throw new InvalidArgument(
+                        "Option 'attribs' must be an array for option '{$value}'."
+                    );
+                }
+                $this->options_attribs[$value] = $attribs;
                 $this->options[$value] = isset($option['label']) ? $option['label'] : '';
             }
         }
