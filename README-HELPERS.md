@@ -530,7 +530,7 @@ $helper->title()->prepend('Site Name | ');
 echo $helper->title();
 ?>
 <meta name="title" property="og:title" content="Café &amp; Bistro" />
-<title>Site Name | Caf&eacute; &amp; Bistro</title>
+<title>Site Name | Café &amp; Bistro</title>
 ```
 
 > **Note:** `getRaw()` is only reliable when the title has been built exclusively
