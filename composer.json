@@ -14,7 +14,7 @@
         "escaping"
     ],
     "homepage": "https://github.com/auraphp/Aura.Html",
-    "license": "BSD-2-Clause",
+    "license": "MIT",
     "authors": [
         {
             "name": "Aura.Html Contributors",
