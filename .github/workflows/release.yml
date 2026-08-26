@@ -1,0 +1,31 @@
+# Releasing this package: Actions -> Release -> Run workflow, pick the branch
+# (6.x) and type the version. Or from a terminal:
+#
+#     gh workflow run release.yml --ref 6.x -f version=6.0.0
+#
+# The shared workflow creates the tag itself, and only after every check has
+# passed. Do not tag by hand -- Packagist derives versions from tags, so a tag
+# is a published version the moment it exists.
+#
+# Release notes come from this package's own CHANGELOG.md. The version you type
+# must match the version at the top of the change log.
+
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release, e.g. 6.0.0'
+        required: true
+        type: string
+
+jobs:
+  release:
+    # Pinned to the branch of auraphp/bin#14 while that PR is open.
+    # Change to @master once it merges.
+    uses: auraphp/bin/.github/workflows/release.yml@release-workflow
+    permissions:
+      contents: write
+    with:
+      version: ${{ inputs.version }}
