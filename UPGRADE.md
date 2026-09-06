@@ -81,9 +81,12 @@ attributes array if you need it back.
 ## Nullable parameter types on helper methods
 
 Optional array parameters that used to be declared `array $attr = null` are now
-declared `?array $attr = null`, which is what PHP 8.4 requires. Calling code is
-unaffected. If you extend a helper and override one of these methods, your
-signature has to match the new one or PHP will raise a fatal error:
+declared `?array $attr = null`. The old form is implicitly nullable, which PHP
+8.4 deprecates and PHP 9 will remove. Calling code is unaffected.
+
+If you extend a helper and override one of these methods, the old signature is
+still compatible and still runs -- but it emits a deprecation notice on every
+load, so update it:
 
 ```php
 // before
