@@ -3,6 +3,7 @@
     "content": [
         "getting-started.md",
         "tag-helpers.md",
-        "form-helpers.md"
+        "form-helpers.md",
+        "upgrading.md"
     ]
 }
