@@ -22,9 +22,7 @@ on:
 
 jobs:
   release:
-    # Pinned to the branch of auraphp/bin#14 while that PR is open.
-    # Change to @master once it merges.
-    uses: auraphp/bin/.github/workflows/release.yml@release-workflow
+    uses: auraphp/bin/.github/workflows/release.yml@master
     permissions:
       contents: write
     with:
