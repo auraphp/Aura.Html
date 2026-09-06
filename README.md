@@ -32,4 +32,4 @@ To ask questions, provide feedback, or otherwise communicate with the Aura commu
 
 This package is fully documented [here](./docs/index.md).
 
-Coming from 2.x? See the [upgrade notes](./UPGRADE.md).
+Coming from 2.x? See the [upgrade notes](./docs/upgrading.md).

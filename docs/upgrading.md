@@ -1,4 +1,4 @@
-# Upgrading from 2.x to 6.0
+## Upgrading from 2.x to 6.0
 
 Version 6.0 is the first release of Aura.Html since 2.6.0. Most of the library
 is unchanged: the escapers, the helper locator, and every tag and form helper
@@ -109,8 +109,8 @@ Nothing here is required, but you may want it once you have upgraded:
   Each entry in `options` can now be either a plain label string, exactly as
   before, or an array of `['label' => '...', 'attribs' => [...]]`. Per-option
   attributes are merged on top of the shared ones and can override them. See
-  the [form helpers](./docs/form-helpers.md) documentation.
+  the [form helpers](form-helpers.md) documentation.
 - `Title::get()` and `Title::getRaw()`, described above. See the
-  [tag helpers](./docs/tag-helpers.md) documentation.
+  [tag helpers](tag-helpers.md) documentation.
 - `@method` annotations on `HelperLocator`, so editors can autocomplete the
   built-in helpers.
