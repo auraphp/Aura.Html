@@ -1,17 +1,17 @@
-## Upgrading from 2.x to 6.0
+## Upgrading from 2.x to 7.0
 
 **If you only ever called Aura.Html, you likely have nothing to change beyond the PHP version.** The escapers, the _HelperLocator_, and every tag and form helper keep the names, arguments, and output they had in 2.6 -- with two exceptions, covered in steps 4 and 5 below. The remaining changes affect wiring and classes that *extend* Aura.Html.
 
-Version 6.0 is the first release since 2.6.0. The version jumps 2.x to 6.x to keep step with the rest of the suite (Aura.Filter `6.x`, Aura.Auth `6.x`, Aura.Router `6.x`, Aura.View `6.x`); there is no 3.x, 4.x, or 5.x.
+Version 7.0 is the first release since 2.6.0. The version jumps 2.x to 7.x to keep step with the rest of the suite, which is moving to `7.x` for its PHP 8.4 line; there is no 3.x, 4.x, 5.x, or 6.x of this package.
 
 Work through these in order.
 
 ### 1. Move to PHP 8.4
 
-2.x ran on PHP 5.3 and up. 6.0 requires PHP 8.4, so upgrade PHP first and the library second.
+2.x ran on PHP 5.3 and up. 7.0 requires PHP 8.4, so upgrade PHP first and the library second.
 
 ```
-composer require aura/html:^6.0
+composer require aura/html:^7.0
 ```
 
 As before, the library needs one of the `mbstring` or `iconv` extensions and has no userland dependencies.
@@ -42,7 +42,7 @@ This is the change most likely to show up as a failing test rather than a broken
 <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen" />
 <script src="/js/site.js" type="text/javascript"></script>
 
-<!-- 6.0 -->
+<!-- 7.0 -->
 <link rel="stylesheet" href="/css/site.css" media="screen" />
 <script src="/js/site.js"></script>
 ```
@@ -57,7 +57,7 @@ In 2.x, rendering the title emptied it, so a second render produced `<title></ti
 <?php
 $helpers->title()->set('Café & Bistro');
 echo $helpers->title();     // <title>Café &amp; Bistro</title>
-echo $helpers->title();     // 2.x: <title></title>   6.0: the same title again
+echo $helpers->title();     // 2.x: <title></title>   7.0: the same title again
 ?>
 ```
 
@@ -74,7 +74,7 @@ If you extend a helper and override one of these methods, the old signature is s
 // 2.x
 protected function fixAttr($href, array $attr = null)
 
-// 6.x
+// 7.x
 protected function fixAttr($href, ?array $attr = null)
 ?>
 ```
@@ -87,11 +87,11 @@ protected function fixAttr($href, ?array $attr = null)
 
 - **Every other helper's output.** Tag helpers, form helpers, input helpers, and the list and series helpers render exactly what they rendered in 2.6. Steps 4 and 5 are the only output changes.
 
-- **The Aura.View wiring.** `$view_factory->newInstance($helpers)` with a _HelperLocator_ works exactly as it did, with no adapter. See [Using Aura.Html Helpers](https://github.com/auraphp/Aura.View/blob/6.x/docs/helpers.md#using-aurahtml-helpers) in the Aura.View docs.
+- **The Aura.View wiring.** `$view_factory->newInstance($helpers)` with a _HelperLocator_ works exactly as it did, with no adapter. See [Using Aura.Html Helpers](https://github.com/auraphp/Aura.View/blob/7.x/docs/helpers.md#using-aurahtml-helpers) in the Aura.View docs.
 
 - **The license.** It changed from BSD to MIT. Both are permissive; check it against your own policies only if you track license terms.
 
-### New In 6.0
+### New In 7.0
 
 Nothing here is required, but you may want it once you have upgraded:
 
@@ -101,4 +101,4 @@ Nothing here is required, but you may want it once you have upgraded:
 
 - **`@method` annotations on _HelperLocator_,** so editors can autocomplete the built-in helpers.
 
-The full list of changes is in [CHANGELOG.md](https://github.com/auraphp/Aura.Html/blob/6.x/CHANGELOG.md).
+The full list of changes is in [CHANGELOG.md](https://github.com/auraphp/Aura.Html/blob/7.x/CHANGELOG.md).
