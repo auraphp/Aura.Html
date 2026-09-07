@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 6.0.0
+## 7.0.0
 
 - ADD: `Helper\Title::get()` to retrieve the HTML-escaped title string for use in HTML contexts.
 - ADD: `Helper\Title::getRaw()` to retrieve the unescaped title string for use in non-HTML contexts such as `og:title` meta tags. Reliable only when built with escaped methods (`set()`, `append()`, `prepend()`); unreliable when mixed with raw variants.

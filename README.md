@@ -12,9 +12,9 @@ It is installable and autoloadable via Composer as [aura/html](https://packagist
 
 ### Quality
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/quality-score.png?b=6.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
-[![codecov](https://codecov.io/gh/auraphp/Aura.Html/branch/6.x/graph/badge.svg?token=UASDouLxyc)](https://codecov.io/gh/auraphp/Aura.Html)
-[![Continuous Integration](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml/badge.svg?branch=6.x)](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Html/badges/quality-score.png?b=7.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Html/)
+[![codecov](https://codecov.io/gh/auraphp/Aura.Html/branch/7.x/graph/badge.svg?token=UASDouLxyc)](https://codecov.io/gh/auraphp/Aura.Html)
+[![Continuous Integration](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml/badge.svg?branch=7.x)](https://github.com/auraphp/Aura.Html/actions/workflows/continuous-integration.yml)
 
 To run the unit tests at the command line, issue `composer install` and then `vendor/bin/phpunit` at the package root. This requires [Composer](http://getcomposer.org/) to be available as `composer`.
 
